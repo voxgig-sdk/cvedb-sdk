@@ -1,0 +1,19 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      description: "Fast Vulnerability lookups using CVE_ID and CPE23"
+      servers: [
+        {
+          url: "https://cvedb.shodan.io"
+        }
+      ]
+      title: "CVEDB"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

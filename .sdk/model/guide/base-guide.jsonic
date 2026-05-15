@@ -1,0 +1,27 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 3
+  metrics: count: path: 3
+  metrics: count: method: 3
+
+  entity: cve: {
+    path: "/cve/{cve_id}": {
+      rename: param: "cve_id": *"id"
+      op: load: method: *GET
+    }
+  }
+
+  entity: if_you_have_the_name_of_a_specific_software_product_and_want_to: {
+    path: "/cpes": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: this_endpoint_is_tailored_for_searches_based_on_product_name_or: {
+    path: "/cves": {
+      op: load: method: *GET
+    }
+  }
+
+}

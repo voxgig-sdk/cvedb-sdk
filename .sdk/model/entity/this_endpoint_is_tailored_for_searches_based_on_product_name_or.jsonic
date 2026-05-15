@@ -1,0 +1,114 @@
+# Entity: this_endpoint_is_tailored_for_searches_based_on_product_name_or
+
+main: kit: entity: this_endpoint_is_tailored_for_searches_based_on_product_name_or: {
+
+  alias: field: {}
+
+  name: "this_endpoint_is_tailored_for_searches_based_on_product_name_or"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "count"
+                orig: "count"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "cpe23"
+                orig: "cpe23"
+                reqd: false
+                type: "`$ANY`"
+              }
+              {
+                kind: "query"
+                name: "end_date"
+                orig: "end_date"
+                reqd: false
+                type: "`$ANY`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "is_kev"
+                orig: "is_kev"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: 1000
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "product"
+                orig: "product"
+                reqd: false
+                type: "`$ANY`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "skip"
+                orig: "skip"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "sort_by_epss"
+                orig: "sort_by_epss"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "start_date"
+                orig: "start_date"
+                reqd: false
+                type: "`$ANY`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/cves"
+          parts: [
+            "cves"
+          ]
+          select: {
+            exist: [
+              "count"
+              "cpe23"
+              "end_date"
+              "is_kev"
+              "limit"
+              "product"
+              "skip"
+              "sort_by_epss"
+              "start_date"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

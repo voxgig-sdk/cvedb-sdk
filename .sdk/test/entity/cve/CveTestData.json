@@ -1,0 +1,78 @@
+{
+  "existing": {
+    "cve": {
+      "CVE00": {
+        "cpe": [],
+        "cve_id": "CVE01",
+        "cvss": "s98",
+        "cvss_v2": "s99",
+        "cvss_v3": "s9a",
+        "cvss_v4": "s9b",
+        "cvss_version": "s9c",
+        "epss": "s9d",
+        "kev": true,
+        "propose_action": "s9f",
+        "published_time": "sa0",
+        "ranking_epss": "sa1",
+        "ransomware_campaign": "sa2",
+        "reference": [],
+        "summary": "sa4"
+      },
+      "CVE01": {
+        "cpe": [],
+        "cve_id": "CVE01",
+        "cvss": "s12e",
+        "cvss_v2": "s12f",
+        "cvss_v3": "s130",
+        "cvss_v4": "s131",
+        "cvss_version": "s132",
+        "epss": "s133",
+        "kev": true,
+        "propose_action": "s135",
+        "published_time": "s136",
+        "ranking_epss": "s137",
+        "ransomware_campaign": "s138",
+        "reference": [],
+        "summary": "s13a"
+      },
+      "CVE02": {
+        "cpe": [],
+        "cve_id": "CVE01",
+        "cvss": "s1c4",
+        "cvss_v2": "s1c5",
+        "cvss_v3": "s1c6",
+        "cvss_v4": "s1c7",
+        "cvss_version": "s1c8",
+        "epss": "s1c9",
+        "kev": true,
+        "propose_action": "s1cb",
+        "published_time": "s1cc",
+        "ranking_epss": "s1cd",
+        "ransomware_campaign": "s1ce",
+        "reference": [],
+        "summary": "s1d0"
+      }
+    }
+  },
+  "new": {
+    "cve": {
+      "cve_ref01": {
+        "cpe": [],
+        "cve_id": "CVE01",
+        "cvss": "s25a",
+        "cvss_v2": "s25b",
+        "cvss_v3": "s25c",
+        "cvss_v4": "s25d",
+        "cvss_version": "s25e",
+        "epss": "s25f",
+        "kev": true,
+        "propose_action": "s261",
+        "published_time": "s262",
+        "ranking_epss": "s263",
+        "ransomware_campaign": "s264",
+        "reference": [],
+        "summary": "s266"
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+package voxgigcvedbsdk
+
+import (
+	"github.com/voxgig-sdk/cvedb-sdk/core"
+	"github.com/voxgig-sdk/cvedb-sdk/entity"
+	"github.com/voxgig-sdk/cvedb-sdk/feature"
+	_ "github.com/voxgig-sdk/cvedb-sdk/utility"
+)
+
+// Type aliases preserve external API.
+type CvedbSDK = core.CvedbSDK
+type Context = core.Context
+type Utility = core.Utility
+type Feature = core.Feature
+type Entity = core.Entity
+type CvedbEntity = core.CvedbEntity
+type FetcherFunc = core.FetcherFunc
+type Spec = core.Spec
+type Result = core.Result
+type Response = core.Response
+type Operation = core.Operation
+type Control = core.Control
+type CvedbError = core.CvedbError
+
+// BaseFeature from feature package.
+type BaseFeature = feature.BaseFeature
+
+func init() {
+	core.NewBaseFeatureFunc = func() core.Feature {
+		return feature.NewBaseFeature()
+	}
+	core.NewTestFeatureFunc = func() core.Feature {
+		return feature.NewTestFeature()
+	}
+	core.NewCveEntityFunc = func(client *core.CvedbSDK, entopts map[string]any) core.CvedbEntity {
+		return entity.NewCveEntity(client, entopts)
+	}
+	core.NewIfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntityFunc = func(client *core.CvedbSDK, entopts map[string]any) core.CvedbEntity {
+		return entity.NewIfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(client, entopts)
+	}
+	core.NewThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntityFunc = func(client *core.CvedbSDK, entopts map[string]any) core.CvedbEntity {
+		return entity.NewThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity(client, entopts)
+	}
+}
+
+// Constructor re-exports.
+var NewCvedbSDK = core.NewCvedbSDK
+var TestSDK = core.TestSDK
+var NewContext = core.NewContext
+var NewSpec = core.NewSpec
+var NewResult = core.NewResult
+var NewResponse = core.NewResponse
+var NewOperation = core.NewOperation
+var MakeConfig = core.MakeConfig
+var NewBaseFeature = feature.NewBaseFeature
+var NewTestFeature = feature.NewTestFeature

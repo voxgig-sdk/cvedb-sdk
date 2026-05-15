@@ -1,0 +1,28 @@
+# BasicThisEndpointIsTailoredForSearchesBasedOnProductNameOrFlow
+
+main: kit: flow: BasicThisEndpointIsTailoredForSearchesBasedOnProductNameOrFlow:
+{
+  entity: "this_endpoint_is_tailored_for_searches_based_on_product_name_or",
+  kind: "basic",
+  name: "BasicThisEndpointIsTailoredForSearchesBasedOnProductNameOrFlow",
+  step: [
+    {
+      input: {
+        ref: "this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01",
+        srcdatavar: "this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicThisEndpointIsTailoredForSearchesBasedOnProductNameOrFlow"
+}

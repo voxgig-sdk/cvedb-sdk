@@ -1,0 +1,32 @@
+# BasicCveFlow
+
+main: kit: flow: BasicCveFlow:
+{
+  entity: "cve",
+  kind: "basic",
+  name: "BasicCveFlow",
+  step: [
+    {
+      input: {
+        ref: "cve_ref01",
+        srcdatavar: "cve_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "cve01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-cve_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCveFlow"
+}

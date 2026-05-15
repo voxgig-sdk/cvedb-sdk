@@ -1,0 +1,824 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CVEDB",
+    "description": "Fast Vulnerability lookups using CVE_ID and CPE23",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://cvedb.shodan.io"
+    }
+  ],
+  "paths": {
+    "/cve/{cve_id}": {
+      "get": {
+        "tags": [
+          "This endpoint delivers detailed information on a particular CVE when you provide its unique CVE ID."
+        ],
+        "summary": "Info",
+        "description": "Get information about a specific CVE.\n\nParameters:\n- `cve_id` (str): The CVE ID of the vulnerability you want to search.\n\nReturns:\n- An object representing the CVEWithCPEs with the following attributes. Please refer to the `CVEWithCPEs`\nschema for more details.",
+        "operationId": "info_cve__cve_id__get",
+        "parameters": [
+          {
+            "name": "cve_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cve Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CVEWithCPEs"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cpes": {
+      "get": {
+        "tags": [
+          "If you have the name of a specific software product and want to check if there are any Common Platform Enumeration (CPE) entries that have vulnerabilities (CVE) attached and are related to your product, then this endpoint is just for you."
+        ],
+        "summary": "Info",
+        "description": "This endpoint allows you to retrieve a CPE 2.3 dictionary based on a specified product.\n\n Parameters\n - `product` (String, Required): The name of the product for which you want to retrieve CPE dictionary.\n - `count` (Boolean, Default: false):If set to true, this returns only the count of matching CPEs. This will help a\n quick overview of how many CPEs are associated with the product name, especially if the total number exceeds the\n limit (by default the limit is 1000 but can be adjusted).\n - `skip` (Integer, Default: 0): Number of CPEs to skip in the result set.\n - `limit` (Integer, Default: 1000): The maximum number of CPEs to return in a single query. By default, up to 1000\n CPEs can be returned, but you can adjust this value based on your specific needs.\n\nReturns\n - if `product` is specified:\n     - Return: `cpes` is a list of CPEs matching the specified product name. Please refer to the `CPEs` schema for\n     more details.\n\n Workflow retrieve all CPE dictionary based on the `count`, `skip` and `limit` parameters:\n - Setting `count` is true:\n     - The `skip` and `limit` parameters are ignored for this request.\n     - Return: `total` is the total number of CPEs matching the specified product name. This allows the user to\n     understand the scale of CPEs associated with the product and plan data retrieval accordingly.\n - Following the retrieval of the `total` count, users can make subsequent requests to fetch the actual CPE data:\n     - if `count` is false:\n         - Users should use the `skip` and `limit` parameters to paginate through the results effectively. This\n         approach facilitates the retrieval of all CPEs associated with the specified product in a structured manner\n         - Parameters `skip` and `limit` allow for precise control over the data fetched in each request. By\n         incrementing `skip` by `limit` after each request, users can sequentially access all records up to the\n         `total` number.\n         - Return: `cpes` is an list containing details about the CPEs associated with the specified product within\n          the specified range. This data is returned in accordance with the pagination parameters\n          (`skip` and `limit`) set by the user. Please refer to the `CPEs` schema for more details on the\n          structure of returned data.",
+        "operationId": "info_cpes_get",
+        "parameters": [
+          {
+            "name": "product",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Product"
+            }
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Count"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1000,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CPEs"
+                    },
+                    {
+                      "$ref": "#/components/schemas/CPEsTotal"
+                    }
+                  ],
+                  "title": "Response Info Cpes Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cves": {
+      "get": {
+        "tags": [
+          "This endpoint is tailored for searches based on product name or specific CPE23, allowing you to retrieve relevant CVE information."
+        ],
+        "summary": "Info",
+        "description": "Retrieve information about CVEs based on a specified product name or CPE 2.3 identifier.\n\nParameters:\n- `cpe23` (String, Optional): The CPE version 2.3 identifier for CVE information retrieval.\n- `product` (String, Optional): The name of the product for CVE information retrieval.\n- `count` (Boolean, Default: false): If set to true, this returns only the count of matching CVEs. This will help a\nquick overview of how many CVEs are associated with the product or CPE identifier, especially if the total number\nexceeds the limit (by default the limit is 1000 but can be adjusted).\n- `is_kev` (Boolean, Default: false): If set to true, this returns only CVEs with the `kev` flag set to true.\n- `sort_by_epss` (Boolean, Default: false): If set to true, this sorts CVEs by the `epss` score in descending order.\n- `skip` (Integer, Default: 0): Number of CVEs to skip in the result set.\n- `limit` (Integer, Default: 1000): The maximum number of CVEs to return in a single query. By default, up to 1000\nCVEs can be returned, but you can adjust this value based on your specific needs.\n- `start_date` (str, optional): Start date for filtering CVEs (inclusive, format YYYY-MM-DDTHH:MM:SS).\n- `end_date` (str, optional): End date for filtering CVEs (inclusive, default is current date, format\nYYYY-MM-DDTHH:MM:SS).\n\nReturns:\n- if `cpe23` and `product` are not specified:\n    - Users can use the `skip` and `limit` parameters to paginate through the results effectively.\n    - Return: `cves` is a list of newest CVEs based on published time. Please refer to the `CVEs` schema for more\n    details.\n- if `cpe23` and `product` are specified:\n    - Raise a message indicating that you can only specify one of `cpe23` or `product`.\n- if `cpe23` is specified:\n    - Return: `cves` is a list of CVEs matching the specified cpe23 identifier. Please refer to the `CVEs` schema\n    for more details.\n- if `product` is specified:\n    - Return: `cves` is a list of CVEs matching the specified product name. Please refer to the `CVEs` schema for\n    more details.\n\nUse `start_date` and `end_date` to filter CVEs based on published time. If `start_date` is not specified, it\ndefaults to 00:00:00 on the given date. If `end_date` is not provided, it defaults to the current date and time.\n\nWorkflow retrieve all CVE information based on the `count`, `skip` and `limit` parameters when `cpe23` and\n`product` are specified:\n- Setting `count` is true:\n    - The `skip` and `limit` parameters are ignored for this request.\n    - Return: `total` is the total number of CVEs matching the specified product name or CPE 2.3 identifier.\n    This allows the user to understand the scale of CVEs associated with the product and plan data retrieval\n    accordingly.\n- Following the retrieval of the `total` count, users can make subsequent requests to fetch the actual CVE data:\n    - Setting `count` is false:\n        - Users should use the `skip` and `limit` parameters to paginate through the results effectively. This\n        approach facilitates the retrieval of all CVEs associated with the specified product in a structured manner.\n        - Parameters `skip` and `limit` allow for precise control over the data fetched in each request. By\n        incrementing `skip` by `limit` after each request, users can sequentially access all records up\n        to the `total` number.\n        - Return: `cves` is a list of CVEs matching the specified product name or CPE 2.3 identifier within the\n        specified range. This data is returned in accordance with the pagination parameters (`skip` and `limit`)\n        set by the user. Please refer to the `CVEs` schema for more details on the structure of returned data.",
+        "operationId": "info_cves_get",
+        "parameters": [
+          {
+            "name": "cpe23",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^cpe:2\\.3:[aho]:[^:]+:[^:]+:[^:]+(:[^:]*(:[^:]*(:[^:]*(:[^:]*(:[^:]*(:[^:]*(:[^:]*)?)?)?)?)?)?)?$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Format required cpe:2.3:part:vendor:product:version",
+              "title": "Cpe23"
+            },
+            "description": "Format required cpe:2.3:part:vendor:product:version"
+          },
+          {
+            "name": "product",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Product"
+            }
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Count"
+            }
+          },
+          {
+            "name": "is_kev",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Is Kev"
+            }
+          },
+          {
+            "name": "sort_by_epss",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false,
+              "title": "Sort By Epss"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "title": "Skip"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1000,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2})?$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Format YYYY-MM-DDTHH:MM:SS, default time is 00:00:00 on the given date",
+              "title": "Start Date"
+            },
+            "description": "Format YYYY-MM-DDTHH:MM:SS, default time is 00:00:00 on the given date"
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2})?$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Format YYYY-MM-DDTHH:MM:SS, default is current date and time",
+              "title": "End Date"
+            },
+            "description": "Format YYYY-MM-DDTHH:MM:SS, default is current date and time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CVEs"
+                    },
+                    {
+                      "$ref": "#/components/schemas/CVEsTotal"
+                    }
+                  ],
+                  "title": "Response Info Cves Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CPEs": {
+        "properties": {
+          "cpes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Cpes",
+            "description": "A dictionary of specific CPE version 2.3 identifiers. This dictionary serves as a valuable resource for systematically identifying and categorizing potentially affected software and hardware when assessing vulnerabilities."
+          }
+        },
+        "type": "object",
+        "required": [
+          "cpes"
+        ],
+        "title": "CPEs"
+      },
+      "CPEsTotal": {
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "The total count of CPE identifiers that match a given query. This provides a overview of the number of distinct products or components identified as potentially vulnerable, allowing for a broad assessment of exposure risk."
+          }
+        },
+        "type": "object",
+        "title": "CPEsTotal"
+      },
+      "CVE": {
+        "properties": {
+          "cve_id": {
+            "type": "string",
+            "title": "Cve Id",
+            "description": "The unique identifier assigned to a reported vulnerability, adhering to the CVE-YYYY-NNNNN format, which helps in tracking and referencing vulnerabilities systematically."
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary",
+            "description": "A brief overview of the vulnerability, providing essential information on what it entails, the affected systems, and the potential impact in clear, understandable English."
+          },
+          "cvss": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss",
+            "description": "The Common Vulnerability Scoring System (CVSS) score, newest version, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. A score of 10 indicates the highest severity."
+          },
+          "cvss_version": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss Version",
+            "description": "The version of the CVSS used in the cvss field."
+          },
+          "cvss_v2": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss V2",
+            "description": "The Common Vulnerability Scoring System (CVSS) score version 2, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. A score of 10 indicates the highest severity."
+          },
+          "cvss_v3": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss V3",
+            "description": "The Common Vulnerability Scoring System (CVSS) score version 3, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. A score of 10 indicates the highest severity."
+          },
+          "cvss_v4": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss V4",
+            "description": "The Common Vulnerability Scoring System (CVSS) score version 4, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. A score of 10 indicates the highest severity."
+          },
+          "epss": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Epss",
+            "description": "The Exploit Prediction Scoring System (EPSS) score, a probabilistic measure between 0 and 1 (0 and 100%)., predicts the likelihood of a vulnerability being exploited in the wild within the next 30 days. Scores closer to 1 indicate a higher risk of exploitation."
+          },
+          "ranking_epss": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ranking Epss",
+            "description": "This score ranks the vulnerability in terms of its EPSS score relative to all other scored vulnerabilities. It shows the proportion of vulnerabilities that have the same or a lower risk of being exploited, with a score closer to 1 indicating a higher relative risk."
+          },
+          "kev": {
+            "type": "boolean",
+            "title": "Kev",
+            "description": "A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts."
+          },
+          "propose_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Propose Action",
+            "description": "Suggested actions or mitigation strategies to address the vulnerability, aimed at reducing its impact or eliminating the risk to affected systems."
+          },
+          "ransomware_campaign": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ransomware Campaign",
+            "description": "Indicates if the vulnerability has been exploited in ransomware campaigns, highlighting its significance and potential impact on security posture."
+          },
+          "references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "References",
+            "description": "A list of references providing further details, technical advisories, and mitigation guidance related to the vulnerability, facilitating deeper understanding and research."
+          },
+          "published_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Published Time",
+            "description": "The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone."
+          },
+          "vendor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vendor",
+            "description": "Vendor name effected by this CVE"
+          },
+          "product": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Product",
+            "description": "Product name of vendor effected by this CVE"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version",
+            "description": "Version of product effected by this CVE"
+          }
+        },
+        "type": "object",
+        "required": [
+          "cve_id",
+          "summary",
+          "cvss",
+          "cvss_version",
+          "cvss_v2",
+          "cvss_v3",
+          "cvss_v4",
+          "epss",
+          "ranking_epss",
+          "kev",
+          "references",
+          "published_time",
+          "vendor",
+          "product",
+          "version"
+        ],
+        "title": "CVE"
+      },
+      "CVEWithCPEs": {
+        "properties": {
+          "cve_id": {
+            "type": "string",
+            "title": "Cve Id",
+            "description": "The unique identifier assigned to a reported vulnerability, adhering to the CVE-YYYY-NNNNN format, which helps in tracking and referencing vulnerabilities systematically."
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary",
+            "description": "A brief overview of the vulnerability, providing essential information on what it entails, the affected systems, and the potential impact in clear, understandable English."
+          },
+          "cvss": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss",
+            "description": "The Common Vulnerability Scoring System (CVSS) score, newest version, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. A score of 10 indicates the highest severity."
+          },
+          "cvss_version": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss Version",
+            "description": "The version of the CVSS used in the cvss field."
+          },
+          "cvss_v2": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss V2",
+            "description": "The Common Vulnerability Scoring System (CVSS) score version 2, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. A score of 10 indicates the highest severity."
+          },
+          "cvss_v3": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss V3",
+            "description": "The Common Vulnerability Scoring System (CVSS) score version 3, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. A score of 10 indicates the highest severity."
+          },
+          "cvss_v4": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 10.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cvss V4",
+            "description": "The Common Vulnerability Scoring System (CVSS) score version 4, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. A score of 10 indicates the highest severity."
+          },
+          "epss": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Epss",
+            "description": "The Exploit Prediction Scoring System (EPSS) score, a probabilistic measure between 0 and 1 (0 and 100%)., predicts the likelihood of a vulnerability being exploited in the wild within the next 30 days. Scores closer to 1 indicate a higher risk of exploitation."
+          },
+          "ranking_epss": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ranking Epss",
+            "description": "This score ranks the vulnerability in terms of its EPSS score relative to all other scored vulnerabilities. It shows the proportion of vulnerabilities that have the same or a lower risk of being exploited, with a score closer to 1 indicating a higher relative risk."
+          },
+          "kev": {
+            "type": "boolean",
+            "title": "Kev",
+            "description": "A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts."
+          },
+          "propose_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Propose Action",
+            "description": "Suggested actions or mitigation strategies to address the vulnerability, aimed at reducing its impact or eliminating the risk to affected systems."
+          },
+          "ransomware_campaign": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ransomware Campaign",
+            "description": "Indicates if the vulnerability has been exploited in ransomware campaigns, highlighting its significance and potential impact on security posture."
+          },
+          "references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "References",
+            "description": "A list of references providing further details, technical advisories, and mitigation guidance related to the vulnerability, facilitating deeper understanding and research."
+          },
+          "published_time": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Published Time",
+            "description": "The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone."
+          },
+          "cpes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Cpes",
+            "description": "A list of Common Platform Enumeration (CPE) identifiers that specify the affected product(s) or component(s) by this vulnerability. CPEs help in systematically identifying and categorizing affected systems for precise vulnerability management."
+          }
+        },
+        "type": "object",
+        "required": [
+          "cve_id",
+          "summary",
+          "cvss",
+          "cvss_version",
+          "cvss_v2",
+          "cvss_v3",
+          "cvss_v4",
+          "epss",
+          "ranking_epss",
+          "kev",
+          "references",
+          "published_time",
+          "cpes"
+        ],
+        "title": "CVEWithCPEs"
+      },
+      "CVEs": {
+        "properties": {
+          "cves": {
+            "items": {
+              "$ref": "#/components/schemas/CVE"
+            },
+            "type": "array",
+            "title": "Cves",
+            "description": "A collection of CVE objects. Each object provides detailed information about a specific Common Vulnerability and Exposure, including its identification, description, scores, and mitigation recommendations."
+          }
+        },
+        "type": "object",
+        "required": [
+          "cves"
+        ],
+        "title": "CVEs"
+      },
+      "CVEsTotal": {
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total",
+            "description": "The total count of CVE entries that match a given query. This is useful for understanding the scope of vulnerabilities affecting a specific product or component without retrieving detailed information about each entry."
+          }
+        },
+        "type": "object",
+        "title": "CVEsTotal"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

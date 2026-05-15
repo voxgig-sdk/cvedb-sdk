@@ -1,0 +1,72 @@
+# Entity: if_you_have_the_name_of_a_specific_software_product_and_want_to
+
+main: kit: entity: if_you_have_the_name_of_a_specific_software_product_and_want_to: {
+
+  alias: field: {}
+
+  name: "if_you_have_the_name_of_a_specific_software_product_and_want_to"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "count"
+                orig: "count"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: 1000
+                kind: "query"
+                name: "limit"
+                orig: "limit"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "product"
+                orig: "product"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: 0
+                kind: "query"
+                name: "skip"
+                orig: "skip"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/cpes"
+          parts: [
+            "cpes"
+          ]
+          select: {
+            exist: [
+              "count"
+              "limit"
+              "product"
+              "skip"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

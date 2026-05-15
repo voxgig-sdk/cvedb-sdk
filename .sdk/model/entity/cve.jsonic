@@ -1,0 +1,129 @@
+# Entity: cve
+
+main: kit: entity: cve: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "cpe"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "cve_id"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "cvss"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "cvss_v2"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "cvss_v3"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "cvss_v4"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "cvss_version"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "epss"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "kev"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "propose_action"
+      req: false
+      type: "`$ANY`"
+    }
+    {
+      name: "published_time"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "ranking_epss"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "ransomware_campaign"
+      req: false
+      type: "`$ANY`"
+    }
+    {
+      name: "reference"
+      req: true
+      type: "`$ARRAY`"
+    }
+    {
+      name: "summary"
+      req: true
+      type: "`$ANY`"
+    }
+  ]
+
+  name: "cve"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "cve_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/cve/{cve_id}"
+          parts: [
+            "cve"
+            "{id}"
+          ]
+          rename: {
+            param: {
+              cve_id: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

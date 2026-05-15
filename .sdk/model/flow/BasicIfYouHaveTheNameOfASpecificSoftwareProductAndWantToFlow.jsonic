@@ -1,0 +1,28 @@
+# BasicIfYouHaveTheNameOfASpecificSoftwareProductAndWantToFlow
+
+main: kit: flow: BasicIfYouHaveTheNameOfASpecificSoftwareProductAndWantToFlow:
+{
+  entity: "if_you_have_the_name_of_a_specific_software_product_and_want_to",
+  kind: "basic",
+  name: "BasicIfYouHaveTheNameOfASpecificSoftwareProductAndWantToFlow",
+  step: [
+    {
+      input: {
+        ref: "if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01",
+        srcdatavar: "if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicIfYouHaveTheNameOfASpecificSoftwareProductAndWantToFlow"
+}
