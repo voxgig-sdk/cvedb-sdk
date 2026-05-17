@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/cvedb-sdk"
-	"github.com/voxgig-sdk/cvedb-sdk/core"
+	sdk "github.com/voxgig-sdk/cvedb-sdk/go"
+	"github.com/voxgig-sdk/cvedb-sdk/go/core"
 )
 
 func TestCveDirect(t *testing.T) {

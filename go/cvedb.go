@@ -1,10 +1,10 @@
 package voxgigcvedbsdk
 
 import (
-	"github.com/voxgig-sdk/cvedb-sdk/core"
-	"github.com/voxgig-sdk/cvedb-sdk/entity"
-	"github.com/voxgig-sdk/cvedb-sdk/feature"
-	_ "github.com/voxgig-sdk/cvedb-sdk/utility"
+	"github.com/voxgig-sdk/cvedb-sdk/go/core"
+	"github.com/voxgig-sdk/cvedb-sdk/go/entity"
+	"github.com/voxgig-sdk/cvedb-sdk/go/feature"
+	_ "github.com/voxgig-sdk/cvedb-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

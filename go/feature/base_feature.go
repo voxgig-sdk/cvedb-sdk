@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/cvedb-sdk/core"
+	"github.com/voxgig-sdk/cvedb-sdk/go/core"
 )
 
 type BaseFeature struct {

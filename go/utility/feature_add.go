@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/cvedb-sdk/core"
+import "github.com/voxgig-sdk/cvedb-sdk/go/core"
 
 func featureAddUtil(ctx *core.Context, f core.Feature) {
 	client := ctx.Client

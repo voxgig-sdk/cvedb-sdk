@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/cvedb-sdk"
-	"github.com/voxgig-sdk/cvedb-sdk/core"
+	sdk "github.com/voxgig-sdk/cvedb-sdk/go"
+	"github.com/voxgig-sdk/cvedb-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/cvedb-sdk/go/utility/struct"
 )
 
 func TestCveEntity(t *testing.T) {

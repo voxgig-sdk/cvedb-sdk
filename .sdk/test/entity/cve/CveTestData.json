@@ -16,7 +16,8 @@
         "ranking_epss": "sa1",
         "ransomware_campaign": "sa2",
         "reference": [],
-        "summary": "sa4"
+        "summary": "sa4",
+        "id": "CVE00"
       },
       "CVE01": {
         "cpe": [],
@@ -33,7 +34,8 @@
         "ranking_epss": "s137",
         "ransomware_campaign": "s138",
         "reference": [],
-        "summary": "s13a"
+        "summary": "s13a",
+        "id": "CVE01"
       },
       "CVE02": {
         "cpe": [],
@@ -50,7 +52,8 @@
         "ranking_epss": "s1cd",
         "ransomware_campaign": "s1ce",
         "reference": [],
-        "summary": "s1d0"
+        "summary": "s1d0",
+        "id": "CVE02"
       }
     }
   },
