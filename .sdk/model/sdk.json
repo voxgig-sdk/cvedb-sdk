@@ -12,7 +12,19 @@
           }
         ],
         "title": "CVEDB",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Fast vulnerability lookups by CVE-ID, EUVD-ID, CPE 2.3, or product name, served by Shodan",
+        "homepage": "https://cvedb.shodan.io",
+        "docs_url": "https://cvedb.shodan.io",
+        "license_short": "Free for non-commercial use; commercial applications require an enterprise licence from Shodan",
+        "license_md": "- Free for non-commercial use, per the project homepage\n- Commercial use requires an enterprise licence from [Shodan](https://www.shodan.io)\n- No Shodan account or API key is needed to query the public endpoints\n- Underlying CVE data originates from public vulnerability sources (NVD, EPSS, KEV, EUVD)",
+        "about_md": "CVEDB is a vulnerability-lookup service run by [Shodan](https://www.shodan.io). It exposes a small read-only HTTP API at `https://cvedb.shodan.io` for fetching CVE records, searching by product or CPE 2.3 string, and pulling the newest disclosures.\n\nWhat you get from the API:\n\n- Single-CVE lookup by identifier at `/cve/{CVE_ID}`\n- Single-record lookup by EUVD identifier at `/euvd/{EUVD_ID}`\n- Listing and filtering of CVEs at `/cves`, including filters for CPE 2.3 (`cpe23=`), product name (`product=`), known-exploited status (`is_kev=true`), and sorting by EPSS score (`sort_by_epss=true`)\n- A CPE dictionary lookup at `/cpes?product=`\n- Per-record fields typically include the CVE summary, CVSS score, EPSS risk score, affected product CPEs, references, and publication dates\n\nOperational notes: no Shodan account or API key is required for the public endpoints. CORS is reported as disabled on the freepublicapis.com health check, so browser-side calls may need a proxy. Rate limits are not documented publicly.",
+        "entity_desc": {
+          "cve": "A single CVE record with summary, CVSS/EPSS scores, affected CPEs, and references, fetched via `/cve/{CVE_ID}` or listed/filtered via `/cves`.",
+          "if_you_have_the_name_of_a_specific_software_product_and_want_to": "CPE dictionary lookup for a given product, exposed at `/cpes?product={name}`, returning the matching CPE 2.3 strings.",
+          "this_endpoint_is_tailored_for_searches_based_on_product_name_or": "Product- and CPE-based CVE search at `/cves`, accepting `product=` or `cpe23=` query parameters (plus optional filters such as `is_kev=true` and `sort_by_epss=true`)."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -20,7 +32,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "cve": {

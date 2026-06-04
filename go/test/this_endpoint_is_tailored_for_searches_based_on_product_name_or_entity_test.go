@@ -117,7 +117,6 @@ func this_endpoint_is_tailored_for_searches_based_on_product_name_orBasicSetup(e
 		"CVEDB_TEST_THIS_ENDPOINT_IS_TAILORED_FOR_SEARCHES_BASED_ON_PRODUCT_NAME_OR_ENTID": idmap,
 		"CVEDB_TEST_LIVE":      "FALSE",
 		"CVEDB_TEST_EXPLAIN":   "FALSE",
-		"CVEDB_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["CVEDB_TEST_THIS_ENDPOINT_IS_TAILORED_FOR_SEARCHES_BASED_ON_PRODUCT_NAME_OR_ENTID"])
@@ -128,7 +127,6 @@ func this_endpoint_is_tailored_for_searches_based_on_product_name_orBasicSetup(e
 	if env["CVEDB_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["CVEDB_APIKEY"],
 			},
 			extra,
 		})

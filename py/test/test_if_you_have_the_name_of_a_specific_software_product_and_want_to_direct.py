@@ -59,14 +59,12 @@ def _if_you_have_the_name_of_a_specific_software_product_and_want_to_direct_setu
     env = runner.env_override({
         "CVEDB_TEST_IF_YOU_HAVE_THE_NAME_OF_A_SPECIFIC_SOFTWARE_PRODUCT_AND_WANT_TO_ENTID": {},
         "CVEDB_TEST_LIVE": "FALSE",
-        "CVEDB_APIKEY": "NONE",
     })
 
     live = env.get("CVEDB_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("CVEDB_APIKEY"),
         }
         client = CvedbSDK(merged_opts)
         return {

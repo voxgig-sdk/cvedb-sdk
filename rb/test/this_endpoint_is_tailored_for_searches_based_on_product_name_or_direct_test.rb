@@ -61,14 +61,12 @@ def this_endpoint_is_tailored_for_searches_based_on_product_name_or_direct_setup
   env = Runner.env_override({
     "CVEDB_TEST_THIS_ENDPOINT_IS_TAILORED_FOR_SEARCHES_BASED_ON_PRODUCT_NAME_OR_ENTID" => {},
     "CVEDB_TEST_LIVE" => "FALSE",
-    "CVEDB_APIKEY" => "NONE",
   })
 
   live = env["CVEDB_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["CVEDB_APIKEY"],
     }
     client = CvedbSDK.new(merged_opts)
     return {

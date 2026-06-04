@@ -72,14 +72,12 @@ function cve_direct_setup(mockres)
   local env = runner.env_override({
     ["CVEDB_TEST_CVE_ENTID"] = {},
     ["CVEDB_TEST_LIVE"] = "FALSE",
-    ["CVEDB_APIKEY"] = "NONE",
   })
 
   local live = env["CVEDB_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["CVEDB_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

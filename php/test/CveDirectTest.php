@@ -77,14 +77,12 @@ function cve_direct_setup($mockres)
     $env = Runner::env_override([
         "CVEDB_TEST_CVE_ENTID" => [],
         "CVEDB_TEST_LIVE" => "FALSE",
-        "CVEDB_APIKEY" => "NONE",
     ]);
 
     $live = $env["CVEDB_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["CVEDB_APIKEY"],
         ];
         $client = new CvedbSDK($merged_opts);
         return [
