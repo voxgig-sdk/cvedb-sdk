@@ -10,7 +10,7 @@ The Lua SDK for the Cvedb API — an entity-oriented client using Lua convention
 
 ## Install
 ```bash
-luarocks install cvedb-sdk
+luarocks install voxgig-sdk-cvedb
 ```
 
 If the module is not yet published, add the source directory to

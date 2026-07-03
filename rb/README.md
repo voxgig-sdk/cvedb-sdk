@@ -10,13 +10,13 @@ The Ruby SDK for the Cvedb API — an entity-oriented client using idiomatic Rub
 
 ## Install
 ```bash
-gem install cvedb-sdk
+gem install voxgig-sdk-cvedb
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "cvedb-sdk"
+gem "voxgig-sdk-cvedb"
 ```
 
 Then run:

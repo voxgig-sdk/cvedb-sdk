@@ -10,7 +10,7 @@ The Python SDK for the Cvedb API — an entity-oriented client following Pythoni
 
 ## Install
 ```bash
-pip install cvedb-sdk
+pip install voxgig-sdk-cvedb
 ```
 
 Or install from source:

@@ -10,7 +10,7 @@ The TypeScript SDK for the Cvedb API — a type-safe, entity-oriented client wit
 
 ## Install
 ```bash
-npm install cvedb
+npm install @voxgig-sdk/cvedb
 ```
 ## Tutorial: your first API call
 

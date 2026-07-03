@@ -8,12 +8,14 @@ source = {
   dir = "cvedb-sdk/lua"
 }
 description = {
-  summary = "Cvedb SDK for Lua",
-  license = "MIT"
+  summary = "Unofficial generated Lua SDK for the CVEDB public API. Not affiliated with or endorsed by the upstream API provider.",
+  homepage = "https://github.com/voxgig-sdk/cvedb-sdk",
+  issues_url = "https://github.com/voxgig-sdk/cvedb-sdk/issues",
+  license = "MIT",
+  labels = { "voxgig", "sdk", "generated-sdk", "openapi", "api-client", "cvedb" }
 }
 dependencies = {
   "lua >= 5.3",
-  "dkjson >= 2.5",
   "dkjson >= 2.5",
 }
 build = {

@@ -10,7 +10,7 @@ The PHP SDK for the Cvedb API — an entity-oriented client using PHP convention
 
 ## Install
 ```bash
-composer require voxgig/cvedb-sdk
+composer require voxgig-sdk/cvedb
 ```
 
 
