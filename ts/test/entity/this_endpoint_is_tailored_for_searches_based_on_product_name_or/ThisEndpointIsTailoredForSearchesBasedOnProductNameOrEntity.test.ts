@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'CVEDB_TEST_THIS_ENDPOINT_IS_TAILORED_FOR_SEARCHES_BASED_ON_PRODUCT_NAME_OR_ENTID': idmap,
     'CVEDB_TEST_LIVE': 'FALSE',
     'CVEDB_TEST_EXPLAIN': 'FALSE',
+    'CVEDB_APIKEY': 'NONE',
   })
 
   idmap = env['CVEDB_TEST_THIS_ENDPOINT_IS_TAILORED_FOR_SEARCHES_BASED_ON_PRODUCT_NAME_OR_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new CvedbSDK(merge([
       {
+        apikey: env.CVEDB_APIKEY,
       },
       extra
     ]))

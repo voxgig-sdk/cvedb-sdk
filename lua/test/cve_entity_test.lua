@@ -91,6 +91,7 @@ function cve_basic_setup(extra)
     ["CVEDB_TEST_CVE_ENTID"] = idmap,
     ["CVEDB_TEST_LIVE"] = "FALSE",
     ["CVEDB_TEST_EXPLAIN"] = "FALSE",
+    ["CVEDB_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ function cve_basic_setup(extra)
   if env["CVEDB_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["CVEDB_APIKEY"],
       },
       extra or {},
     })

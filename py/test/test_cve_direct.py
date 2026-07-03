@@ -69,12 +69,14 @@ def _cve_direct_setup(mockres):
     env = runner.env_override({
         "CVEDB_TEST_CVE_ENTID": {},
         "CVEDB_TEST_LIVE": "FALSE",
+        "CVEDB_APIKEY": "NONE",
     })
 
     live = env.get("CVEDB_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("CVEDB_APIKEY"),
         }
         client = CvedbSDK(merged_opts)
         return {

@@ -62,12 +62,14 @@ function if_you_have_the_name_of_a_specific_software_product_and_want_to_direct_
   local env = runner.env_override({
     ["CVEDB_TEST_IF_YOU_HAVE_THE_NAME_OF_A_SPECIFIC_SOFTWARE_PRODUCT_AND_WANT_TO_ENTID"] = {},
     ["CVEDB_TEST_LIVE"] = "FALSE",
+    ["CVEDB_APIKEY"] = "NONE",
   })
 
   local live = env["CVEDB_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["CVEDB_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

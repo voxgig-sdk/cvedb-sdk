@@ -99,12 +99,14 @@ func if_you_have_the_name_of_a_specific_software_product_and_want_toDirectSetup(
 	env := envOverride(map[string]any{
 		"CVEDB_TEST_IF_YOU_HAVE_THE_NAME_OF_A_SPECIFIC_SOFTWARE_PRODUCT_AND_WANT_TO_ENTID": map[string]any{},
 		"CVEDB_TEST_LIVE":    "FALSE",
+		"CVEDB_APIKEY":       "NONE",
 	})
 
 	live := env["CVEDB_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["CVEDB_APIKEY"],
 		}
 		client := sdk.NewCvedbSDK(mergedOpts)
 

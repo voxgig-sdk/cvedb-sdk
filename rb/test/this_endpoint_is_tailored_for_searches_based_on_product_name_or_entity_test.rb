@@ -82,6 +82,7 @@ def this_endpoint_is_tailored_for_searches_based_on_product_name_or_basic_setup(
     "CVEDB_TEST_THIS_ENDPOINT_IS_TAILORED_FOR_SEARCHES_BASED_ON_PRODUCT_NAME_OR_ENTID" => idmap,
     "CVEDB_TEST_LIVE" => "FALSE",
     "CVEDB_TEST_EXPLAIN" => "FALSE",
+    "CVEDB_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -93,6 +94,7 @@ def this_endpoint_is_tailored_for_searches_based_on_product_name_or_basic_setup(
   if env["CVEDB_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
+        "apikey" => env["CVEDB_APIKEY"],
       },
       extra || {},
     ])

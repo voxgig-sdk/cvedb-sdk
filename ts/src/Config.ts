@@ -38,6 +38,10 @@ class Config {
   options = {
     base: 'https://cvedb.shodan.io',
 
+    auth: {
+      prefix: 'Bearer',
+    },
+
     headers: {
       "content-type": "application/json"
     },
@@ -61,126 +65,128 @@ class Config {
     "cve": {
       "fields": [
         {
+          "active": true,
           "name": "cpe",
           "req": true,
           "type": "`$ARRAY`",
-          "active": true,
           "index$": 0
         },
         {
+          "active": true,
           "name": "cve_id",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 1
         },
         {
+          "active": true,
           "name": "cvss",
           "req": true,
           "type": "`$ANY`",
-          "active": true,
           "index$": 2
         },
         {
+          "active": true,
           "name": "cvss_v2",
           "req": true,
           "type": "`$ANY`",
-          "active": true,
           "index$": 3
         },
         {
+          "active": true,
           "name": "cvss_v3",
           "req": true,
           "type": "`$ANY`",
-          "active": true,
           "index$": 4
         },
         {
+          "active": true,
           "name": "cvss_v4",
           "req": true,
           "type": "`$ANY`",
-          "active": true,
           "index$": 5
         },
         {
+          "active": true,
           "name": "cvss_version",
           "req": true,
           "type": "`$ANY`",
-          "active": true,
           "index$": 6
         },
         {
+          "active": true,
           "name": "epss",
           "req": true,
           "type": "`$ANY`",
-          "active": true,
           "index$": 7
         },
         {
+          "active": true,
           "name": "kev",
           "req": true,
           "type": "`$BOOLEAN`",
-          "active": true,
           "index$": 8
         },
         {
+          "active": true,
           "name": "propose_action",
           "req": false,
           "type": "`$ANY`",
-          "active": true,
           "index$": 9
         },
         {
+          "active": true,
           "name": "published_time",
           "req": true,
           "type": "`$STRING`",
-          "active": true,
           "index$": 10
         },
         {
+          "active": true,
           "name": "ranking_epss",
           "req": true,
           "type": "`$ANY`",
-          "active": true,
           "index$": 11
         },
         {
+          "active": true,
           "name": "ransomware_campaign",
           "req": false,
           "type": "`$ANY`",
-          "active": true,
           "index$": 12
         },
         {
+          "active": true,
           "name": "reference",
           "req": true,
           "type": "`$ARRAY`",
-          "active": true,
           "index$": 13
         },
         {
+          "active": true,
           "name": "summary",
           "req": true,
           "type": "`$ANY`",
-          "active": true,
           "index$": 14
         }
       ],
       "name": "cve",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "params": [
                   {
+                    "active": true,
                     "kind": "param",
                     "name": "id",
                     "orig": "cve_id",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -204,11 +210,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -221,45 +225,47 @@ class Config {
       "name": "if_you_have_the_name_of_a_specific_software_product_and_want_to",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "query": [
                   {
+                    "active": true,
                     "example": false,
                     "kind": "query",
                     "name": "count",
                     "orig": "count",
                     "reqd": false,
-                    "type": "`$BOOLEAN`",
-                    "active": true
+                    "type": "`$BOOLEAN`"
                   },
                   {
+                    "active": true,
                     "example": 1000,
                     "kind": "query",
                     "name": "limit",
                     "orig": "limit",
                     "reqd": false,
-                    "type": "`$INTEGER`",
-                    "active": true
+                    "type": "`$INTEGER`"
                   },
                   {
+                    "active": true,
                     "kind": "query",
                     "name": "product",
                     "orig": "product",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "active": true
+                    "type": "`$STRING`"
                   },
                   {
+                    "active": true,
                     "example": 0,
                     "kind": "query",
                     "name": "skip",
                     "orig": "skip",
                     "reqd": false,
-                    "type": "`$INTEGER`",
-                    "active": true
+                    "type": "`$INTEGER`"
                   }
                 ]
               },
@@ -280,11 +286,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },
@@ -297,87 +301,89 @@ class Config {
       "name": "this_endpoint_is_tailored_for_searches_based_on_product_name_or",
       "op": {
         "load": {
+          "input": "data",
           "name": "load",
           "points": [
             {
+              "active": true,
               "args": {
                 "query": [
                   {
+                    "active": true,
                     "example": false,
                     "kind": "query",
                     "name": "count",
                     "orig": "count",
                     "reqd": false,
-                    "type": "`$BOOLEAN`",
-                    "active": true
+                    "type": "`$BOOLEAN`"
                   },
                   {
+                    "active": true,
                     "kind": "query",
                     "name": "cpe23",
                     "orig": "cpe23",
                     "reqd": false,
-                    "type": "`$ANY`",
-                    "active": true
+                    "type": "`$ANY`"
                   },
                   {
+                    "active": true,
                     "kind": "query",
                     "name": "end_date",
                     "orig": "end_date",
                     "reqd": false,
-                    "type": "`$ANY`",
-                    "active": true
+                    "type": "`$ANY`"
                   },
                   {
+                    "active": true,
                     "example": false,
                     "kind": "query",
                     "name": "is_kev",
                     "orig": "is_kev",
                     "reqd": false,
-                    "type": "`$BOOLEAN`",
-                    "active": true
+                    "type": "`$BOOLEAN`"
                   },
                   {
+                    "active": true,
                     "example": 1000,
                     "kind": "query",
                     "name": "limit",
                     "orig": "limit",
                     "reqd": false,
-                    "type": "`$INTEGER`",
-                    "active": true
+                    "type": "`$INTEGER`"
                   },
                   {
+                    "active": true,
                     "kind": "query",
                     "name": "product",
                     "orig": "product",
                     "reqd": false,
-                    "type": "`$ANY`",
-                    "active": true
+                    "type": "`$ANY`"
                   },
                   {
+                    "active": true,
                     "example": 0,
                     "kind": "query",
                     "name": "skip",
                     "orig": "skip",
                     "reqd": false,
-                    "type": "`$INTEGER`",
-                    "active": true
+                    "type": "`$INTEGER`"
                   },
                   {
+                    "active": true,
                     "example": false,
                     "kind": "query",
                     "name": "sort_by_epss",
                     "orig": "sort_by_epss",
                     "reqd": false,
-                    "type": "`$BOOLEAN`",
-                    "active": true
+                    "type": "`$BOOLEAN`"
                   },
                   {
+                    "active": true,
                     "kind": "query",
                     "name": "start_date",
                     "orig": "start_date",
                     "reqd": false,
-                    "type": "`$ANY`",
-                    "active": true
+                    "type": "`$ANY`"
                   }
                 ]
               },
@@ -403,11 +409,9 @@ class Config {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "active": true,
               "index$": 0
             }
           ],
-          "input": "data",
           "key$": "load"
         }
       },

@@ -117,12 +117,14 @@ func cveDirectSetup(mockres any) *cveDirectSetupResult {
 	env := envOverride(map[string]any{
 		"CVEDB_TEST_CVE_ENTID": map[string]any{},
 		"CVEDB_TEST_LIVE":    "FALSE",
+		"CVEDB_APIKEY":       "NONE",
 	})
 
 	live := env["CVEDB_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["CVEDB_APIKEY"],
 		}
 		client := sdk.NewCvedbSDK(mergedOpts)
 

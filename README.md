@@ -1,22 +1,8 @@
 # Cvedb SDK
 
-Fast vulnerability lookups by CVE-ID, EUVD-ID, CPE 2.3, or product name, served by Shodan
+CVEDB client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About CVEDB
-
-CVEDB is a vulnerability-lookup service run by [Shodan](https://www.shodan.io). It exposes a small read-only HTTP API at `https://cvedb.shodan.io` for fetching CVE records, searching by product or CPE 2.3 string, and pulling the newest disclosures.
-
-What you get from the API:
-
-- Single-CVE lookup by identifier at `/cve/{CVE_ID}`
-- Single-record lookup by EUVD identifier at `/euvd/{EUVD_ID}`
-- Listing and filtering of CVEs at `/cves`, including filters for CPE 2.3 (`cpe23=`), product name (`product=`), known-exploited status (`is_kev=true`), and sorting by EPSS score (`sort_by_epss=true`)
-- A CPE dictionary lookup at `/cpes?product=`
-- Per-record fields typically include the CVE summary, CVSS score, EPSS risk score, affected product CPEs, references, and publication dates
-
-Operational notes: no Shodan account or API key is required for the public endpoints. CORS is reported as disabled on the freepublicapis.com health check, so browser-side calls may need a proxy. Rate limits are not documented publicly.
 
 ## Try it
 
@@ -50,27 +36,31 @@ gem install cvedb-sdk
 luarocks install cvedb-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { CvedbSDK } from 'cvedb'
 
-const client = new CvedbSDK({})
+const client = new CvedbSDK({
+  apikey: process.env.CVEDB_APIKEY,
+})
 
+// Load cve data
+const cve = await client.Cve().load({})
+console.log(cve.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -100,9 +90,9 @@ The API exposes 3 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Cve** | A single CVE record with summary, CVSS/EPSS scores, affected CPEs, and references, fetched via `/cve/{CVE_ID}` or listed/filtered via `/cves`. | `/cve/{cve_id}` |
-| **IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo** | CPE dictionary lookup for a given product, exposed at `/cpes?product={name}`, returning the matching CPE 2.3 strings. | `/cpes` |
-| **ThisEndpointIsTailoredForSearchesBasedOnProductNameOr** | Product- and CPE-based CVE search at `/cves`, accepting `product=` or `cpe23=` query parameters (plus optional filters such as `is_kev=true` and `sort_by_epss=true`). | `/cves` |
+| **Cve** |  | `/cve/{cve_id}` |
+| **IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo** |  | `/cpes` |
+| **ThisEndpointIsTailoredForSearchesBasedOnProductNameOr** |  | `/cves` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -112,15 +102,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from cvedb_sdk import CvedbSDK
 
-client = CvedbSDK({})
+client = CvedbSDK({
+    "apikey": os.environ.get("CVEDB_APIKEY"),
+})
 
 
 # Load a specific cve
-cve, err = client.Cve(None).load(
-    {"id": "example_id"}, None
-)
+cve, err = client.Cve().load({"id": "example_id"})
+print(cve)
 ```
 
 ### PHP
@@ -129,13 +121,14 @@ cve, err = client.Cve(None).load(
 <?php
 require_once 'cvedb_sdk.php';
 
-$client = new CvedbSDK([]);
+$client = new CvedbSDK([
+    "apikey" => getenv("CVEDB_APIKEY"),
+]);
 
 
 // Load a specific cve
-[$cve, $err] = $client->Cve(null)->load(
-    ["id" => "example_id"], null
-);
+[$cve, $err] = $client->Cve()->load(["id" => "example_id"]);
+print_r($cve);
 ```
 
 ### Golang
@@ -143,8 +136,13 @@ $client = new CvedbSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/cvedb-sdk/go"
 
-client := sdk.NewCvedbSDK(map[string]any{})
+client := sdk.NewCvedbSDK(map[string]any{
+    "apikey": os.Getenv("CVEDB_APIKEY"),
+})
 
+// Load cve data
+cve, err := client.Cve(nil).Load(map[string]any{}, nil)
+fmt.Println(cve)
 ```
 
 ### Ruby
@@ -152,13 +150,14 @@ client := sdk.NewCvedbSDK(map[string]any{})
 ```ruby
 require_relative "Cvedb_sdk"
 
-client = CvedbSDK.new({})
+client = CvedbSDK.new({
+  "apikey" => ENV["CVEDB_APIKEY"],
+})
 
 
 # Load a specific cve
-cve, err = client.Cve(nil).load(
-  { "id" => "example_id" }, nil
-)
+cve, err = client.Cve().load({ "id" => "example_id" })
+puts cve
 ```
 
 ### Lua
@@ -166,13 +165,14 @@ cve, err = client.Cve(nil).load(
 ```lua
 local sdk = require("cvedb_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("CVEDB_APIKEY"),
+})
 
 
 -- Load a specific cve
-local cve, err = client:Cve(nil):load(
-  { id = "example_id" }, nil
-)
+local cve, err = client:Cve():load({ id = "example_id" })
+print(cve)
 ```
 
 ## Unit testing in offline mode
@@ -191,25 +191,21 @@ const result = await client.Cve().load({ id: 'test01' })
 ### Python
 
 ```python
-client = CvedbSDK.test(None, None)
-result, err = client.Cve(None).load(
-    {"id": "test01"}, None
-)
+client = CvedbSDK.test()
+result, err = client.Cve().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = CvedbSDK::test(null, null);
-[$result, $err] = $client->Cve(null)->load(
-    ["id" => "test01"], null
-);
+$client = CvedbSDK::test();
+[$result, $err] = $client->Cve()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Cve(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -218,19 +214,15 @@ result, err := client.Cve(nil).Load(
 ### Ruby
 
 ```ruby
-client = CvedbSDK.test(nil, nil)
-result, err = client.Cve(nil).load(
-  { "id" => "test01" }, nil
-)
+client = CvedbSDK.test
+result, err = client.Cve().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Cve(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Cve():load({ id = "test01" })
 ```
 
 ## How it works
@@ -334,15 +326,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the CVEDB
-
-- Upstream: [https://cvedb.shodan.io](https://cvedb.shodan.io)
-
-- Free for non-commercial use, per the project homepage
-- Commercial use requires an enterprise licence from [Shodan](https://www.shodan.io)
-- No Shodan account or API key is needed to query the public endpoints
-- Underlying CVE data originates from public vulnerability sources (NVD, EPSS, KEV, EUVD)
 
 ---
 

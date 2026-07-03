@@ -91,6 +91,7 @@ function if_you_have_the_name_of_a_specific_software_product_and_want_to_basic_s
     ["CVEDB_TEST_IF_YOU_HAVE_THE_NAME_OF_A_SPECIFIC_SOFTWARE_PRODUCT_AND_WANT_TO_ENTID"] = idmap,
     ["CVEDB_TEST_LIVE"] = "FALSE",
     ["CVEDB_TEST_EXPLAIN"] = "FALSE",
+    ["CVEDB_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +103,7 @@ function if_you_have_the_name_of_a_specific_software_product_and_want_to_basic_s
   if env["CVEDB_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["CVEDB_APIKEY"],
       },
       extra or {},
     })

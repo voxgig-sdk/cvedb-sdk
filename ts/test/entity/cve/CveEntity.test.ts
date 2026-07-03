@@ -111,6 +111,7 @@ function basicSetup(extra?: any) {
     'CVEDB_TEST_CVE_ENTID': idmap,
     'CVEDB_TEST_LIVE': 'FALSE',
     'CVEDB_TEST_EXPLAIN': 'FALSE',
+    'CVEDB_APIKEY': 'NONE',
   })
 
   idmap = env['CVEDB_TEST_CVE_ENTID']
@@ -120,6 +121,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new CvedbSDK(merge([
       {
+        apikey: env.CVEDB_APIKEY,
       },
       extra
     ]))

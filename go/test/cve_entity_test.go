@@ -117,6 +117,7 @@ func cveBasicSetup(extra map[string]any) *entityTestSetup {
 		"CVEDB_TEST_CVE_ENTID": idmap,
 		"CVEDB_TEST_LIVE":      "FALSE",
 		"CVEDB_TEST_EXPLAIN":   "FALSE",
+		"CVEDB_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["CVEDB_TEST_CVE_ENTID"])
@@ -127,6 +128,7 @@ func cveBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["CVEDB_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["CVEDB_APIKEY"],
 			},
 			extra,
 		})

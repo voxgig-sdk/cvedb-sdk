@@ -1,37 +1,13 @@
 {
-  "name": "cvedb",
-  "origin": "voxgig-sdk",
   "def": "cvedb_0.1.0.json",
   "main": {
+    "def": {
+      "desc": ""
+    },
     "kit": {
-      "info": {
-        "description": "Fast Vulnerability lookups using CVE_ID and CPE23",
-        "servers": [
-          {
-            "url": "https://cvedb.shodan.io"
-          }
-        ],
-        "title": "CVEDB",
-        "version": "1.0.0",
-        "tagline": "Fast vulnerability lookups by CVE-ID, EUVD-ID, CPE 2.3, or product name, served by Shodan",
-        "homepage": "https://cvedb.shodan.io",
-        "docs_url": "https://cvedb.shodan.io",
-        "license_short": "Free for non-commercial use; commercial applications require an enterprise licence from Shodan",
-        "license_md": "- Free for non-commercial use, per the project homepage\n- Commercial use requires an enterprise licence from [Shodan](https://www.shodan.io)\n- No Shodan account or API key is needed to query the public endpoints\n- Underlying CVE data originates from public vulnerability sources (NVD, EPSS, KEV, EUVD)",
-        "about_md": "CVEDB is a vulnerability-lookup service run by [Shodan](https://www.shodan.io). It exposes a small read-only HTTP API at `https://cvedb.shodan.io` for fetching CVE records, searching by product or CPE 2.3 string, and pulling the newest disclosures.\n\nWhat you get from the API:\n\n- Single-CVE lookup by identifier at `/cve/{CVE_ID}`\n- Single-record lookup by EUVD identifier at `/euvd/{EUVD_ID}`\n- Listing and filtering of CVEs at `/cves`, including filters for CPE 2.3 (`cpe23=`), product name (`product=`), known-exploited status (`is_kev=true`), and sorting by EPSS score (`sort_by_epss=true`)\n- A CPE dictionary lookup at `/cpes?product=`\n- Per-record fields typically include the CVE summary, CVSS score, EPSS risk score, affected product CPEs, references, and publication dates\n\nOperational notes: no Shodan account or API key is required for the public endpoints. CORS is reported as disabled on the freepublicapis.com health check, so browser-side calls may need a proxy. Rate limits are not documented publicly.",
-        "entity_desc": {
-          "cve": "A single CVE record with summary, CVSS/EPSS scores, affected CPEs, and references, fetched via `/cve/{CVE_ID}` or listed/filtered via `/cves`.",
-          "if_you_have_the_name_of_a_specific_software_product_and_want_to": "CPE dictionary lookup for a given product, exposed at `/cpes?product={name}`, returning the matching CPE 2.3 strings.",
-          "this_endpoint_is_tailored_for_searches_based_on_product_name_or": "Product- and CPE-based CVE search at `/cves`, accepting `product=` or `cpe23=` query parameters (plus optional filters such as `is_kev=true` and `sort_by_epss=true`)."
-        },
-        "auth": false
-      },
       "config": {
         "auth": {
           "prefix": "Bearer"
-        },
-        "headers": {
-          "content-type": "application/json"
         },
         "docs_order": [
           "ts",
@@ -40,120 +16,126 @@
           "go",
           "rb",
           "lua"
-        ]
+        ],
+        "headers": {
+          "content-type": "application/json"
+        }
       },
       "entity": {
         "cve": {
+          "active": true,
           "alias": {
             "field": {}
           },
           "fields": [
             {
+              "active": true,
               "name": "cpe",
               "req": true,
-              "type": "`$ARRAY`",
-              "active": true
+              "type": "`$ARRAY`"
             },
             {
+              "active": true,
               "name": "cve_id",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "cvss",
               "req": true,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "cvss_v2",
               "req": true,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "cvss_v3",
               "req": true,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "cvss_v4",
               "req": true,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "cvss_version",
               "req": true,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "epss",
               "req": true,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "kev",
               "req": true,
-              "type": "`$BOOLEAN`",
-              "active": true
+              "type": "`$BOOLEAN`"
             },
             {
+              "active": true,
               "name": "propose_action",
               "req": false,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "published_time",
               "req": true,
-              "type": "`$STRING`",
-              "active": true
+              "type": "`$STRING`"
             },
             {
+              "active": true,
               "name": "ranking_epss",
               "req": true,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "ransomware_campaign",
               "req": false,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             },
             {
+              "active": true,
               "name": "reference",
               "req": true,
-              "type": "`$ARRAY`",
-              "active": true
+              "type": "`$ARRAY`"
             },
             {
+              "active": true,
               "name": "summary",
               "req": true,
-              "type": "`$ANY`",
-              "active": true
+              "type": "`$ANY`"
             }
           ],
           "name": "cve",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "params": [
                       {
+                        "active": true,
                         "kind": "param",
                         "name": "id",
                         "orig": "cve_id",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       }
                     ]
                   },
@@ -176,64 +158,65 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
           "relations": {
             "ancestors": []
           }
         },
         "if_you_have_the_name_of_a_specific_software_product_and_want_to": {
+          "active": true,
           "alias": {
             "field": {}
           },
+          "fields": [],
           "name": "if_you_have_the_name_of_a_specific_software_product_and_want_to",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": false,
                         "kind": "query",
                         "name": "count",
                         "orig": "count",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "example": 1000,
                         "kind": "query",
                         "name": "limit",
                         "orig": "limit",
                         "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
+                        "type": "`$INTEGER`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "product",
                         "orig": "product",
                         "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
+                        "type": "`$STRING`"
                       },
                       {
+                        "active": true,
                         "example": 0,
                         "kind": "query",
                         "name": "skip",
                         "orig": "skip",
                         "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
+                        "type": "`$INTEGER`"
                       }
                     ]
                   },
@@ -253,107 +236,107 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
-          "fields": [],
           "relations": {
             "ancestors": []
           }
         },
         "this_endpoint_is_tailored_for_searches_based_on_product_name_or": {
+          "active": true,
           "alias": {
             "field": {}
           },
+          "fields": [],
           "name": "this_endpoint_is_tailored_for_searches_based_on_product_name_or",
           "op": {
             "load": {
+              "input": "data",
               "name": "load",
               "points": [
                 {
+                  "active": true,
                   "args": {
                     "query": [
                       {
+                        "active": true,
                         "example": false,
                         "kind": "query",
                         "name": "count",
                         "orig": "count",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "cpe23",
                         "orig": "cpe23",
                         "reqd": false,
-                        "type": "`$ANY`",
-                        "active": true
+                        "type": "`$ANY`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "end_date",
                         "orig": "end_date",
                         "reqd": false,
-                        "type": "`$ANY`",
-                        "active": true
+                        "type": "`$ANY`"
                       },
                       {
+                        "active": true,
                         "example": false,
                         "kind": "query",
                         "name": "is_kev",
                         "orig": "is_kev",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "example": 1000,
                         "kind": "query",
                         "name": "limit",
                         "orig": "limit",
                         "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
+                        "type": "`$INTEGER`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "product",
                         "orig": "product",
                         "reqd": false,
-                        "type": "`$ANY`",
-                        "active": true
+                        "type": "`$ANY`"
                       },
                       {
+                        "active": true,
                         "example": 0,
                         "kind": "query",
                         "name": "skip",
                         "orig": "skip",
                         "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
+                        "type": "`$INTEGER`"
                       },
                       {
+                        "active": true,
                         "example": false,
                         "kind": "query",
                         "name": "sort_by_epss",
                         "orig": "sort_by_epss",
                         "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
+                        "type": "`$BOOLEAN`"
                       },
                       {
+                        "active": true,
                         "kind": "query",
                         "name": "start_date",
                         "orig": "start_date",
                         "reqd": false,
-                        "type": "`$ANY`",
-                        "active": true
+                        "type": "`$ANY`"
                       }
                     ]
                   },
@@ -378,15 +361,11 @@
                   "transform": {
                     "req": "`reqdata`",
                     "res": "`body`"
-                  },
-                  "active": true
+                  }
                 }
-              ],
-              "input": "data"
+              ]
             }
           },
-          "active": true,
-          "fields": [],
           "relations": {
             "ancestors": []
           }
@@ -394,9 +373,6 @@
       },
       "feature": {
         "test": {
-          "name": "test",
-          "title": "In-memory mock transport for testing without a live server",
-          "version": "0.0.1",
           "active": true,
           "config": {
             "options": {
@@ -404,6 +380,14 @@
             }
           },
           "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
             "PostConstruct": {
               "active": true,
               "await": false
@@ -412,25 +396,11 @@
               "active": true,
               "await": false
             },
-            "SetData": {
-              "active": true,
-              "await": false
-            },
-            "GetData": {
-              "active": true,
-              "await": false
-            },
-            "SetMatch": {
-              "active": true
-            },
-            "GetMatch": {
-              "active": true,
+            "PostOperation": {
+              "active": false,
               "await": false
             },
             "PrePoint": {
-              "active": true
-            },
-            "PreSpec": {
               "active": true,
               "await": false
             },
@@ -446,20 +416,32 @@
               "active": true,
               "await": false
             },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
             "PreTarget": {
               "active": false,
               "await": false
             },
-            "PostOperation": {
-              "active": false,
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
               "await": false
             }
           },
+          "name": "test",
           "target": {
-            "ts": {
+            "go": {
               "deps": {}
             },
-            "go": {
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
               "deps": {}
             },
             "lua": {
@@ -474,22 +456,26 @@
             "rb": {
               "deps": {}
             },
-            "go-cli": {
-              "deps": {}
-            },
-            "go-mcp": {
+            "ts": {
               "deps": {}
             }
-          }
+          },
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1"
         }
       },
       "flow": {
         "BasicCveFlow": {
+          "active": true,
           "entity": "cve",
+          "key$": "BasicCveFlow",
           "kind": "basic",
           "name": "BasicCveFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "cve_ref01",
                 "srcdatavar": "cve_ref01_data",
@@ -499,6 +485,7 @@
                 "id": "cve01"
               },
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -506,28 +493,29 @@
                     "mark": "Mark01-cve_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicCveFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicIfYouHaveTheNameOfASpecificSoftwareProductAndWantToFlow": {
+          "active": true,
           "entity": "if_you_have_the_name_of_a_specific_software_product_and_want_to",
+          "key$": "BasicIfYouHaveTheNameOfASpecificSoftwareProductAndWantToFlow",
           "kind": "basic",
           "name": "BasicIfYouHaveTheNameOfASpecificSoftwareProductAndWantToFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01",
                 "srcdatavar": "if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -535,29 +523,29 @@
                     "mark": "Mark01-if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicIfYouHaveTheNameOfASpecificSoftwareProductAndWantToFlow",
-          "active": true,
-          "param": {}
+          ]
         },
         "BasicThisEndpointIsTailoredForSearchesBasedOnProductNameOrFlow": {
+          "active": true,
           "entity": "this_endpoint_is_tailored_for_searches_based_on_product_name_or",
+          "key$": "BasicThisEndpointIsTailoredForSearchesBasedOnProductNameOrFlow",
           "kind": "basic",
           "name": "BasicThisEndpointIsTailoredForSearchesBasedOnProductNameOrFlow",
+          "param": {},
           "step": [
             {
+              "active": true,
+              "data": {},
               "input": {
                 "ref": "this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01",
                 "srcdatavar": "this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_data",
                 "suffix": "_dt0"
               },
+              "match": {},
               "op": "load",
+              "spec": [],
               "valid": [
                 {
                   "apply": "TextFieldMark",
@@ -565,28 +553,48 @@
                     "mark": "Mark01-this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01"
                   }
                 }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "spec": []
+              ]
             }
-          ],
-          "key$": "BasicThisEndpointIsTailoredForSearchesBasedOnProductNameOrFlow",
-          "active": true,
-          "param": {}
+          ]
         }
       },
+      "info": {
+        "description": "Fast Vulnerability lookups using CVE_ID and CPE23",
+        "servers": [
+          {
+            "url": "https://cvedb.shodan.io"
+          }
+        ],
+        "title": "CVEDB",
+        "version": "1.0.0"
+      },
+      "option": {},
       "target": {
-        "go-cli": {
-          "title": "Go CLI",
-          "ext": "go",
+        "go": {
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "cvedb"
           },
+          "name": "go",
+          "srcfeature": false,
+          "title": "Golang"
+        },
+        "go-cli": {
+          "active": true,
+          "comment": {
+            "line": "//"
+          },
+          "deps": {},
+          "ext": "go",
+          "module": {
+            "name": "cvedb"
+          },
+          "name": "go-cli",
           "phase": {
             "entity": {
               "active": false
@@ -601,19 +609,19 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-cli",
-          "active": true
+          "title": "Go CLI"
         },
         "go-mcp": {
-          "title": "Go MCP server",
-          "ext": "go",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "cvedb"
           },
+          "name": "go-mcp",
           "phase": {
             "entity": {
               "active": false
@@ -628,138 +636,120 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-mcp",
-          "active": true
-        },
-        "ts": {
-          "title": "TypeScript",
-          "ext": "ts",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "cvedb"
-          },
-          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
-          "deps": {
-            "dotenv": {
-              "active": true,
-              "version": "^17.4.2",
-              "kind": "dev"
-            },
-            "typescript": {
-              "active": true,
-              "version": "^5.9.3",
-              "kind": "dev"
-            },
-            "@types/node": {
-              "active": true,
-              "version": "^25.6.0",
-              "kind": "dev"
-            }
-          },
-          "name": "ts",
-          "active": true
-        },
-        "go": {
-          "title": "Golang",
-          "ext": "go",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "cvedb"
-          },
-          "srcfeature": false,
-          "deps": {},
-          "name": "go",
-          "active": true
+          "title": "Go MCP server"
         },
         "lua": {
-          "title": "Lua",
-          "ext": "lua",
+          "active": true,
           "comment": {
             "line": "--"
           },
-          "module": {
-            "name": "cvedb"
-          },
-          "srcfeature": false,
           "deps": {
             "dkjson": {
               "active": true,
-              "version": "2.5",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.5"
             }
           },
+          "ext": "lua",
+          "module": {
+            "name": "cvedb"
+          },
           "name": "lua",
-          "active": true
+          "srcfeature": false,
+          "title": "Lua"
         },
         "php": {
-          "title": "PHP",
-          "ext": "php",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "php",
           "module": {
             "name": "cvedb"
           },
-          "srcfeature": false,
-          "deps": {},
           "name": "php",
-          "active": true
+          "srcfeature": false,
+          "title": "PHP"
         },
         "py": {
-          "title": "Python",
-          "ext": "py",
+          "active": true,
           "comment": {
             "line": "#"
           },
-          "module": {
-            "name": "cvedb"
-          },
-          "srcfeature": false,
           "deps": {
             "requests": {
               "active": true,
-              "version": "2.33",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.33"
             }
           },
-          "name": "py",
-          "active": true
-        },
-        "rb": {
-          "title": "Ruby",
-          "ext": "rb",
-          "comment": {
-            "line": "#"
-          },
+          "ext": "py",
           "module": {
             "name": "cvedb"
           },
+          "name": "py",
           "srcfeature": false,
+          "title": "Python"
+        },
+        "rb": {
+          "active": true,
+          "comment": {
+            "line": "#"
+          },
           "deps": {
-            "voxgig-struct": {
-              "active": true,
-              "version": "0.0.10",
-              "kind": "prod"
-            },
             "json": {
               "active": true,
-              "version": "0",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "0"
+            },
+            "voxgig-struct": {
+              "active": true,
+              "kind": "prod",
+              "version": "0.0.10"
             }
           },
+          "ext": "rb",
+          "module": {
+            "name": "cvedb"
+          },
           "name": "rb",
-          "active": true
+          "srcfeature": false,
+          "title": "Ruby"
+        },
+        "ts": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "dotenv": {
+              "active": true,
+              "kind": "dev",
+              "version": "^17.4.2"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "module": {
+            "name": "cvedb"
+          },
+          "name": "ts",
+          "title": "TypeScript"
         }
-      },
-      "option": {}
-    },
-    "def": {
-      "desc": ""
+      }
     }
-  }
+  },
+  "name": "cvedb",
+  "origin": "voxgig-sdk"
 }

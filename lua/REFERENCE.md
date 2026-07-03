@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -122,7 +122,7 @@ local cve = client:Cve(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Cve(nil):load({ id = "cve_id" }, nil)
+local result, err = client:Cve():load({ id = "cve_id" })
 ```
 
 ### Common Methods
@@ -168,7 +168,7 @@ local if_you_have_the_name_of_a_specific_software_product_and_want_to = client:I
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil):load({ id = "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" }, nil)
+local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load({ id = "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" })
 ```
 
 ### Common Methods
@@ -214,7 +214,7 @@ local this_endpoint_is_tailored_for_searches_based_on_product_name_or = client:T
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil):load({ id = "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" }, nil)
+local result, err = client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr():load({ id = "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" })
 ```
 
 ### Common Methods
