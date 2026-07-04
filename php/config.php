@@ -20,9 +20,6 @@ class CvedbConfig
             ],
             "options" => [
                 "base" => "https://cvedb.shodan.io",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -158,6 +155,7 @@ class CvedbConfig
                         'orig' => 'cve_id',
                         'reqd' => true,
                         'type' => '`$STRING`',
+                        'index$' => 0,
                       ],
                     ],
                   ],

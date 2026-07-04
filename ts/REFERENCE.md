@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -134,7 +133,7 @@ Alias for `CvedbSDK.test()`.
 ## CveEntity
 
 ```ts
-const cve = client.Cve()
+const cve = client.cve
 ```
 
 ### Fields
@@ -164,7 +163,7 @@ const cve = client.Cve()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Cve().load({ id: 'cve_id' })
+const result = await client.cve.load({ id: 'cve_id' })
 ```
 
 ### Common Methods
@@ -198,7 +197,7 @@ Return a copy of the entity options.
 ## IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
 
 ```ts
-const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
+const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.if_you_have_the_name_of_a_specific_software_product_and_want_to
 ```
 
 ### Operations
@@ -208,7 +207,7 @@ const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.I
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
+const result = await client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
 ```
 
 ### Common Methods
@@ -242,7 +241,7 @@ Return a copy of the entity options.
 ## ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
 
 ```ts
-const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()
+const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or
 ```
 
 ### Operations
@@ -252,7 +251,7 @@ const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.T
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
+const result = await client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
 ```
 
 ### Common Methods

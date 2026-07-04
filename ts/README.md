@@ -9,9 +9,12 @@ The TypeScript SDK for the Cvedb API — a type-safe, entity-oriented client wit
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/cvedb
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/cvedb-sdk/releases](https://github.com/voxgig-sdk/cvedb-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { CvedbSDK } from 'cvedb'
+import { CvedbSDK } from '@voxgig-sdk/cvedb'
 
-const client = new CvedbSDK({
-  apikey: process.env.CVEDB_APIKEY,
-})
+const client = new CvedbSDK()
 ```
 
 ### 3. Load a cve
 
 ```ts
-const result = await client.Cve().load({ id: 'example_id' })
+const result = await client.cve.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CvedbSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.cve.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new CvedbSDK({ apikey: '...' })
+const client = new CvedbSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.cve
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new CvedbSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -134,7 +134,6 @@ Create a `.env.local` file at the project root:
 
 ```
 CVEDB_TEST_LIVE=TRUE
-CVEDB_APIKEY=<your-key>
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new CvedbSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new CvedbSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -300,7 +297,7 @@ API path: `/cves`
 
 ### Cve
 
-Create an instance: `const cve = client.Cve()`
+Create an instance: `const cve = client.cve`
 
 #### Operations
 
@@ -331,13 +328,13 @@ Create an instance: `const cve = client.Cve()`
 #### Example: Load
 
 ```ts
-const cve = await client.Cve().load({ id: 'cve_id' })
+const cve = await client.cve.load({ id: 'cve_id' })
 ```
 
 
 ### IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 
-Create an instance: `const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()`
+Create an instance: `const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.if_you_have_the_name_of_a_specific_software_product_and_want_to`
 
 #### Operations
 
@@ -348,13 +345,13 @@ Create an instance: `const if_you_have_the_name_of_a_specific_software_product_a
 #### Example: Load
 
 ```ts
-const if_you_have_the_name_of_a_specific_software_product_and_want_to = await client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
+const if_you_have_the_name_of_a_specific_software_product_and_want_to = await client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
 ```
 
 
 ### ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 
-Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()`
+Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or`
 
 #### Operations
 
@@ -365,7 +362,7 @@ Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_produ
 #### Example: Load
 
 ```ts
-const this_endpoint_is_tailored_for_searches_based_on_product_name_or = await client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
+const this_endpoint_is_tailored_for_searches_based_on_product_name_or = await client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
 ```
 
 
@@ -426,7 +423,7 @@ cvedb/
 Import the SDK from the package root:
 
 ```ts
-import { CvedbSDK } from 'cvedb'
+import { CvedbSDK } from '@voxgig-sdk/cvedb'
 ```
 
 ### Entity state
@@ -436,11 +433,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const cve = client.cve
+await cve.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// cve.data() now returns the loaded cve data
+// cve.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

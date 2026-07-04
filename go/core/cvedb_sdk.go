@@ -245,16 +245,25 @@ func (sdk *CvedbSDK) Direct(fetchargs map[string]any) (map[string]any, error) {
 }
 
 
+// Cve returns a Cve entity bound to this client.
+// Idiomatic usage: client.Cve(nil).List(nil, nil) or
+// client.Cve(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CvedbSDK) Cve(data map[string]any) CvedbEntity {
 	return NewCveEntityFunc(sdk, data)
 }
 
 
+// IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo returns a IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo entity bound to this client.
+// Idiomatic usage: client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).List(nil, nil) or
+// client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CvedbSDK) IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(data map[string]any) CvedbEntity {
 	return NewIfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntityFunc(sdk, data)
 }
 
 
+// ThisEndpointIsTailoredForSearchesBasedOnProductNameOr returns a ThisEndpointIsTailoredForSearchesBasedOnProductNameOr entity bound to this client.
+// Idiomatic usage: client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).List(nil, nil) or
+// client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CvedbSDK) ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(data map[string]any) CvedbEntity {
 	return NewThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntityFunc(sdk, data)
 }

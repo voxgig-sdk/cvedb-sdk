@@ -21,7 +21,7 @@ class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrDirectTest extends Te
         $client = $setup["client"];
 
 
-        [$result, $err] = $client->direct([
+        $result = $client->direct([
             "path" => "cves",
             "method" => "GET",
             "params" => [],
@@ -30,8 +30,8 @@ class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrDirectTest extends Te
             // Live mode is lenient: synthetic IDs frequently 4xx. Skip
             // rather than fail when the load endpoint isn't reachable
             // with the IDs we can construct from setup.idmap.
-            if ($err !== null) {
-                $this->markTestSkipped("load call failed (likely synthetic IDs against live API): " . (string)$err);
+            if (!empty($result["err"])) {
+                $this->markTestSkipped("load call failed (likely synthetic IDs against live API): " . (string)$result["err"]);
                 return;
             }
             if (empty($result["ok"])) {
@@ -44,7 +44,7 @@ class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrDirectTest extends Te
                 return;
             }
         } else {
-            $this->assertNull($err);
+            $this->assertArrayNotHasKey("err", $result);
             $this->assertTrue($result["ok"]);
             $this->assertEquals(200, Helpers::to_int($result["status"]));
             $this->assertNotNull($result["data"]);
@@ -67,14 +67,12 @@ function this_endpoint_is_tailored_for_searches_based_on_product_name_or_direct_
     $env = Runner::env_override([
         "CVEDB_TEST_THIS_ENDPOINT_IS_TAILORED_FOR_SEARCHES_BASED_ON_PRODUCT_NAME_OR_ENTID" => [],
         "CVEDB_TEST_LIVE" => "FALSE",
-        "CVEDB_APIKEY" => "NONE",
     ]);
 
     $live = $env["CVEDB_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["CVEDB_APIKEY"],
         ];
         $client = new CvedbSDK($merged_opts);
         return [

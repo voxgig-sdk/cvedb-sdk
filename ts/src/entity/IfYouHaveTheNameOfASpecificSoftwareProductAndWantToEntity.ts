@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo,
+  IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch,
+} from '../CvedbTypes'
 
 // TODO: needs Entity superclass
-class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity extends CvedbEntityBase {
+class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity extends CvedbEntityBase<IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo> {
 
   constructor(client: CvedbSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity extends CvedbEnt
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch, ctrl?: Control): Promise<IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity extends CvedbEnt
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

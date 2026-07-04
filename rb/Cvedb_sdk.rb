@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'Cvedb_types'
+
 
 class CvedbSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class CvedbSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class CvedbSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue CvedbError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = CvedbHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class CvedbSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,28 +198,49 @@ class CvedbSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.cve.list / client.cve.load({ "id" => ... })
+  def cve
+    require_relative 'entity/cve_entity'
+    @cve ||= CveEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.cve instead.
   def Cve(data = nil)
     require_relative 'entity/cve_entity'
     CveEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.if_you_have_the_name_of_a_specific_software_product_and_want_to.list / client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ "id" => ... })
+  def if_you_have_the_name_of_a_specific_software_product_and_want_to
+    require_relative 'entity/if_you_have_the_name_of_a_specific_software_product_and_want_to_entity'
+    @if_you_have_the_name_of_a_specific_software_product_and_want_to ||= IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.if_you_have_the_name_of_a_specific_software_product_and_want_to instead.
   def IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(data = nil)
     require_relative 'entity/if_you_have_the_name_of_a_specific_software_product_and_want_to_entity'
     IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.list / client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ "id" => ... })
+  def this_endpoint_is_tailored_for_searches_based_on_product_name_or
+    require_relative 'entity/this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity'
+    @this_endpoint_is_tailored_for_searches_based_on_product_name_or ||= ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.this_endpoint_is_tailored_for_searches_based_on_product_name_or instead.
   def ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(data = nil)
     require_relative 'entity/this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity'
     ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity.new(self, data)

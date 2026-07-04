@@ -42,8 +42,7 @@ class CveEntityTest < Minitest::Test
     # LOAD
     cve_ref01_ent = client.Cve(nil)
     cve_ref01_match_dt0 = {}
-    cve_ref01_data_dt0_loaded, err = cve_ref01_ent.load(cve_ref01_match_dt0, nil)
-    assert_nil err
+    cve_ref01_data_dt0_loaded = cve_ref01_ent.load(cve_ref01_match_dt0, nil)
     assert !cve_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def cve_basic_setup(extra)
     "CVEDB_TEST_CVE_ENTID" => idmap,
     "CVEDB_TEST_LIVE" => "FALSE",
     "CVEDB_TEST_EXPLAIN" => "FALSE",
-    "CVEDB_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def cve_basic_setup(extra)
   if env["CVEDB_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["CVEDB_APIKEY"],
       },
       extra || {},
     ])

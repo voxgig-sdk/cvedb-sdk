@@ -9,12 +9,9 @@ The Lua SDK for the Cvedb API — an entity-oriented client using Lua convention
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-cvedb
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/cvedb-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("cvedb_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("CVEDB_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 3. Load a cve
 
 ```lua
-local result, err = client:Cve():load({ id = "example_id" })
+local result, err = client:cve():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Cvedb():load({ id = "test01" })
+local result, err = client:cve():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -121,7 +116,6 @@ Create a `.env.local` file at the project root:
 
 ```
 CVEDB_TEST_LIVE=TRUE
-CVEDB_APIKEY=<your-key>
 ```
 
 Then run:
@@ -144,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -255,7 +248,7 @@ API path: `/cves`
 
 ### Cve
 
-Create an instance: `const cve = client.Cve()`
+Create an instance: `const cve = client.cve`
 
 #### Operations
 
@@ -286,13 +279,13 @@ Create an instance: `const cve = client.Cve()`
 #### Example: Load
 
 ```ts
-const cve = await client.Cve().load({ id: 'cve_id' })
+const cve = await client.cve.load({ id: 'cve_id' })
 ```
 
 
 ### IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 
-Create an instance: `const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()`
+Create an instance: `const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.if_you_have_the_name_of_a_specific_software_product_and_want_to`
 
 #### Operations
 
@@ -303,13 +296,13 @@ Create an instance: `const if_you_have_the_name_of_a_specific_software_product_a
 #### Example: Load
 
 ```ts
-const if_you_have_the_name_of_a_specific_software_product_and_want_to = await client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
+const if_you_have_the_name_of_a_specific_software_product_and_want_to = await client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
 ```
 
 
 ### ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 
-Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()`
+Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or`
 
 #### Operations
 
@@ -320,7 +313,7 @@ Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_produ
 #### Example: Load
 
 ```ts
-const this_endpoint_is_tailored_for_searches_based_on_product_name_or = await client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
+const this_endpoint_is_tailored_for_searches_based_on_product_name_or = await client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
 ```
 
 
@@ -395,11 +388,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local cve = client:cve()
+cve:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- cve:data_get() now returns the loaded cve data
+-- cve:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

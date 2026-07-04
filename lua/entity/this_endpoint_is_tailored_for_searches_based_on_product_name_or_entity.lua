@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch
+---@param ctrl? table
+---@return ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
+---@return string? err
 function ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

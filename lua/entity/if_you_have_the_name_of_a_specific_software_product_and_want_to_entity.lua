@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch
+---@param ctrl? table
+---@return IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
+---@return string? err
 function IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

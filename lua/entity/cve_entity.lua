@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch CveLoadMatch
+---@param ctrl? table
+---@return Cve
+---@return string? err
 function CveEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

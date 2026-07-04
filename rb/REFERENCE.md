@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `Hash` | SDK configuration options. |
-| `options["apikey"]` | `String` | API key for authentication. |
 | `options["base"]` | `String` | Base URL for API requests. |
 | `options["prefix"]` | `String` | URL prefix appended after base. |
 | `options["suffix"]` | `String` | URL suffix appended after path. |
@@ -62,9 +61,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -78,14 +79,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -93,7 +94,7 @@ same parameters as `direct()`.
 ## CveEntity
 
 ```ruby
-cve = client.Cve
+cve = client.cve
 ```
 
 ### Fields
@@ -118,12 +119,12 @@ cve = client.Cve
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Cve.load({ "id" => "cve_id" })
+result = client.cve.load({ "id" => "cve_id" })
 ```
 
 ### Common Methods
@@ -159,17 +160,17 @@ Return the entity name.
 ## IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
 
 ```ruby
-if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
+if_you_have_the_name_of_a_specific_software_product_and_want_to = client.if_you_have_the_name_of_a_specific_software_product_and_want_to
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load({ "id" => "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" })
+result = client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ "id" => "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" })
 ```
 
 ### Common Methods
@@ -205,17 +206,17 @@ Return the entity name.
 ## ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
 
 ```ruby
-this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
+this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr.load({ "id" => "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" })
+result = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ "id" => "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" })
 ```
 
 ### Common Methods

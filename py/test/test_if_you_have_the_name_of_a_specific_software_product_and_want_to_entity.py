@@ -49,8 +49,7 @@ class TestIfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity:
         # LOAD
         if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_ent = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(None)
         if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_match_dt0 = {}
-        if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_data_dt0_loaded, err = if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_ent.load(if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_match_dt0, None)
-        assert err is None
+        if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_data_dt0_loaded = if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_ent.load(if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_match_dt0, None)
         assert if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _if_you_have_the_name_of_a_specific_software_product_and_want_to_basic_setup
         "CVEDB_TEST_IF_YOU_HAVE_THE_NAME_OF_A_SPECIFIC_SOFTWARE_PRODUCT_AND_WANT_TO_ENTID": idmap,
         "CVEDB_TEST_LIVE": "FALSE",
         "CVEDB_TEST_EXPLAIN": "FALSE",
-        "CVEDB_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _if_you_have_the_name_of_a_specific_software_product_and_want_to_basic_setup
     if env.get("CVEDB_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("CVEDB_APIKEY"),
             },
             extra or {},
         ])

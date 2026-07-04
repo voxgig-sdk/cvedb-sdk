@@ -1,7 +1,13 @@
 # Cvedb SDK Cve entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from cvedb_types import (
+    Cve,
+    CveLoadMatch,
+)
 
 
 class CveEntity:
@@ -44,7 +50,7 @@ class CveEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Cve:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +59,12 @@ class CveEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Cve:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: CveLoadMatch, ctrl=None) -> Cve:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",

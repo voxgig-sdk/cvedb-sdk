@@ -4,6 +4,7 @@
 main: {
   kit: {
     info: {
+      auth: false
       description: "Fast Vulnerability lookups using CVE_ID and CPE23"
       servers: [
         {

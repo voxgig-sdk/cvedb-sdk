@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://cvedb.shodan.io",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -153,6 +150,7 @@ def make_config():
                       "orig": "cve_id",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },

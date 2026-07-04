@@ -9,9 +9,10 @@ The PHP SDK for the Cvedb API — an entity-oriented client using PHP convention
 
 
 ## Install
-```bash
-composer require voxgig-sdk/cvedb
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/cvedb-sdk/releases](https://github.com/voxgig-sdk/cvedb-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -25,17 +26,18 @@ loading a specific record.
 <?php
 require_once 'cvedb_sdk.php';
 
-$client = new CvedbSDK([
-    "apikey" => getenv("CVEDB_APIKEY"),
-]);
+$client = new CvedbSDK();
 ```
 
 ### 3. Load a cve
 
 ```php
-[$result, $err] = $client->Cve()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->cve()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 
@@ -46,28 +48,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -81,7 +86,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = CvedbSDK::test();
 
-[$result, $err] = $client->Cvedb()->load(["id" => "test01"]);
+$result = $client->cve()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -116,7 +121,6 @@ Create a `.env.local` file at the project root:
 
 ```
 CVEDB_TEST_LIVE=TRUE
-CVEDB_APIKEY=<your-key>
 ```
 
 Then run:
@@ -139,7 +143,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -187,8 +190,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -250,7 +257,7 @@ API path: `/cves`
 
 ### Cve
 
-Create an instance: `const cve = client.Cve()`
+Create an instance: `const cve = client.cve`
 
 #### Operations
 
@@ -281,13 +288,13 @@ Create an instance: `const cve = client.Cve()`
 #### Example: Load
 
 ```ts
-const cve = await client.Cve().load({ id: 'cve_id' })
+const cve = await client.cve.load({ id: 'cve_id' })
 ```
 
 
 ### IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 
-Create an instance: `const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()`
+Create an instance: `const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.if_you_have_the_name_of_a_specific_software_product_and_want_to`
 
 #### Operations
 
@@ -298,13 +305,13 @@ Create an instance: `const if_you_have_the_name_of_a_specific_software_product_a
 #### Example: Load
 
 ```ts
-const if_you_have_the_name_of_a_specific_software_product_and_want_to = await client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
+const if_you_have_the_name_of_a_specific_software_product_and_want_to = await client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
 ```
 
 
 ### ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 
-Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()`
+Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or`
 
 #### Operations
 
@@ -315,7 +322,7 @@ Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_produ
 #### Example: Load
 
 ```ts
-const this_endpoint_is_tailored_for_searches_based_on_product_name_or = await client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
+const this_endpoint_is_tailored_for_searches_based_on_product_name_or = await client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
 ```
 
 
@@ -390,11 +397,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$cve = $client->cve();
+$cve->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $cve->dataGet() now returns the loaded cve data
+// $cve->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

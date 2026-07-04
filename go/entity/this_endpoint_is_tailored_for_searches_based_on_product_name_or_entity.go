@@ -85,6 +85,27 @@ func (e *ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity) Match(args
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an ThisEndpointIsTailoredForSearchesBasedOnProductNameOr; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity) DataTyped(data ...ThisEndpointIsTailoredForSearchesBasedOnProductNameOr) ThisEndpointIsTailoredForSearchesBasedOnProductNameOr {
+	if len(data) > 0 {
+		return typedFrom[ThisEndpointIsTailoredForSearchesBasedOnProductNameOr](e.Data(asMap(data[0])))
+	}
+	return typedFrom[ThisEndpointIsTailoredForSearchesBasedOnProductNameOr](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through ThisEndpointIsTailoredForSearchesBasedOnProductNameOr (all fields
+// optional at the wire level).
+func (e *ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity) MatchTyped(match ...ThisEndpointIsTailoredForSearchesBasedOnProductNameOr) ThisEndpointIsTailoredForSearchesBasedOnProductNameOr {
+	if len(match) > 0 {
+		return typedFrom[ThisEndpointIsTailoredForSearchesBasedOnProductNameOr](e.Match(asMap(match[0])))
+	}
+	return typedFrom[ThisEndpointIsTailoredForSearchesBasedOnProductNameOr](e.Match())
+}
+
 
 func (e *ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -109,6 +130,17 @@ func (e *ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity) Load(reqma
 			}
 		}
 	})
+}
+
+// LoadTyped is the statically-typed variant of Load: it takes an
+// ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch and returns an ThisEndpointIsTailoredForSearchesBasedOnProductNameOr. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity) LoadTyped(reqmatch ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch, ctrl map[string]any) (ThisEndpointIsTailoredForSearchesBasedOnProductNameOr, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return ThisEndpointIsTailoredForSearchesBasedOnProductNameOr{}, err
+	}
+	return typedFrom[ThisEndpointIsTailoredForSearchesBasedOnProductNameOr](res), nil
 }
 
 

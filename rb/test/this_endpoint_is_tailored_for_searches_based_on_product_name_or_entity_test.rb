@@ -42,8 +42,7 @@ class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntityTest < Minitest
     # LOAD
     this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_ent = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil)
     this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_match_dt0 = {}
-    this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_data_dt0_loaded, err = this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_ent.load(this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_match_dt0, nil)
-    assert_nil err
+    this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_data_dt0_loaded = this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_ent.load(this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_match_dt0, nil)
     assert !this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def this_endpoint_is_tailored_for_searches_based_on_product_name_or_basic_setup(
     "CVEDB_TEST_THIS_ENDPOINT_IS_TAILORED_FOR_SEARCHES_BASED_ON_PRODUCT_NAME_OR_ENTID" => idmap,
     "CVEDB_TEST_LIVE" => "FALSE",
     "CVEDB_TEST_EXPLAIN" => "FALSE",
-    "CVEDB_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def this_endpoint_is_tailored_for_searches_based_on_product_name_or_basic_setup(
   if env["CVEDB_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["CVEDB_APIKEY"],
       },
       extra || {},
     ])

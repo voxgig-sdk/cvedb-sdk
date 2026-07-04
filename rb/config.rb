@@ -15,9 +15,6 @@ module CvedbConfig
       },
       "options" => {
         "base" => "https://cvedb.shodan.io",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -153,6 +150,7 @@ module CvedbConfig
                         "orig" => "cve_id",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },

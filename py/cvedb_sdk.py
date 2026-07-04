@@ -144,16 +144,23 @@ class CvedbSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class CvedbSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,25 +212,58 @@ class CvedbSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def cve(self):
+        """Idiomatic facade: client.cve.list() / client.cve.load({"id": ...})."""
+        from entity.cve_entity import CveEntity
+        cached = getattr(self, "_cve", None)
+        if cached is None:
+            cached = CveEntity(self, None)
+            self._cve = cached
+        return cached
 
     def Cve(self, data=None):
+        # Deprecated: use client.cve instead.
         from entity.cve_entity import CveEntity
         return CveEntity(self, data)
 
 
+    @property
+    def if_you_have_the_name_of_a_specific_software_product_and_want_to(self):
+        """Idiomatic facade: client.if_you_have_the_name_of_a_specific_software_product_and_want_to.list() / client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({"id": ...})."""
+        from entity.if_you_have_the_name_of_a_specific_software_product_and_want_to_entity import IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
+        cached = getattr(self, "_if_you_have_the_name_of_a_specific_software_product_and_want_to", None)
+        if cached is None:
+            cached = IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(self, None)
+            self._if_you_have_the_name_of_a_specific_software_product_and_want_to = cached
+        return cached
+
     def IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(self, data=None):
+        # Deprecated: use client.if_you_have_the_name_of_a_specific_software_product_and_want_to instead.
         from entity.if_you_have_the_name_of_a_specific_software_product_and_want_to_entity import IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
         return IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(self, data)
 
 
+    @property
+    def this_endpoint_is_tailored_for_searches_based_on_product_name_or(self):
+        """Idiomatic facade: client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.list() / client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({"id": ...})."""
+        from entity.this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity import ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
+        cached = getattr(self, "_this_endpoint_is_tailored_for_searches_based_on_product_name_or", None)
+        if cached is None:
+            cached = ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity(self, None)
+            self._this_endpoint_is_tailored_for_searches_based_on_product_name_or = cached
+        return cached
+
     def ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(self, data=None):
+        # Deprecated: use client.this_endpoint_is_tailored_for_searches_based_on_product_name_or instead.
         from entity.this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity import ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
         return ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity(self, data)
 

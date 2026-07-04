@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  ThisEndpointIsTailoredForSearchesBasedOnProductNameOr,
+  ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch,
+} from '../CvedbTypes'
 
 // TODO: needs Entity superclass
-class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity extends CvedbEntityBase {
+class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity extends CvedbEntityBase<ThisEndpointIsTailoredForSearchesBasedOnProductNameOr> {
 
   constructor(client: CvedbSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity extends CvedbE
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch, ctrl?: Control): Promise<ThisEndpointIsTailoredForSearchesBasedOnProductNameOr> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity extends CvedbE
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<ThisEndpointIsTailoredForSearchesBasedOnProductNameOr> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

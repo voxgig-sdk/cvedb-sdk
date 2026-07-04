@@ -4,6 +4,8 @@ import { CveEntity } from './entity/CveEntity'
 import { IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity } from './entity/IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity'
 import { ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity } from './entity/ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity'
 
+export type * from './CvedbTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -204,18 +206,42 @@ class CvedbSDK {
 
 
 
+  _cve?: CveEntity
+
+  // Idiomatic facade: `client.cve.list()` / `client.cve.load({ id })`.
+  get cve(): CveEntity {
+    return (this._cve ??= new CveEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.cve` instead. */
   Cve(data?: any) {
     const self = this
     return new CveEntity(self,data)
   }
 
 
+  _if_you_have_the_name_of_a_specific_software_product_and_want_to?: IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
+
+  // Idiomatic facade: `client.if_you_have_the_name_of_a_specific_software_product_and_want_to.list()` / `client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ id })`.
+  get if_you_have_the_name_of_a_specific_software_product_and_want_to(): IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity {
+    return (this._if_you_have_the_name_of_a_specific_software_product_and_want_to ??= new IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.if_you_have_the_name_of_a_specific_software_product_and_want_to` instead. */
   IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(data?: any) {
     const self = this
     return new IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(self,data)
   }
 
 
+  _this_endpoint_is_tailored_for_searches_based_on_product_name_or?: ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
+
+  // Idiomatic facade: `client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.list()` / `client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ id })`.
+  get this_endpoint_is_tailored_for_searches_based_on_product_name_or(): ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity {
+    return (this._this_endpoint_is_tailored_for_searches_based_on_product_name_or ??= new ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.this_endpoint_is_tailored_for_searches_based_on_product_name_or` instead. */
   ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(data?: any) {
     const self = this
     return new ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity(self,data)
