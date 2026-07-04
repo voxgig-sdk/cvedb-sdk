@@ -220,57 +220,27 @@ class CvedbSDK:
         }
 
 
-    @property
-    def cve(self):
-        """Idiomatic facade: client.cve.list() / client.cve.load({"id": ...})."""
-        from entity.cve_entity import CveEntity
-        cached = getattr(self, "_cve", None)
-        if cached is None:
-            cached = CveEntity(self, None)
-            self._cve = cached
-        return cached
-
-    def Cve(self, data=None):
-        # Deprecated: use client.cve instead.
+    def Cve(self, data=None) -> "CveEntity":
+        """Entity factory: client.Cve().list({}) / client.Cve().load({"id": ...})."""
         from entity.cve_entity import CveEntity
         return CveEntity(self, data)
 
 
-    @property
-    def if_you_have_the_name_of_a_specific_software_product_and_want_to(self):
-        """Idiomatic facade: client.if_you_have_the_name_of_a_specific_software_product_and_want_to.list() / client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({"id": ...})."""
-        from entity.if_you_have_the_name_of_a_specific_software_product_and_want_to_entity import IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
-        cached = getattr(self, "_if_you_have_the_name_of_a_specific_software_product_and_want_to", None)
-        if cached is None:
-            cached = IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(self, None)
-            self._if_you_have_the_name_of_a_specific_software_product_and_want_to = cached
-        return cached
-
-    def IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(self, data=None):
-        # Deprecated: use client.if_you_have_the_name_of_a_specific_software_product_and_want_to instead.
+    def IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(self, data=None) -> "IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity":
+        """Entity factory: client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().list({}) / client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load({"id": ...})."""
         from entity.if_you_have_the_name_of_a_specific_software_product_and_want_to_entity import IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
         return IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(self, data)
 
 
-    @property
-    def this_endpoint_is_tailored_for_searches_based_on_product_name_or(self):
-        """Idiomatic facade: client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.list() / client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({"id": ...})."""
-        from entity.this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity import ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
-        cached = getattr(self, "_this_endpoint_is_tailored_for_searches_based_on_product_name_or", None)
-        if cached is None:
-            cached = ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity(self, None)
-            self._this_endpoint_is_tailored_for_searches_based_on_product_name_or = cached
-        return cached
-
-    def ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(self, data=None):
-        # Deprecated: use client.this_endpoint_is_tailored_for_searches_based_on_product_name_or instead.
+    def ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(self, data=None) -> "ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity":
+        """Entity factory: client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().list({}) / client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load({"id": ...})."""
         from entity.this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity import ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
         return ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "CvedbSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -290,3 +260,11 @@ class CvedbSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.cve_entity import CveEntity
+    from entity.if_you_have_the_name_of_a_specific_software_product_and_want_to_entity import IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
+    from entity.this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity import ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity

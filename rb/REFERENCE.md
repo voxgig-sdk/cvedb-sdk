@@ -94,7 +94,7 @@ same parameters as `direct()`. Raises on error.
 ## CveEntity
 
 ```ruby
-cve = client.cve
+cve = client.Cve
 ```
 
 ### Fields
@@ -124,7 +124,7 @@ cve = client.cve
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.cve.load({ "id" => "cve_id" })
+result = client.Cve.load({ "id" => "cve_id" })
 ```
 
 ### Common Methods
@@ -160,7 +160,7 @@ Return the entity name.
 ## IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
 
 ```ruby
-if_you_have_the_name_of_a_specific_software_product_and_want_to = client.if_you_have_the_name_of_a_specific_software_product_and_want_to
+if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 ```
 
 ### Operations
@@ -170,7 +170,7 @@ if_you_have_the_name_of_a_specific_software_product_and_want_to = client.if_you_
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ "id" => "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" })
+result = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load({ "id" => "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" })
 ```
 
 ### Common Methods
@@ -206,7 +206,7 @@ Return the entity name.
 ## ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
 
 ```ruby
-this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or
+this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 ```
 
 ### Operations
@@ -216,7 +216,7 @@ this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.this_en
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ "id" => "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" })
+result = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr.load({ "id" => "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" })
 ```
 
 ### Common Methods

@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:cve():list() / client:cve():load({ id = ... })
-function CvedbSDK:cve(data)
+-- Idiomatic facade: client:Cve():list() / client:Cve():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CvedbSDK:Cve(data)
   local EntityMod = require("entity.cve_entity")
   if data == nil then
     if self._cve == nil then
@@ -256,15 +257,10 @@ function CvedbSDK:cve(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:cve() instead.
-function CvedbSDK:Cve(data)
-  local EntityMod = require("entity.cve_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:if_you_have_the_name_of_a_specific_software_product_and_want_to():list() / client:if_you_have_the_name_of_a_specific_software_product_and_want_to():load({ id = ... })
-function CvedbSDK:if_you_have_the_name_of_a_specific_software_product_and_want_to(data)
+-- Idiomatic facade: client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():list() / client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CvedbSDK:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(data)
   local EntityMod = require("entity.if_you_have_the_name_of_a_specific_software_product_and_want_to_entity")
   if data == nil then
     if self._if_you_have_the_name_of_a_specific_software_product_and_want_to == nil then
@@ -275,15 +271,10 @@ function CvedbSDK:if_you_have_the_name_of_a_specific_software_product_and_want_t
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:if_you_have_the_name_of_a_specific_software_product_and_want_to() instead.
-function CvedbSDK:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(data)
-  local EntityMod = require("entity.if_you_have_the_name_of_a_specific_software_product_and_want_to_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:this_endpoint_is_tailored_for_searches_based_on_product_name_or():list() / client:this_endpoint_is_tailored_for_searches_based_on_product_name_or():load({ id = ... })
-function CvedbSDK:this_endpoint_is_tailored_for_searches_based_on_product_name_or(data)
+-- Idiomatic facade: client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr():list() / client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CvedbSDK:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(data)
   local EntityMod = require("entity.this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity")
   if data == nil then
     if self._this_endpoint_is_tailored_for_searches_based_on_product_name_or == nil then
@@ -291,12 +282,6 @@ function CvedbSDK:this_endpoint_is_tailored_for_searches_based_on_product_name_o
     end
     return self._this_endpoint_is_tailored_for_searches_based_on_product_name_or
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:this_endpoint_is_tailored_for_searches_based_on_product_name_or() instead.
-function CvedbSDK:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(data)
-  local EntityMod = require("entity.this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity")
   return EntityMod.new(self, data)
 end
 

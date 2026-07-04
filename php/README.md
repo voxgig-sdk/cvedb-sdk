@@ -33,9 +33,10 @@ $client = new CvedbSDK();
 
 ```php
 try {
-    $result = $client->cve()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Cve record (throws on error).
+    $cve = $client->Cve()->load(["id" => "example_id"]);
+    print_r($cve);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -81,13 +82,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = CvedbSDK::test();
+$client = CvedbSDK::test([
+    "entity" => ["cve" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->cve()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$cve = $client->Cve()->load(["id" => "test01"]);
+print_r($cve);
 ```
 
 ### Use a custom fetch function
@@ -167,7 +172,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `prepare` | `(array $fetchargs): array` | Build an HTTP request definition without sending. |
 | `direct` | `(array $fetchargs): array` | Build and send an HTTP request. |
 | `Cve` | `($data): CveEntity` | Create a Cve entity instance. |
-| `IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo` | `($data): IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity` | Create a IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo entity instance. |
+| `IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo` | `($data): IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity` | Create an IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo entity instance. |
 | `ThisEndpointIsTailoredForSearchesBasedOnProductNameOr` | `($data): ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity` | Create a ThisEndpointIsTailoredForSearchesBasedOnProductNameOr entity instance. |
 
 ### Entity interface
@@ -257,7 +262,7 @@ API path: `/cves`
 
 ### Cve
 
-Create an instance: `const cve = client.cve`
+Create an instance: `$cve = $client->Cve();`
 
 #### Operations
 
@@ -287,14 +292,15 @@ Create an instance: `const cve = client.cve`
 
 #### Example: Load
 
-```ts
-const cve = await client.cve.load({ id: 'cve_id' })
+```php
+// load() returns the bare Cve record (throws on error).
+$cve = $client->Cve()->load(["id" => "cve_id"]);
 ```
 
 
 ### IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 
-Create an instance: `const if_you_have_the_name_of_a_specific_software_product_and_want_to = client.if_you_have_the_name_of_a_specific_software_product_and_want_to`
+Create an instance: `$if_you_have_the_name_of_a_specific_software_product_and_want_to = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo();`
 
 #### Operations
 
@@ -304,14 +310,15 @@ Create an instance: `const if_you_have_the_name_of_a_specific_software_product_a
 
 #### Example: Load
 
-```ts
-const if_you_have_the_name_of_a_specific_software_product_and_want_to = await client.if_you_have_the_name_of_a_specific_software_product_and_want_to.load({ id: 'if_you_have_the_name_of_a_specific_software_product_and_want_to_id' })
+```php
+// load() returns the bare IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo record (throws on error).
+$if_you_have_the_name_of_a_specific_software_product_and_want_to = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()->load(["id" => "if_you_have_the_name_of_a_specific_software_product_and_want_to_id"]);
 ```
 
 
 ### ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 
-Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.this_endpoint_is_tailored_for_searches_based_on_product_name_or`
+Create an instance: `$this_endpoint_is_tailored_for_searches_based_on_product_name_or = $client->ThisEndpointIsTailoredForSearchesBasedOnProductNameOr();`
 
 #### Operations
 
@@ -321,8 +328,9 @@ Create an instance: `const this_endpoint_is_tailored_for_searches_based_on_produ
 
 #### Example: Load
 
-```ts
-const this_endpoint_is_tailored_for_searches_based_on_product_name_or = await client.this_endpoint_is_tailored_for_searches_based_on_product_name_or.load({ id: 'this_endpoint_is_tailored_for_searches_based_on_product_name_or_id' })
+```php
+// load() returns the bare ThisEndpointIsTailoredForSearchesBasedOnProductNameOr record (throws on error).
+$this_endpoint_is_tailored_for_searches_based_on_product_name_or = $client->ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()->load(["id" => "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id"]);
 ```
 
 
@@ -397,7 +405,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$cve = $client->cve();
+$cve = $client->Cve();
 $cve->load(["id" => "example_id"]);
 
 // $cve->dataGet() now returns the loaded cve data

@@ -26,9 +26,9 @@ import { CvedbSDK } from '@voxgig-sdk/cvedb'
 
 const client = new CvedbSDK()
 
-// Load cve data
-const cve = await client.cve.load({})
-console.log(cve.data)
+// Load cve data (returns a Cve)
+const cve = await client.Cve().load()
+console.log(cve)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -86,8 +86,8 @@ from cvedb_sdk import CvedbSDK
 client = CvedbSDK()
 
 
-# Load a specific cve
-cve = client.cve.load({"id": "example_id"})
+# Load a specific cve (returns the record, raises on error)
+cve = client.Cve().load({"id": "example_id"})
 print(cve)
 ```
 
@@ -100,8 +100,8 @@ require_once 'cvedb_sdk.php';
 $client = new CvedbSDK();
 
 
-// Load a specific cve
-$cve = $client->cve()->load(["id" => "example_id"]);
+// Load a specific cve (returns the bare record; throws on error)
+$cve = $client->Cve()->load(["id" => "example_id"]);
 print_r($cve);
 ```
 
@@ -125,8 +125,8 @@ require_relative "Cvedb_sdk"
 client = CvedbSDK.new
 
 
-# Load a specific cve
-cve = client.cve.load({ "id" => "example_id" })
+# Load a specific cve (returns the bare record; raises on error)
+cve = client.Cve.load({ "id" => "example_id" })
 puts cve
 ```
 
@@ -139,7 +139,7 @@ local client = sdk.new()
 
 
 -- Load a specific cve
-local cve, err = client:cve():load({ id = "example_id" })
+local cve, err = client:Cve():load({ id = "example_id" })
 print(cve)
 ```
 
@@ -152,22 +152,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = CvedbSDK.test()
-const result = await client.cve.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const cve = await client.Cve().load({ id: 'test01' })
+// cve is a bare Cve populated with mock data
+console.log(cve)
 ```
 
 ### Python
 
 ```python
 client = CvedbSDK.test()
-result = client.cve.load({"id": "test01"})
+cve = client.Cve().load({"id": "test01"})
+print(cve)
 ```
 
 ### PHP
 
 ```php
-$client = CvedbSDK::test();
-$result = $client->cve()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = CvedbSDK::test([
+    "entity" => ["cve" => ["test01" => ["id" => "test01"]]],
+]);
+$cve = $client->Cve()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -182,15 +187,18 @@ result, err := client.Cve(nil).Load(
 ### Ruby
 
 ```ruby
-client = CvedbSDK.test
-result = client.cve.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = CvedbSDK.test({
+  "entity" => { "cve" => { "test01" => { "id" => "test01" } } },
+})
+cve = client.Cve.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:cve():load({ id = "test01" })
+local result, err = client:Cve():load({ id = "test01" })
 ```
 
 ## How it works
@@ -238,6 +246,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

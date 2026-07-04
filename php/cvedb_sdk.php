@@ -233,10 +233,10 @@ class CvedbSDK
 
     private $_cve = null;
 
-    // Idiomatic facade: $client->cve()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Cve() (PHP method
-    // names are case-insensitive).
-    public function cve($data = null)
+    // Canonical facade: $client->Cve()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->cve()
+    // resolves here too.
+    public function Cve($data = null)
     {
         require_once __DIR__ . '/entity/cve_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class CvedbSDK
 
     private $_if_you_have_the_name_of_a_specific_software_product_and_want_to = null;
 
-    // Idiomatic facade: $client->if_you_have_the_name_of_a_specific_software_product_and_want_to()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo() (PHP method
-    // names are case-insensitive).
-    public function if_you_have_the_name_of_a_specific_software_product_and_want_to($data = null)
+    // Canonical facade: $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->if_you_have_the_name_of_a_specific_software_product_and_want_to()
+    // resolves here too.
+    public function IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo($data = null)
     {
         require_once __DIR__ . '/entity/if_you_have_the_name_of_a_specific_software_product_and_want_to_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class CvedbSDK
 
     private $_this_endpoint_is_tailored_for_searches_based_on_product_name_or = null;
 
-    // Idiomatic facade: $client->this_endpoint_is_tailored_for_searches_based_on_product_name_or()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ThisEndpointIsTailoredForSearchesBasedOnProductNameOr() (PHP method
-    // names are case-insensitive).
-    public function this_endpoint_is_tailored_for_searches_based_on_product_name_or($data = null)
+    // Canonical facade: $client->ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->this_endpoint_is_tailored_for_searches_based_on_product_name_or()
+    // resolves here too.
+    public function ThisEndpointIsTailoredForSearchesBasedOnProductNameOr($data = null)
     {
         require_once __DIR__ . '/entity/this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity.php';
         if ($data === null) {
