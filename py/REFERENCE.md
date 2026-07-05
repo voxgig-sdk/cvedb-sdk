@@ -95,21 +95,21 @@ cve = client.Cve()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | ``$ARRAY`` | Yes |  |
-| `cve_id` | ``$STRING`` | Yes |  |
-| `cvss` | ``$ANY`` | Yes |  |
-| `cvss_v2` | ``$ANY`` | Yes |  |
-| `cvss_v3` | ``$ANY`` | Yes |  |
-| `cvss_v4` | ``$ANY`` | Yes |  |
-| `cvss_version` | ``$ANY`` | Yes |  |
-| `epss` | ``$ANY`` | Yes |  |
-| `kev` | ``$BOOLEAN`` | Yes |  |
-| `propose_action` | ``$ANY`` | No |  |
-| `published_time` | ``$STRING`` | Yes |  |
-| `ranking_epss` | ``$ANY`` | Yes |  |
-| `ransomware_campaign` | ``$ANY`` | No |  |
-| `reference` | ``$ARRAY`` | Yes |  |
-| `summary` | ``$ANY`` | Yes |  |
+| `cpe` | `list` | Yes |  |
+| `cve_id` | `str` | Yes |  |
+| `cvss` | `Any` | Yes |  |
+| `cvss_v2` | `Any` | Yes |  |
+| `cvss_v3` | `Any` | Yes |  |
+| `cvss_v4` | `Any` | Yes |  |
+| `cvss_version` | `Any` | Yes |  |
+| `epss` | `Any` | Yes |  |
+| `kev` | `bool` | Yes |  |
+| `propose_action` | `Any` | No |  |
+| `published_time` | `str` | Yes |  |
+| `ranking_epss` | `Any` | Yes |  |
+| `ransomware_campaign` | `Any` | No |  |
+| `reference` | `list` | Yes |  |
+| `summary` | `Any` | Yes |  |
 
 ### Operations
 
@@ -163,7 +163,7 @@ if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHa
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load({"id": "if_you_have_the_name_of_a_specific_software_product_and_want_to_id"})
+result = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load()
 ```
 
 ### Common Methods
@@ -208,7 +208,7 @@ this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEnd
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load({"id": "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id"})
+result = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load()
 ```
 
 ### Common Methods

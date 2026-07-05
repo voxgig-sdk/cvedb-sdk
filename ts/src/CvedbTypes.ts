@@ -30,10 +30,12 @@ export interface CveLoadMatch {
 export interface IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo {
 }
 
-export type IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch = Partial<IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo>
+export interface IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch {
+}
 
 export interface ThisEndpointIsTailoredForSearchesBasedOnProductNameOr {
 }
 
-export type ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch = Partial<ThisEndpointIsTailoredForSearchesBasedOnProductNameOr>
+export interface ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch {
+}
 

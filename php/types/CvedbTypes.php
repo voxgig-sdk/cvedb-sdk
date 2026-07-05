@@ -43,7 +43,7 @@ class IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 {
 }
 
-/** Match filter for IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo#load (any subset of IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo fields). */
+/** Request payload for IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo#load. */
 class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch
 {
 }
@@ -53,7 +53,7 @@ class ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 {
 }
 
-/** Match filter for ThisEndpointIsTailoredForSearchesBasedOnProductNameOr#load (any subset of ThisEndpointIsTailoredForSearchesBasedOnProductNameOr fields). */
+/** Request payload for ThisEndpointIsTailoredForSearchesBasedOnProductNameOr#load. */
 class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch
 {
 }

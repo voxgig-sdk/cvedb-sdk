@@ -105,21 +105,21 @@ cve := client.Cve(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | ``$ARRAY`` | Yes |  |
-| `cve_id` | ``$STRING`` | Yes |  |
-| `cvss` | ``$ANY`` | Yes |  |
-| `cvss_v2` | ``$ANY`` | Yes |  |
-| `cvss_v3` | ``$ANY`` | Yes |  |
-| `cvss_v4` | ``$ANY`` | Yes |  |
-| `cvss_version` | ``$ANY`` | Yes |  |
-| `epss` | ``$ANY`` | Yes |  |
-| `kev` | ``$BOOLEAN`` | Yes |  |
-| `propose_action` | ``$ANY`` | No |  |
-| `published_time` | ``$STRING`` | Yes |  |
-| `ranking_epss` | ``$ANY`` | Yes |  |
-| `ransomware_campaign` | ``$ANY`` | No |  |
-| `reference` | ``$ARRAY`` | Yes |  |
-| `summary` | ``$ANY`` | Yes |  |
+| `cpe` | `[]any` | Yes |  |
+| `cve_id` | `string` | Yes |  |
+| `cvss` | `any` | Yes |  |
+| `cvss_v2` | `any` | Yes |  |
+| `cvss_v3` | `any` | Yes |  |
+| `cvss_v4` | `any` | Yes |  |
+| `cvss_version` | `any` | Yes |  |
+| `epss` | `any` | Yes |  |
+| `kev` | `bool` | Yes |  |
+| `propose_action` | `any` | No |  |
+| `published_time` | `string` | Yes |  |
+| `ranking_epss` | `any` | Yes |  |
+| `ransomware_campaign` | `any` | No |  |
+| `reference` | `[]any` | Yes |  |
+| `summary` | `any` | Yes |  |
 
 ### Operations
 
@@ -168,7 +168,7 @@ if_you_have_the_name_of_a_specific_software_product_and_want_to := client.IfYouH
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(map[string]any{"id": "if_you_have_the_name_of_a_specific_software_product_and_want_to_id"}, nil)
+result, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -208,7 +208,7 @@ this_endpoint_is_tailored_for_searches_based_on_product_name_or := client.ThisEn
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).Load(map[string]any{"id": "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id"}, nil)
+result, err := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).Load(nil, nil)
 ```
 
 ### Common Methods

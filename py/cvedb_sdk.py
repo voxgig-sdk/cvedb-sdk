@@ -221,19 +221,19 @@ class CvedbSDK:
 
 
     def Cve(self, data=None) -> "CveEntity":
-        """Entity factory: client.Cve().list({}) / client.Cve().load({"id": ...})."""
+        """Entity factory: client.Cve().list() / client.Cve().load({"id": ...})."""
         from entity.cve_entity import CveEntity
         return CveEntity(self, data)
 
 
     def IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(self, data=None) -> "IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity":
-        """Entity factory: client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().list({}) / client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load({"id": ...})."""
+        """Entity factory: client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().list() / client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load({"id": ...})."""
         from entity.if_you_have_the_name_of_a_specific_software_product_and_want_to_entity import IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
         return IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(self, data)
 
 
     def ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(self, data=None) -> "ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity":
-        """Entity factory: client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().list({}) / client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load({"id": ...})."""
+        """Entity factory: client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().list() / client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr().load({"id": ...})."""
         from entity.this_endpoint_is_tailored_for_searches_based_on_product_name_or_entity import ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
         return ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity(self, data)
 

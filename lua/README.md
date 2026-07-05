@@ -4,6 +4,8 @@
 
 The Lua SDK for the Cvedb API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Cve()` — each with the same small set of operations (`load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -37,6 +39,28 @@ local client = sdk.new()
 local cve, err = client:Cve():load({ id = "example_id" })
 if err then error(err) end
 print(cve)
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local cve, err = client:Cve():load({ id = "example_id" })
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -83,7 +107,7 @@ Create a mock client for unit testing — no server required:
 local client = sdk.test()
 
 local result, err = client:Cve():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -172,10 +196,6 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -190,8 +210,7 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
-| `list` | an array (`table`) of entity records |
+| `load` | the entity record (a `table`) |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
@@ -265,21 +284,21 @@ Create an instance: `local cve = client:Cve(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpe` | ``$ARRAY`` |  |
-| `cve_id` | ``$STRING`` |  |
-| `cvss` | ``$ANY`` |  |
-| `cvss_v2` | ``$ANY`` |  |
-| `cvss_v3` | ``$ANY`` |  |
-| `cvss_v4` | ``$ANY`` |  |
-| `cvss_version` | ``$ANY`` |  |
-| `epss` | ``$ANY`` |  |
-| `kev` | ``$BOOLEAN`` |  |
-| `propose_action` | ``$ANY`` |  |
-| `published_time` | ``$STRING`` |  |
-| `ranking_epss` | ``$ANY`` |  |
-| `ransomware_campaign` | ``$ANY`` |  |
-| `reference` | ``$ARRAY`` |  |
-| `summary` | ``$ANY`` |  |
+| `cpe` | `table` |  |
+| `cve_id` | `string` |  |
+| `cvss` | `any` |  |
+| `cvss_v2` | `any` |  |
+| `cvss_v3` | `any` |  |
+| `cvss_v4` | `any` |  |
+| `cvss_version` | `any` |  |
+| `epss` | `any` |  |
+| `kev` | `boolean` |  |
+| `propose_action` | `any` |  |
+| `published_time` | `string` |  |
+| `ranking_epss` | `any` |  |
+| `ransomware_campaign` | `any` |  |
+| `reference` | `table` |  |
+| `summary` | `any` |  |
 
 #### Example: Load
 
@@ -301,7 +320,7 @@ Create an instance: `local if_you_have_the_name_of_a_specific_software_product_a
 #### Example: Load
 
 ```lua
-local if_you_have_the_name_of_a_specific_software_product_and_want_to, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load({ id = "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" })
+local if_you_have_the_name_of_a_specific_software_product_and_want_to, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load()
 ```
 
 
@@ -318,16 +337,20 @@ Create an instance: `local this_endpoint_is_tailored_for_searches_based_on_produ
 #### Example: Load
 
 ```lua
-local this_endpoint_is_tailored_for_searches_based_on_product_name_or, err = client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr():load({ id = "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" })
+local this_endpoint_is_tailored_for_searches_based_on_product_name_or, err = client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr():load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -344,8 +367,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -396,7 +420,7 @@ stores the returned data and match criteria internally.
 local cve = client:Cve()
 cve:load({ id = "example_id" })
 
--- cve:data_get() now returns the loaded cve data
+-- cve:data_get() now returns the cve data from the last load
 -- cve:match_get() returns the last match criteria
 ```
 

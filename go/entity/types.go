@@ -36,8 +36,7 @@ type CveLoadMatch struct {
 type IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo struct {
 }
 
-// IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch mirrors the if_you_have_the_name_of_a_specific_software_product_and_want_to fields as an all-optional match
-// filter (Go analog of Partial<IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo>).
+// IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch is the typed request payload for IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.LoadTyped.
 type IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch struct {
 }
 
@@ -45,8 +44,7 @@ type IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch struct {
 type ThisEndpointIsTailoredForSearchesBasedOnProductNameOr struct {
 }
 
-// ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch mirrors the this_endpoint_is_tailored_for_searches_based_on_product_name_or fields as an all-optional match
-// filter (Go analog of Partial<ThisEndpointIsTailoredForSearchesBasedOnProductNameOr>).
+// ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch is the typed request payload for ThisEndpointIsTailoredForSearchesBasedOnProductNameOr.LoadTyped.
 type ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch struct {
 }
 

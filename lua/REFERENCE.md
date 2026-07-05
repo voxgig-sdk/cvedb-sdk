@@ -98,21 +98,21 @@ local cve = client:Cve(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | ``$ARRAY`` | Yes |  |
-| `cve_id` | ``$STRING`` | Yes |  |
-| `cvss` | ``$ANY`` | Yes |  |
-| `cvss_v2` | ``$ANY`` | Yes |  |
-| `cvss_v3` | ``$ANY`` | Yes |  |
-| `cvss_v4` | ``$ANY`` | Yes |  |
-| `cvss_version` | ``$ANY`` | Yes |  |
-| `epss` | ``$ANY`` | Yes |  |
-| `kev` | ``$BOOLEAN`` | Yes |  |
-| `propose_action` | ``$ANY`` | No |  |
-| `published_time` | ``$STRING`` | Yes |  |
-| `ranking_epss` | ``$ANY`` | Yes |  |
-| `ransomware_campaign` | ``$ANY`` | No |  |
-| `reference` | ``$ARRAY`` | Yes |  |
-| `summary` | ``$ANY`` | Yes |  |
+| `cpe` | `table` | Yes |  |
+| `cve_id` | `string` | Yes |  |
+| `cvss` | `any` | Yes |  |
+| `cvss_v2` | `any` | Yes |  |
+| `cvss_v3` | `any` | Yes |  |
+| `cvss_v4` | `any` | Yes |  |
+| `cvss_version` | `any` | Yes |  |
+| `epss` | `any` | Yes |  |
+| `kev` | `boolean` | Yes |  |
+| `propose_action` | `any` | No |  |
+| `published_time` | `string` | Yes |  |
+| `ranking_epss` | `any` | Yes |  |
+| `ransomware_campaign` | `any` | No |  |
+| `reference` | `table` | Yes |  |
+| `summary` | `any` | Yes |  |
 
 ### Operations
 
@@ -167,7 +167,7 @@ local if_you_have_the_name_of_a_specific_software_product_and_want_to = client:I
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load({ id = "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" })
+local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load()
 ```
 
 ### Common Methods
@@ -213,7 +213,7 @@ local this_endpoint_is_tailored_for_searches_based_on_product_name_or = client:T
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr():load({ id = "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" })
+local result, err = client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr():load()
 ```
 
 ### Common Methods

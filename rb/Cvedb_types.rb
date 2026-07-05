@@ -86,7 +86,7 @@ CveLoadMatch = Struct.new(
 class IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 end
 
-# Match filter for IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo#load (any subset of IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo fields).
+# Request payload for IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo#load.
 class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch
 end
 
@@ -94,7 +94,7 @@ end
 class ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 end
 
-# Match filter for ThisEndpointIsTailoredForSearchesBasedOnProductNameOr#load (any subset of ThisEndpointIsTailoredForSearchesBasedOnProductNameOr fields).
+# Request payload for ThisEndpointIsTailoredForSearchesBasedOnProductNameOr#load.
 class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch
 end
 

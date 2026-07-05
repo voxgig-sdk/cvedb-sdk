@@ -8,7 +8,7 @@ Complete API reference for the Cvedb Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'cvedb_sdk'
+require_relative 'Cvedb_sdk'
 
 client = CvedbSDK.new(options)
 ```
@@ -101,21 +101,21 @@ cve = client.Cve
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | ``$ARRAY`` | Yes |  |
-| `cve_id` | ``$STRING`` | Yes |  |
-| `cvss` | ``$ANY`` | Yes |  |
-| `cvss_v2` | ``$ANY`` | Yes |  |
-| `cvss_v3` | ``$ANY`` | Yes |  |
-| `cvss_v4` | ``$ANY`` | Yes |  |
-| `cvss_version` | ``$ANY`` | Yes |  |
-| `epss` | ``$ANY`` | Yes |  |
-| `kev` | ``$BOOLEAN`` | Yes |  |
-| `propose_action` | ``$ANY`` | No |  |
-| `published_time` | ``$STRING`` | Yes |  |
-| `ranking_epss` | ``$ANY`` | Yes |  |
-| `ransomware_campaign` | ``$ANY`` | No |  |
-| `reference` | ``$ARRAY`` | Yes |  |
-| `summary` | ``$ANY`` | Yes |  |
+| `cpe` | `Array` | Yes |  |
+| `cve_id` | `String` | Yes |  |
+| `cvss` | `Object` | Yes |  |
+| `cvss_v2` | `Object` | Yes |  |
+| `cvss_v3` | `Object` | Yes |  |
+| `cvss_v4` | `Object` | Yes |  |
+| `cvss_version` | `Object` | Yes |  |
+| `epss` | `Object` | Yes |  |
+| `kev` | `Boolean` | Yes |  |
+| `propose_action` | `Object` | No |  |
+| `published_time` | `String` | Yes |  |
+| `ranking_epss` | `Object` | Yes |  |
+| `ransomware_campaign` | `Object` | No |  |
+| `reference` | `Array` | Yes |  |
+| `summary` | `Object` | Yes |  |
 
 ### Operations
 
@@ -170,7 +170,7 @@ if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHa
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load({ "id" => "if_you_have_the_name_of_a_specific_software_product_and_want_to_id" })
+result = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load()
 ```
 
 ### Common Methods
@@ -216,7 +216,7 @@ this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEnd
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr.load({ "id" => "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id" })
+result = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr.load()
 ```
 
 ### Common Methods

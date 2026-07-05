@@ -4,6 +4,8 @@
 
 The Golang SDK for the Cvedb API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Cve(nil)` — each with the same small set of operations (`Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -49,12 +51,41 @@ func main() {
     client := sdk.New()
 
     // Load a single cve — the value is the loaded record.
-    cve, err := client.Cve(nil).Load(map[string]any{"id": "example_id"}, nil)
+    cve, err := client.Cve(nil).Load(map[string]any{"id": "example"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(cve)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+cve, err := client.Cve(nil).Load(map[string]any{"id": "example_id"}, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = cve
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -110,7 +141,7 @@ cve, err := client.Cve(nil).Load(
 if err != nil {
     panic(err)
 }
-fmt.Println(cve) // the loaded mock data
+fmt.Println(cve) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -198,10 +229,6 @@ All entities implement the `CvedbEntity` interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -214,8 +241,7 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` | the entity record (`map[string]any`) |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
@@ -223,7 +249,7 @@ slice):
 
     cve, err := client.Cve(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil { /* handle */ }
-    // cve is the loaded record
+    // cve is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -291,21 +317,21 @@ Create an instance: `cve := client.Cve(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpe` | ``$ARRAY`` |  |
-| `cve_id` | ``$STRING`` |  |
-| `cvss` | ``$ANY`` |  |
-| `cvss_v2` | ``$ANY`` |  |
-| `cvss_v3` | ``$ANY`` |  |
-| `cvss_v4` | ``$ANY`` |  |
-| `cvss_version` | ``$ANY`` |  |
-| `epss` | ``$ANY`` |  |
-| `kev` | ``$BOOLEAN`` |  |
-| `propose_action` | ``$ANY`` |  |
-| `published_time` | ``$STRING`` |  |
-| `ranking_epss` | ``$ANY`` |  |
-| `ransomware_campaign` | ``$ANY`` |  |
-| `reference` | ``$ARRAY`` |  |
-| `summary` | ``$ANY`` |  |
+| `cpe` | `[]any` |  |
+| `cve_id` | `string` |  |
+| `cvss` | `any` |  |
+| `cvss_v2` | `any` |  |
+| `cvss_v3` | `any` |  |
+| `cvss_v4` | `any` |  |
+| `cvss_version` | `any` |  |
+| `epss` | `any` |  |
+| `kev` | `bool` |  |
+| `propose_action` | `any` |  |
+| `published_time` | `string` |  |
+| `ranking_epss` | `any` |  |
+| `ransomware_campaign` | `any` |  |
+| `reference` | `[]any` |  |
+| `summary` | `any` |  |
 
 #### Example: Load
 
@@ -331,7 +357,7 @@ Create an instance: `if_you_have_the_name_of_a_specific_software_product_and_wan
 #### Example: Load
 
 ```go
-if_you_have_the_name_of_a_specific_software_product_and_want_to, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(map[string]any{"id": "if_you_have_the_name_of_a_specific_software_product_and_want_to_id"}, nil)
+if_you_have_the_name_of_a_specific_software_product_and_want_to, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -352,7 +378,7 @@ Create an instance: `this_endpoint_is_tailored_for_searches_based_on_product_nam
 #### Example: Load
 
 ```go
-this_endpoint_is_tailored_for_searches_based_on_product_name_or, err := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).Load(map[string]any{"id": "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id"}, nil)
+this_endpoint_is_tailored_for_searches_based_on_product_name_or, err := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -360,12 +386,16 @@ fmt.Println(this_endpoint_is_tailored_for_searches_based_on_product_name_or) // 
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -382,9 +412,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -432,7 +462,7 @@ stores the returned data and match criteria internally.
 cve := client.Cve(nil)
 cve.Load(map[string]any{"id": "example_id"}, nil)
 
-// cve.Data() now returns the loaded cve data
+// cve.Data() now returns the cve data from the last load
 // cve.Match() returns the last match criteria
 ```
 

@@ -53,11 +53,11 @@ Create a new `IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity` instanc
 
 Create a new `ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): CvedbUtility`
 
 Return a copy of the SDK utility object.
 
@@ -100,21 +100,21 @@ $cve = $client->Cve();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | ``$ARRAY`` | Yes |  |
-| `cve_id` | ``$STRING`` | Yes |  |
-| `cvss` | ``$ANY`` | Yes |  |
-| `cvss_v2` | ``$ANY`` | Yes |  |
-| `cvss_v3` | ``$ANY`` | Yes |  |
-| `cvss_v4` | ``$ANY`` | Yes |  |
-| `cvss_version` | ``$ANY`` | Yes |  |
-| `epss` | ``$ANY`` | Yes |  |
-| `kev` | ``$BOOLEAN`` | Yes |  |
-| `propose_action` | ``$ANY`` | No |  |
-| `published_time` | ``$STRING`` | Yes |  |
-| `ranking_epss` | ``$ANY`` | Yes |  |
-| `ransomware_campaign` | ``$ANY`` | No |  |
-| `reference` | ``$ARRAY`` | Yes |  |
-| `summary` | ``$ANY`` | Yes |  |
+| `cpe` | `array` | Yes |  |
+| `cve_id` | `string` | Yes |  |
+| `cvss` | `mixed` | Yes |  |
+| `cvss_v2` | `mixed` | Yes |  |
+| `cvss_v3` | `mixed` | Yes |  |
+| `cvss_v4` | `mixed` | Yes |  |
+| `cvss_version` | `mixed` | Yes |  |
+| `epss` | `mixed` | Yes |  |
+| `kev` | `bool` | Yes |  |
+| `propose_action` | `mixed` | No |  |
+| `published_time` | `string` | Yes |  |
+| `ranking_epss` | `mixed` | Yes |  |
+| `ransomware_campaign` | `mixed` | No |  |
+| `reference` | `array` | Yes |  |
+| `summary` | `mixed` | Yes |  |
 
 ### Operations
 
@@ -128,19 +128,19 @@ $result = $client->Cve()->load(["id" => "cve_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -149,7 +149,7 @@ Set the entity match criteria.
 Create a new `CveEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -169,24 +169,24 @@ $if_you_have_the_name_of_a_specific_software_product_and_want_to = $client->IfYo
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()->load(["id" => "if_you_have_the_name_of_a_specific_software_product_and_want_to_id"]);
+$result = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -195,7 +195,7 @@ Set the entity match criteria.
 Create a new `IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -215,24 +215,24 @@ $this_endpoint_is_tailored_for_searches_based_on_product_name_or = $client->This
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()->load(["id" => "this_endpoint_is_tailored_for_searches_based_on_product_name_or_id"]);
+$result = $client->ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -241,7 +241,7 @@ Set the entity match criteria.
 Create a new `ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
