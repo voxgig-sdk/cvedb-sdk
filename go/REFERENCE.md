@@ -99,6 +99,7 @@ same parameters as `Direct()`.
 
 ```go
 cve := client.Cve(nil)
+fmt.Println(cve.GetName()) // "cve"
 ```
 
 ### Fields
@@ -129,6 +130,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Cve(nil).Load(map[string]any{"id": "cve_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -158,7 +163,8 @@ Return the entity name.
 ## IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity
 
 ```go
-if_you_have_the_name_of_a_specific_software_product_and_want_to := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil)
+ifYouHaveTheNameOfASpecificSoftwareProductAndWantTo := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil)
+fmt.Println(ifYouHaveTheNameOfASpecificSoftwareProductAndWantTo.GetName()) // "if_you_have_the_name_of_a_specific_software_product_and_want_to"
 ```
 
 ### Operations
@@ -169,6 +175,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -198,7 +208,8 @@ Return the entity name.
 ## ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity
 
 ```go
-this_endpoint_is_tailored_for_searches_based_on_product_name_or := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil)
+thisEndpointIsTailoredForSearchesBasedOnProductNameOr := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil)
+fmt.Println(thisEndpointIsTailoredForSearchesBasedOnProductNameOr.GetName()) // "this_endpoint_is_tailored_for_searches_based_on_product_name_or"
 ```
 
 ### Operations
@@ -209,6 +220,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

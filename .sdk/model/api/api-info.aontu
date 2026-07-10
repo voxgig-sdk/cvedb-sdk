@@ -11,9 +11,9 @@ main: {
           url: "https://cvedb.shodan.io"
         }
       ]
+      summary: "Fast Vulnerability lookups using CVE_ID and CPE23"
       title: "CVEDB"
       version: "1.0.0"
+      website: "https://cvedb.shodan.io"
     }
   }
-}
-

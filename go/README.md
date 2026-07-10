@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Load a single cve — the value is the loaded record.
-    cve, err := client.Cve(nil).Load(map[string]any{"id": "example"}, nil)
+    cve, err := client.Cve(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
@@ -346,7 +346,7 @@ fmt.Println(cve) // the loaded record
 
 ### IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 
-Create an instance: `if_you_have_the_name_of_a_specific_software_product_and_want_to := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil)`
+Create an instance: `ifYouHaveTheNameOfASpecificSoftwareProductAndWantTo := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil)`
 
 #### Operations
 
@@ -357,17 +357,17 @@ Create an instance: `if_you_have_the_name_of_a_specific_software_product_and_wan
 #### Example: Load
 
 ```go
-if_you_have_the_name_of_a_specific_software_product_and_want_to, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(nil, nil)
+ifYouHaveTheNameOfASpecificSoftwareProductAndWantTo, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(if_you_have_the_name_of_a_specific_software_product_and_want_to) // the loaded record
+fmt.Println(ifYouHaveTheNameOfASpecificSoftwareProductAndWantTo) // the loaded record
 ```
 
 
 ### ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 
-Create an instance: `this_endpoint_is_tailored_for_searches_based_on_product_name_or := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil)`
+Create an instance: `thisEndpointIsTailoredForSearchesBasedOnProductNameOr := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil)`
 
 #### Operations
 
@@ -378,11 +378,11 @@ Create an instance: `this_endpoint_is_tailored_for_searches_based_on_product_nam
 #### Example: Load
 
 ```go
-this_endpoint_is_tailored_for_searches_based_on_product_name_or, err := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).Load(nil, nil)
+thisEndpointIsTailoredForSearchesBasedOnProductNameOr, err := client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(this_endpoint_is_tailored_for_searches_based_on_product_name_or) // the loaded record
+fmt.Println(thisEndpointIsTailoredForSearchesBasedOnProductNameOr) // the loaded record
 ```
 
 

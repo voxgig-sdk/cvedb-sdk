@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -561,13 +558,16 @@
       "info": {
         "auth": false,
         "description": "Fast Vulnerability lookups using CVE_ID and CPE23",
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "url": "https://cvedb.shodan.io"
           }
         ],
+        "summary": "Fast Vulnerability lookups using CVE_ID and CPE23",
         "title": "CVEDB",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://cvedb.shodan.io"
       },
       "option": {},
       "target": {
@@ -620,6 +620,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -670,6 +673,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
