@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- Cvedb SDK exists test
 
 local sdk = require("cvedb_sdk")
 
