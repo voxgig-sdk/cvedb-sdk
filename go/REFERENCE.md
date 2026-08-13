@@ -106,7 +106,7 @@ fmt.Println(cve.GetName()) // "cve"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | `[]any` | Yes |  |
+| `cpes` | `[]any` | Yes |  |
 | `cve_id` | `string` | Yes |  |
 | `cvss` | `any` | Yes |  |
 | `cvss_v2` | `any` | Yes |  |
@@ -119,7 +119,7 @@ fmt.Println(cve.GetName()) // "cve"
 | `published_time` | `string` | Yes |  |
 | `ranking_epss` | `any` | Yes |  |
 | `ransomware_campaign` | `any` | No |  |
-| `reference` | `[]any` | Yes |  |
+| `references` | `[]any` | Yes |  |
 | `summary` | `any` | Yes |  |
 
 ### Operations

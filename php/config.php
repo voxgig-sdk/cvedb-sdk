@@ -34,7 +34,7 @@ class CvedbConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'cpe',
+              'name' => 'cpes',
               'req' => true,
               'type' => '`$ARRAY`',
               'index$' => 0,
@@ -125,7 +125,7 @@ class CvedbConfig
             ],
             [
               'active' => true,
-              'name' => 'reference',
+              'name' => 'references',
               'req' => true,
               'type' => '`$ARRAY`',
               'index$' => 13,
@@ -159,6 +159,7 @@ class CvedbConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cve/{cve_id}',
                   'parts' => [
@@ -238,6 +239,7 @@ class CvedbConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cpes',
                   'parts' => [
@@ -356,6 +358,7 @@ class CvedbConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cves',
                   'parts' => [

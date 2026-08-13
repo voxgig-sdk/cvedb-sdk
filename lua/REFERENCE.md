@@ -98,7 +98,7 @@ local cve = client:Cve(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | `table` | Yes |  |
+| `cpes` | `table` | Yes |  |
 | `cve_id` | `string` | Yes |  |
 | `cvss` | `any` | Yes |  |
 | `cvss_v2` | `any` | Yes |  |
@@ -111,7 +111,7 @@ local cve = client:Cve(nil)
 | `published_time` | `string` | Yes |  |
 | `ranking_epss` | `any` | Yes |  |
 | `ransomware_campaign` | `any` | No |  |
-| `reference` | `table` | Yes |  |
+| `references` | `table` | Yes |  |
 | `summary` | `any` | Yes |  |
 
 ### Operations

@@ -95,7 +95,7 @@ cve = client.Cve()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | `list` | Yes |  |
+| `cpes` | `list` | Yes |  |
 | `cve_id` | `str` | Yes |  |
 | `cvss` | `Any` | Yes |  |
 | `cvss_v2` | `Any` | Yes |  |
@@ -108,7 +108,7 @@ cve = client.Cve()
 | `published_time` | `str` | Yes |  |
 | `ranking_epss` | `Any` | Yes |  |
 | `ransomware_campaign` | `Any` | No |  |
-| `reference` | `list` | Yes |  |
+| `references` | `list` | Yes |  |
 | `summary` | `Any` | Yes |  |
 
 ### Operations

@@ -29,7 +29,7 @@ module CvedbConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "cpe",
+              "name" => "cpes",
               "req" => true,
               "type" => "`$ARRAY`",
               "index$" => 0,
@@ -120,7 +120,7 @@ module CvedbConfig
             },
             {
               "active" => true,
-              "name" => "reference",
+              "name" => "references",
               "req" => true,
               "type" => "`$ARRAY`",
               "index$" => 13,
@@ -154,6 +154,7 @@ module CvedbConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/cve/{cve_id}",
                   "parts" => [
@@ -233,6 +234,7 @@ module CvedbConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/cpes",
                   "parts" => [
@@ -351,6 +353,7 @@ module CvedbConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/cves",
                   "parts" => [

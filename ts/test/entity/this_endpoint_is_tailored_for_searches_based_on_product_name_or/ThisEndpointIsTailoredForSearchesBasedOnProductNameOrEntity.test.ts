@@ -62,7 +62,7 @@ describe('ThisEndpointIsTailoredForSearchesBasedOnProductNameOrEntity', async ()
     // LOAD
     const this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_ent = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()
     const this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_match_dt0: any = {}
-    const this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_data_dt0 = await this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_ent.load(this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_match_dt0)
+    const this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_data_dt0 = (await this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_ent.load(this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_match_dt0)).data()
     assert(null != this_endpoint_is_tailored_for_searches_based_on_product_name_or_ref01_data_dt0)
 
 

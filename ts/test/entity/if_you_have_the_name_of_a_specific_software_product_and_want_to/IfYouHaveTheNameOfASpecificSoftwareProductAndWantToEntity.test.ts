@@ -62,7 +62,7 @@ describe('IfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity', async () =
     // LOAD
     const if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_ent = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
     const if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_match_dt0: any = {}
-    const if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_data_dt0 = await if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_ent.load(if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_match_dt0)
+    const if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_data_dt0 = (await if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_ent.load(if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_match_dt0)).data()
     assert(null != if_you_have_the_name_of_a_specific_software_product_and_want_to_ref01_data_dt0)
 
 

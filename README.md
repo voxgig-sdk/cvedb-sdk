@@ -23,7 +23,7 @@ support (`load`):
 
 ```ts
 const client = new CvedbSDK()
-const cve = await client.Cve().load()
+const cve = await client.Cve().load({ id: "example_id" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = CvedbSDK.test()
-const cve = await client.Cve().load({ id: 'test01' })
-// cve is a bare Cve populated with mock data
-console.log(cve)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = CvedbSDK.test({
+  entity: {
+    if_you_have_the_name_of_a_specific_software_product_and_want_to: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const ifyouhavethenameofaspecificsoftwareproductandwantto = await client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load()
+// ifyouhavethenameofaspecificsoftwareproductandwantto is the IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo entity, populated with mock data
+// — call ifyouhavethenameofaspecificsoftwareproductandwantto.data() for the record itself
+console.log(ifyouhavethenameofaspecificsoftwareproductandwantto)
 ```
 
 ### Python
 
 ```python
 client = CvedbSDK.test()
-cve = client.Cve().load({"id": "test01"})
-print(cve)
+ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load()
+print(ifyouhavethenameofaspecificsoftwareproductandwantto)
 ```
 
 ### PHP
@@ -57,17 +66,17 @@ print(cve)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = CvedbSDK::test([
-    "entity" => ["cve" => ["test01" => ["id" => "test01"]]],
+    "entity" => ["ifyouhavethenameofaspecificsoftwareproductandwantto" => ["test01" => []]],
 ]);
-$cve = $client->Cve()->load(["id" => "test01"]);
+$ifyouhavethenameofaspecificsoftwareproductandwantto = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Cve(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+result, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(
+    nil, nil,
 )
 ```
 
@@ -76,16 +85,16 @@ result, err := client.Cve(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = CvedbSDK.test({
-  "entity" => { "cve" => { "test01" => { "id" => "test01" } } },
+  "entity" => { "ifyouhavethenameofaspecificsoftwareproductandwantto" => { "test01" => {} } },
 })
-cve = client.Cve.load({ "id" => "test01" })
+ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Cve():load({ id = "test01" })
+local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load()
 ```
 
 ## Packages
@@ -184,7 +193,7 @@ require_once 'cvedb_sdk.php';
 $client = new CvedbSDK();
 
 
-// Load a specific cve (returns the bare record; throws on error)
+// Load a specific cve (returns the ENTITY; call data_get() for the record; throws on error)
 $cve = $client->Cve()->load(["id" => "example_id"]);
 print_r($cve);
 ```
@@ -212,7 +221,7 @@ require_relative "Cvedb_sdk"
 client = CvedbSDK.new
 
 
-# Load a specific cve (returns the bare record; raises on error)
+# Load a specific cve (returns the ENTITY; call data_get for the record)
 cve = client.Cve.load({ "id" => "example_id" })
 puts cve
 ```
@@ -346,6 +355,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://cvedb.shodan.io](https://cvedb.shodan.io)
 

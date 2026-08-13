@@ -101,7 +101,7 @@ cve = client.Cve
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | `Array` | Yes |  |
+| `cpes` | `Array` | Yes |  |
 | `cve_id` | `String` | Yes |  |
 | `cvss` | `Object` | Yes |  |
 | `cvss_v2` | `Object` | Yes |  |
@@ -114,7 +114,7 @@ cve = client.Cve
 | `published_time` | `String` | Yes |  |
 | `ranking_epss` | `Object` | Yes |  |
 | `ransomware_campaign` | `Object` | No |  |
-| `reference` | `Array` | Yes |  |
+| `references` | `Array` | Yes |  |
 | `summary` | `Object` | Yes |  |
 
 ### Operations

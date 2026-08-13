@@ -28,7 +28,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "cpe",
+            ["name"] = "cpes",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
@@ -119,7 +119,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "reference",
+            ["name"] = "references",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
             ["index$"] = 13,
@@ -153,6 +153,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cve/{cve_id}",
                 ["parts"] = {
@@ -232,6 +233,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cpes",
                 ["parts"] = {
@@ -350,6 +352,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/cves",
                 ["parts"] = {

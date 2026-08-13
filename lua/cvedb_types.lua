@@ -7,7 +7,7 @@
 -- edit by hand.
 
 ---@class Cve
----@field cpe table
+---@field cpes table
 ---@field cve_id string
 ---@field cvss any
 ---@field cvss_v2 any
@@ -20,7 +20,7 @@
 ---@field published_time string
 ---@field ranking_epss any
 ---@field ransomware_campaign? any
----@field reference table
+---@field references table
 ---@field summary any
 
 ---@class CveLoadMatch

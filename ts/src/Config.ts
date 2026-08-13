@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'Cvedb',
   }
 
 
@@ -62,7 +62,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "cpe",
+          "name": "cpes",
           "req": true,
           "type": "`$ARRAY`",
           "index$": 0
@@ -153,7 +153,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "reference",
+          "name": "references",
           "req": true,
           "type": "`$ARRAY`",
           "index$": 13
@@ -187,6 +187,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/cve/{cve_id}",
               "parts": [
@@ -266,6 +267,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/cpes",
               "parts": [
@@ -384,6 +386,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/cves",
               "parts": [

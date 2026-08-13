@@ -10,7 +10,7 @@
 
 # Cve entity data model.
 #
-# @!attribute [rw] cpe
+# @!attribute [rw] cpes
 #   @return [Array]
 #
 # @!attribute [rw] cve_id
@@ -49,13 +49,13 @@
 # @!attribute [rw] ransomware_campaign
 #   @return [Object, nil]
 #
-# @!attribute [rw] reference
+# @!attribute [rw] references
 #   @return [Array]
 #
 # @!attribute [rw] summary
 #   @return [Object]
 Cve = Struct.new(
-  :cpe,
+  :cpes,
   :cve_id,
   :cvss,
   :cvss_v2,
@@ -68,7 +68,7 @@ Cve = Struct.new(
   :published_time,
   :ranking_epss,
   :ransomware_campaign,
-  :reference,
+  :references,
   :summary,
   keyword_init: true
 )

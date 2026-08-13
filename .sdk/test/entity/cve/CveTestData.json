@@ -2,7 +2,7 @@
   "existing": {
     "cve": {
       "CVE00": {
-        "cpe": [],
+        "cpes": [],
         "cve_id": "CVE01",
         "cvss": "s98",
         "cvss_v2": "s99",
@@ -15,12 +15,12 @@
         "published_time": "sa0",
         "ranking_epss": "sa1",
         "ransomware_campaign": "sa2",
-        "reference": [],
+        "references": [],
         "summary": "sa4",
         "id": "CVE00"
       },
       "CVE01": {
-        "cpe": [],
+        "cpes": [],
         "cve_id": "CVE01",
         "cvss": "s12e",
         "cvss_v2": "s12f",
@@ -33,12 +33,12 @@
         "published_time": "s136",
         "ranking_epss": "s137",
         "ransomware_campaign": "s138",
-        "reference": [],
+        "references": [],
         "summary": "s13a",
         "id": "CVE01"
       },
       "CVE02": {
-        "cpe": [],
+        "cpes": [],
         "cve_id": "CVE01",
         "cvss": "s1c4",
         "cvss_v2": "s1c5",
@@ -51,7 +51,7 @@
         "published_time": "s1cc",
         "ranking_epss": "s1cd",
         "ransomware_campaign": "s1ce",
-        "reference": [],
+        "references": [],
         "summary": "s1d0",
         "id": "CVE02"
       }
@@ -60,7 +60,7 @@
   "new": {
     "cve": {
       "cve_ref01": {
-        "cpe": [],
+        "cpes": [],
         "cve_id": "CVE01",
         "cvss": "s25a",
         "cvss_v2": "s25b",
@@ -73,7 +73,7 @@
         "published_time": "s262",
         "ranking_epss": "s263",
         "ransomware_campaign": "s264",
-        "reference": [],
+        "references": [],
         "summary": "s266"
       }
     }

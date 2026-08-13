@@ -48,7 +48,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local cve, err = client:Cve():load({ id = "example_id" })
+local ifyouhavethenameofaspecificsoftwareproductandwantto, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load()
 if err then error(err) end
 ```
 
@@ -106,7 +106,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Cve():load({ id = "test01" })
+local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -227,7 +227,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `cpe` |  |
+| `cpes` |  |
 | `cve_id` |  |
 | `cvss` |  |
 | `cvss_v2` |  |
@@ -240,7 +240,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | `published_time` |  |
 | `ranking_epss` |  |
 | `ransomware_campaign` |  |
-| `reference` |  |
+| `references` |  |
 | `summary` |  |
 
 Operations: Load.
@@ -284,7 +284,7 @@ Create an instance: `local cve = client:Cve(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpe` | `table` |  |
+| `cpes` | `table` |  |
 | `cve_id` | `string` |  |
 | `cvss` | `any` |  |
 | `cvss_v2` | `any` |  |
@@ -297,7 +297,7 @@ Create an instance: `local cve = client:Cve(nil)`
 | `published_time` | `string` |  |
 | `ranking_epss` | `any` |  |
 | `ransomware_campaign` | `any` |  |
-| `reference` | `table` |  |
+| `references` | `table` |  |
 | `summary` | `any` |  |
 
 #### Example: Load
@@ -417,11 +417,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local cve = client:Cve()
-cve:load({ id = "example_id" })
+local ifyouhavethenameofaspecificsoftwareproductandwantto = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
+ifyouhavethenameofaspecificsoftwareproductandwantto:load()
 
--- cve:data_get() now returns the cve data from the last load
--- cve:match_get() returns the last match criteria
+-- ifyouhavethenameofaspecificsoftwareproductandwantto:data_get() now returns the ifyouhavethenameofaspecificsoftwareproductandwantto data from the last load
+-- ifyouhavethenameofaspecificsoftwareproductandwantto:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

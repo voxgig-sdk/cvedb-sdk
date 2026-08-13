@@ -35,7 +35,7 @@ $client = new CvedbSDK();
 
 ```php
 try {
-    // load() returns the bare Cve record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Cve record (throws on error).
     $cve = $client->Cve()->load(["id" => "example_id"]);
     print_r($cve);
 } catch (\Throwable $err) {
@@ -51,7 +51,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $cve = $client->Cve()->load(["id" => "example_id"]);
+    $ifyouhavethenameofaspecificsoftwareproductandwantto = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -118,17 +118,15 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = CvedbSDK::test([
-    "entity" => ["cve" => ["test01" => ["id" => "test01"]]],
-]);
+$client = CvedbSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$cve = $client->Cve()->load(["id" => "test01"]);
-print_r($cve);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$ifyouhavethenameofaspecificsoftwareproductandwantto = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()->load();
+print_r($ifyouhavethenameofaspecificsoftwareproductandwantto);
 ```
 
 ### Use a custom fetch function
@@ -227,7 +225,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -249,7 +247,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `cpe` |  |
+| `cpes` |  |
 | `cve_id` |  |
 | `cvss` |  |
 | `cvss_v2` |  |
@@ -262,7 +260,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | `published_time` |  |
 | `ranking_epss` |  |
 | `ransomware_campaign` |  |
-| `reference` |  |
+| `references` |  |
 | `summary` |  |
 
 Operations: Load.
@@ -306,7 +304,7 @@ Create an instance: `$cve = $client->Cve();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpe` | `array` |  |
+| `cpes` | `array` |  |
 | `cve_id` | `string` |  |
 | `cvss` | `mixed` |  |
 | `cvss_v2` | `mixed` |  |
@@ -319,13 +317,13 @@ Create an instance: `$cve = $client->Cve();`
 | `published_time` | `string` |  |
 | `ranking_epss` | `mixed` |  |
 | `ransomware_campaign` | `mixed` |  |
-| `reference` | `array` |  |
+| `references` | `array` |  |
 | `summary` | `mixed` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Cve record (throws on error).
+// load() returns the ENTITY — call data_get() for the Cve record (throws on error).
 $cve = $client->Cve()->load(["id" => "cve_id"]);
 ```
 
@@ -343,7 +341,7 @@ Create an instance: `$if_you_have_the_name_of_a_specific_software_product_and_wa
 #### Example: Load
 
 ```php
-// load() returns the bare IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo record (throws on error).
+// load() returns the ENTITY — call data_get() for the IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo record (throws on error).
 $if_you_have_the_name_of_a_specific_software_product_and_want_to = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()->load();
 ```
 
@@ -361,7 +359,7 @@ Create an instance: `$this_endpoint_is_tailored_for_searches_based_on_product_na
 #### Example: Load
 
 ```php
-// load() returns the bare ThisEndpointIsTailoredForSearchesBasedOnProductNameOr record (throws on error).
+// load() returns the ENTITY — call data_get() for the ThisEndpointIsTailoredForSearchesBasedOnProductNameOr record (throws on error).
 $this_endpoint_is_tailored_for_searches_based_on_product_name_or = $client->ThisEndpointIsTailoredForSearchesBasedOnProductNameOr()->load();
 ```
 
@@ -442,11 +440,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$cve = $client->Cve();
-$cve->load(["id" => "example_id"]);
+$ifyouhavethenameofaspecificsoftwareproductandwantto = $client->IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo();
+$ifyouhavethenameofaspecificsoftwareproductandwantto->load();
 
-// $cve->data_get() now returns the cve data from the last load
-// $cve->match_get() returns the last match criteria
+// $ifyouhavethenameofaspecificsoftwareproductandwantto->data_get() now returns the ifyouhavethenameofaspecificsoftwareproductandwantto data from the last load
+// $ifyouhavethenameofaspecificsoftwareproductandwantto->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

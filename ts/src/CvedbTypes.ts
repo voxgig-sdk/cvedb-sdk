@@ -6,7 +6,7 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Cve {
-  cpe: any[]
+  cpes: any[]
   cve_id: string
   cvss: any
   cvss_v2: any
@@ -19,7 +19,7 @@ export interface Cve {
   published_time: string
   ranking_epss: any
   ransomware_campaign?: any
-  reference: any[]
+  references: any[]
   summary: any
 }
 

@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import CvedbControl
-from core.error import CvedbError
-from core.result import CvedbResult
-from core.spec import CvedbSpec
+from cvedb_sdk.config import make_config
+from cvedb_sdk.features import _make_feature
+from cvedb_sdk.core.control import CvedbControl
+from cvedb_sdk.core.error import CvedbError
+from cvedb_sdk.core.result import CvedbResult
+from cvedb_sdk.core.spec import CvedbSpec
 
 
 # True when this SDK was generated with the named feature.

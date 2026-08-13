@@ -66,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-cve, err := client.Cve(nil).Load(map[string]any{"id": "example_id"}, nil)
+ifyouhavethenameofaspecificsoftwareproductandwantto, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = cve
+_ = ifyouhavethenameofaspecificsoftwareproductandwantto
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-cve, err := client.Cve(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+ifYouHaveTheNameOfASpecificSoftwareProductAndWantTo, err := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil).Load(
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(cve) // the returned mock data
+fmt.Println(ifYouHaveTheNameOfASpecificSoftwareProductAndWantTo) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -260,7 +260,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"cpe"` |  |
+| `"cpes"` |  |
 | `"cve_id"` |  |
 | `"cvss"` |  |
 | `"cvss_v2"` |  |
@@ -273,7 +273,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | `"published_time"` |  |
 | `"ranking_epss"` |  |
 | `"ransomware_campaign"` |  |
-| `"reference"` |  |
+| `"references"` |  |
 | `"summary"` |  |
 
 Operations: Load.
@@ -317,7 +317,7 @@ Create an instance: `cve := client.Cve(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpe` | `[]any` |  |
+| `cpes` | `[]any` |  |
 | `cve_id` | `string` |  |
 | `cvss` | `any` |  |
 | `cvss_v2` | `any` |  |
@@ -330,7 +330,7 @@ Create an instance: `cve := client.Cve(nil)`
 | `published_time` | `string` |  |
 | `ranking_epss` | `any` |  |
 | `ransomware_campaign` | `any` |  |
-| `reference` | `[]any` |  |
+| `references` | `[]any` |  |
 | `summary` | `any` |  |
 
 #### Example: Load
@@ -459,11 +459,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-cve := client.Cve(nil)
-cve.Load(map[string]any{"id": "example_id"}, nil)
+ifyouhavethenameofaspecificsoftwareproductandwantto := client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(nil)
+ifyouhavethenameofaspecificsoftwareproductandwantto.Load(nil, nil)
 
-// cve.Data() now returns the cve data from the last load
-// cve.Match() returns the last match criteria
+// ifyouhavethenameofaspecificsoftwareproductandwantto.Data() now returns the ifyouhavethenameofaspecificsoftwareproductandwantto data from the last load
+// ifyouhavethenameofaspecificsoftwareproductandwantto.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

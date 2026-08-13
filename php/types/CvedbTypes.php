@@ -15,7 +15,7 @@ declare(strict_types=1);
 /** Cve entity data model. */
 class Cve
 {
-    public array $cpe;
+    public array $cpes;
     public string $cve_id;
     public mixed $cvss;
     public mixed $cvss_v2;
@@ -28,7 +28,7 @@ class Cve
     public string $published_time;
     public mixed $ranking_epss;
     public mixed $ransomware_campaign = null;
-    public array $reference;
+    public array $references;
     public mixed $summary;
 }
 

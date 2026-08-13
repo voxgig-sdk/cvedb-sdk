@@ -16,11 +16,11 @@
 import pytest
 
 from cvedb_sdk import CvedbSDK
-from core.error import CvedbError
-from core.result import CvedbResult
-from core.response import CvedbResponse
-from core.spec import CvedbSpec
-from feature.base_feature import CvedbBaseFeature
+from cvedb_sdk.core.error import CvedbError
+from cvedb_sdk.core.result import CvedbResult
+from cvedb_sdk.core.response import CvedbResponse
+from cvedb_sdk.core.spec import CvedbSpec
+from cvedb_sdk.feature.base_feature import CvedbBaseFeature
 
 
 def _client():

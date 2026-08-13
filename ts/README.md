@@ -53,8 +53,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const cve = await client.Cve().load({ id: "example_id" })
-  console.log(cve)
+  const ifyouhavethenameofaspecificsoftwareproductandwantto = await client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load()
+  console.log(ifyouhavethenameofaspecificsoftwareproductandwantto)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -120,9 +120,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CvedbSDK.test()
 
-const cve = await client.Cve().load({ id: 'test01' })
-// cve is a bare entity populated with mock response data
-console.log(cve)
+const ifyouhavethenameofaspecificsoftwareproductandwantto = await client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load()
+// ifyouhavethenameofaspecificsoftwareproductandwantto is the entity, populated with mock response data
+// — call ifyouhavethenameofaspecificsoftwareproductandwantto.data() for the record itself
+console.log(ifyouhavethenameofaspecificsoftwareproductandwantto)
 ```
 
 You can also use the instance method:
@@ -137,10 +138,10 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Cve()
+const entity = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
 
 // First call runs the operation and stores its result
-await entity.load({ id: 'example' })
+await entity.load()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -286,7 +287,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `cpe` |  |
+| `cpes` |  |
 | `cve_id` |  |
 | `cvss` |  |
 | `cvss_v2` |  |
@@ -299,7 +300,7 @@ The `prepare()` method returns:
 | `published_time` |  |
 | `ranking_epss` |  |
 | `ransomware_campaign` |  |
-| `reference` |  |
+| `references` |  |
 | `summary` |  |
 
 Operations: load.
@@ -343,7 +344,7 @@ Create an instance: `const cve = client.Cve()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpe` | `any[]` |  |
+| `cpes` | `any[]` |  |
 | `cve_id` | `string` |  |
 | `cvss` | `any` |  |
 | `cvss_v2` | `any` |  |
@@ -356,7 +357,7 @@ Create an instance: `const cve = client.Cve()`
 | `published_time` | `string` |  |
 | `ranking_epss` | `any` |  |
 | `ransomware_campaign` | `any` |  |
-| `reference` | `any[]` |  |
+| `references` | `any[]` |  |
 | `summary` | `any` |  |
 
 #### Example: Load
@@ -469,11 +470,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const cve = client.Cve()
-await cve.load({ id: "example_id" })
+const ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
+await ifyouhavethenameofaspecificsoftwareproductandwantto.load()
 
-// cve.data() now returns the cve data from the last `load`
-// cve.match() returns { id: "example_id" }
+// ifyouhavethenameofaspecificsoftwareproductandwantto.data() now returns the ifyouhavethenameofaspecificsoftwareproductandwantto data from the last `load`
+// ifyouhavethenameofaspecificsoftwareproductandwantto.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

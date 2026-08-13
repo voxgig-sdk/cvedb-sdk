@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from cvedb_sdk.utility.voxgig_struct import voxgig_struct as vs
 from cvedb_sdk import CvedbSDK
-from core import helpers
+from cvedb_sdk.core import helpers
 from test import runner
 
 

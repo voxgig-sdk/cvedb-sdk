@@ -38,7 +38,7 @@ client = CvedbSDK()
 
 ### 3. Load a cve
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -55,8 +55,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    cve = client.Cve().load({"id": "example_id"})
-    print(cve)
+    ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load()
+    print(ifyouhavethenameofaspecificsoftwareproductandwantto)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -122,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = CvedbSDK.test()
 
-# Entity ops return the bare record and raise on error.
-cve = client.Cve().load({"id": "test01"})
-# cve contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo().load()
+# ifyouhavethenameofaspecificsoftwareproductandwantto contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -220,7 +221,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -242,7 +243,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `cpe` |  |
+| `cpes` |  |
 | `cve_id` |  |
 | `cvss` |  |
 | `cvss_v2` |  |
@@ -255,7 +256,7 @@ On error, `ok` is `False` and `err` contains the error value.
 | `published_time` |  |
 | `ranking_epss` |  |
 | `ransomware_campaign` |  |
-| `reference` |  |
+| `references` |  |
 | `summary` |  |
 
 Operations: Load.
@@ -299,7 +300,7 @@ Create an instance: `cve = client.Cve()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpe` | `list` |  |
+| `cpes` | `list` |  |
 | `cve_id` | `str` |  |
 | `cvss` | `Any` |  |
 | `cvss_v2` | `Any` |  |
@@ -312,7 +313,7 @@ Create an instance: `cve = client.Cve()`
 | `published_time` | `str` |  |
 | `ranking_epss` | `Any` |  |
 | `ransomware_campaign` | `Any` |  |
-| `reference` | `list` |  |
+| `references` | `list` |  |
 | `summary` | `Any` |  |
 
 #### Example: Load
@@ -431,11 +432,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-cve = client.Cve()
-cve.load({"id": "example_id"})
+ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
+ifyouhavethenameofaspecificsoftwareproductandwantto.load()
 
-# cve.data_get() now returns the cve data from the last load
-# cve.match_get() returns the last match criteria
+# ifyouhavethenameofaspecificsoftwareproductandwantto.data_get() now returns the ifyouhavethenameofaspecificsoftwareproductandwantto data from the last load
+# ifyouhavethenameofaspecificsoftwareproductandwantto.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

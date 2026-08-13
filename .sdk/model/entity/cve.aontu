@@ -6,7 +6,7 @@ main: kit: entity: cve: {
 
   fields: [
     {
-      name: "cpe"
+      name: "cpes"
       req: true
       type: "`$ARRAY`"
     }
@@ -71,7 +71,7 @@ main: kit: entity: cve: {
       type: "`$ANY`"
     }
     {
-      name: "reference"
+      name: "references"
       req: true
       type: "`$ARRAY`"
     }

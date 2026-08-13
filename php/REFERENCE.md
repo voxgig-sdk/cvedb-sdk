@@ -100,7 +100,7 @@ $cve = $client->Cve();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpe` | `array` | Yes |  |
+| `cpes` | `array` | Yes |  |
 | `cve_id` | `string` | Yes |  |
 | `cvss` | `mixed` | Yes |  |
 | `cvss_v2` | `mixed` | Yes |  |
@@ -113,7 +113,7 @@ $cve = $client->Cve();
 | `published_time` | `string` | Yes |  |
 | `ranking_epss` | `mixed` | Yes |  |
 | `ransomware_campaign` | `mixed` | No |  |
-| `reference` | `array` | Yes |  |
+| `references` | `array` | Yes |  |
 | `summary` | `mixed` | Yes |  |
 
 ### Operations
