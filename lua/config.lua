@@ -1,5 +1,8 @@
 -- Cvedb SDK configuration
 
+-- Build a fresh, fully materialised config table. Every call rebuilds the
+-- whole structure, so prefer require("config_shared") unless you need a
+-- private copy you intend to mutate.
 local function make_config()
   return {
     main = {
@@ -27,109 +30,77 @@ local function make_config()
       ["cve"] = {
         ["fields"] = {
           {
-            ["active"] = true,
             ["name"] = "cpes",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
-            ["index$"] = 0,
           },
           {
-            ["active"] = true,
             ["name"] = "cve_id",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 1,
           },
           {
-            ["active"] = true,
             ["name"] = "cvss",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 2,
           },
           {
-            ["active"] = true,
             ["name"] = "cvss_v2",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 3,
           },
           {
-            ["active"] = true,
             ["name"] = "cvss_v3",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 4,
           },
           {
-            ["active"] = true,
             ["name"] = "cvss_v4",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 5,
           },
           {
-            ["active"] = true,
             ["name"] = "cvss_version",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 6,
           },
           {
-            ["active"] = true,
             ["name"] = "epss",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 7,
           },
           {
-            ["active"] = true,
             ["name"] = "kev",
             ["req"] = true,
             ["type"] = "`$BOOLEAN`",
-            ["index$"] = 8,
           },
           {
-            ["active"] = true,
             ["name"] = "propose_action",
-            ["req"] = false,
             ["type"] = "`$ANY`",
-            ["index$"] = 9,
           },
           {
-            ["active"] = true,
             ["name"] = "published_time",
             ["req"] = true,
             ["type"] = "`$STRING`",
-            ["index$"] = 10,
           },
           {
-            ["active"] = true,
             ["name"] = "ranking_epss",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 11,
           },
           {
-            ["active"] = true,
             ["name"] = "ransomware_campaign",
-            ["req"] = false,
             ["type"] = "`$ANY`",
-            ["index$"] = 12,
           },
           {
-            ["active"] = true,
             ["name"] = "references",
             ["req"] = true,
             ["type"] = "`$ARRAY`",
-            ["index$"] = 13,
           },
           {
-            ["active"] = true,
             ["name"] = "summary",
             ["req"] = true,
             ["type"] = "`$ANY`",
-            ["index$"] = 14,
           },
         },
         ["name"] = "cve",
@@ -139,17 +110,14 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["params"] = {
                     {
-                      ["active"] = true,
                       ["kind"] = "param",
                       ["name"] = "id",
                       ["orig"] = "cve_id",
                       ["reqd"] = true,
                       ["type"] = "`$STRING`",
-                      ["index$"] = 0,
                     },
                   },
                 },
@@ -174,10 +142,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -193,29 +159,23 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["example"] = false,
                       ["kind"] = "query",
                       ["name"] = "count",
                       ["orig"] = "count",
-                      ["reqd"] = false,
                       ["type"] = "`$BOOLEAN`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 1000,
                       ["kind"] = "query",
                       ["name"] = "limit",
                       ["orig"] = "limit",
-                      ["reqd"] = false,
                       ["type"] = "`$INTEGER`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "product",
                       ["orig"] = "product",
@@ -223,12 +183,10 @@ local function make_config()
                       ["type"] = "`$STRING`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 0,
                       ["kind"] = "query",
                       ["name"] = "skip",
                       ["orig"] = "skip",
-                      ["reqd"] = false,
                       ["type"] = "`$INTEGER`",
                     },
                   },
@@ -251,10 +209,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {
@@ -270,84 +226,65 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["active"] = true,
                 ["args"] = {
                   ["query"] = {
                     {
-                      ["active"] = true,
                       ["example"] = false,
                       ["kind"] = "query",
                       ["name"] = "count",
                       ["orig"] = "count",
-                      ["reqd"] = false,
                       ["type"] = "`$BOOLEAN`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "cpe23",
                       ["orig"] = "cpe23",
-                      ["reqd"] = false,
                       ["type"] = "`$ANY`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "end_date",
                       ["orig"] = "end_date",
-                      ["reqd"] = false,
                       ["type"] = "`$ANY`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = false,
                       ["kind"] = "query",
                       ["name"] = "is_kev",
                       ["orig"] = "is_kev",
-                      ["reqd"] = false,
                       ["type"] = "`$BOOLEAN`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 1000,
                       ["kind"] = "query",
                       ["name"] = "limit",
                       ["orig"] = "limit",
-                      ["reqd"] = false,
                       ["type"] = "`$INTEGER`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "product",
                       ["orig"] = "product",
-                      ["reqd"] = false,
                       ["type"] = "`$ANY`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = 0,
                       ["kind"] = "query",
                       ["name"] = "skip",
                       ["orig"] = "skip",
-                      ["reqd"] = false,
                       ["type"] = "`$INTEGER`",
                     },
                     {
-                      ["active"] = true,
                       ["example"] = false,
                       ["kind"] = "query",
                       ["name"] = "sort_by_epss",
                       ["orig"] = "sort_by_epss",
-                      ["reqd"] = false,
                       ["type"] = "`$BOOLEAN`",
                     },
                     {
-                      ["active"] = true,
                       ["kind"] = "query",
                       ["name"] = "start_date",
                       ["orig"] = "start_date",
-                      ["reqd"] = false,
                       ["type"] = "`$ANY`",
                     },
                   },
@@ -375,10 +312,8 @@ local function make_config()
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["index$"] = 0,
               },
             },
-            ["key$"] = "load",
           },
         },
         ["relations"] = {

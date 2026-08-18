@@ -28,7 +28,7 @@ class CvedbSDK
     utility = CvedbUtility.new
     @_utility = utility
 
-    config = CvedbConfig.make_config
+    config = CvedbConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

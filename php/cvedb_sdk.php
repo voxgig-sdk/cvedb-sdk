@@ -40,7 +40,7 @@ class CvedbSDK
         $utility = new CvedbUtility();
         $this->_utility = $utility;
 
-        $config = CvedbConfig::make_config();
+        $config = CvedbConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

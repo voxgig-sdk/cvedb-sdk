@@ -1,7 +1,30 @@
 # Cvedb SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "Cvedb",
@@ -28,109 +51,77 @@ def make_config():
       "cve": {
         "fields": [
           {
-            "active": True,
             "name": "cpes",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "cve_id",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "cvss",
             "req": True,
             "type": "`$ANY`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "cvss_v2",
             "req": True,
             "type": "`$ANY`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "cvss_v3",
             "req": True,
             "type": "`$ANY`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "cvss_v4",
             "req": True,
             "type": "`$ANY`",
-            "index$": 5,
           },
           {
-            "active": True,
             "name": "cvss_version",
             "req": True,
             "type": "`$ANY`",
-            "index$": 6,
           },
           {
-            "active": True,
             "name": "epss",
             "req": True,
             "type": "`$ANY`",
-            "index$": 7,
           },
           {
-            "active": True,
             "name": "kev",
             "req": True,
             "type": "`$BOOLEAN`",
-            "index$": 8,
           },
           {
-            "active": True,
             "name": "propose_action",
-            "req": False,
             "type": "`$ANY`",
-            "index$": 9,
           },
           {
-            "active": True,
             "name": "published_time",
             "req": True,
             "type": "`$STRING`",
-            "index$": 10,
           },
           {
-            "active": True,
             "name": "ranking_epss",
             "req": True,
             "type": "`$ANY`",
-            "index$": 11,
           },
           {
-            "active": True,
             "name": "ransomware_campaign",
-            "req": False,
             "type": "`$ANY`",
-            "index$": 12,
           },
           {
-            "active": True,
             "name": "references",
             "req": True,
             "type": "`$ARRAY`",
-            "index$": 13,
           },
           {
-            "active": True,
             "name": "summary",
             "req": True,
             "type": "`$ANY`",
-            "index$": 14,
           },
         ],
         "name": "cve",
@@ -140,17 +131,14 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "params": [
                     {
-                      "active": True,
                       "kind": "param",
                       "name": "id",
                       "orig": "cve_id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "index$": 0,
                     },
                   ],
                 },
@@ -175,10 +163,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -194,29 +180,23 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "count",
                       "orig": "count",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "example": 1000,
                       "kind": "query",
                       "name": "limit",
                       "orig": "limit",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "product",
                       "orig": "product",
@@ -224,12 +204,10 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": 0,
                       "kind": "query",
                       "name": "skip",
                       "orig": "skip",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                   ],
@@ -252,10 +230,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -271,84 +247,65 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "count",
                       "orig": "count",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "cpe23",
                       "orig": "cpe23",
-                      "reqd": False,
                       "type": "`$ANY`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "end_date",
                       "orig": "end_date",
-                      "reqd": False,
                       "type": "`$ANY`",
                     },
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "is_kev",
                       "orig": "is_kev",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "example": 1000,
                       "kind": "query",
                       "name": "limit",
                       "orig": "limit",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "product",
                       "orig": "product",
-                      "reqd": False,
                       "type": "`$ANY`",
                     },
                     {
-                      "active": True,
                       "example": 0,
                       "kind": "query",
                       "name": "skip",
                       "orig": "skip",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "sort_by_epss",
                       "orig": "sort_by_epss",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "start_date",
                       "orig": "start_date",
-                      "reqd": False,
                       "type": "`$ANY`",
                     },
                   ],
@@ -376,10 +333,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {

@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from cvedb_sdk.config import make_config
+from cvedb_sdk.config import shared_config
 from cvedb_sdk.features import _make_feature
 from cvedb_sdk.core.control import CvedbControl
 from cvedb_sdk.core.error import CvedbError
@@ -24,7 +24,7 @@ from cvedb_sdk.core.spec import CvedbSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 
