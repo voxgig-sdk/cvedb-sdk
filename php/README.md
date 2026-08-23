@@ -247,21 +247,21 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `cpes` |  |
-| `cve_id` |  |
-| `cvss` |  |
-| `cvss_v2` |  |
-| `cvss_v3` |  |
-| `cvss_v4` |  |
-| `cvss_version` |  |
-| `epss` |  |
-| `kev` |  |
-| `propose_action` |  |
-| `published_time` |  |
-| `ranking_epss` |  |
-| `ransomware_campaign` |  |
-| `references` |  |
-| `summary` |  |
+| `cpes` | A list of Common Platform Enumeration (CPE) identifiers that specify the affected product(s) or component(s) by this vulnerability. |
+| `cve_id` | The unique identifier assigned to a reported vulnerability, adhering to the CVE-YYYY-NNNNN format, which helps in tracking and referencing vulnerabilities systematically. |
+| `cvss` | The Common Vulnerability Scoring System (CVSS) score, newest version, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v2` | The Common Vulnerability Scoring System (CVSS) score version 2, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v3` | The Common Vulnerability Scoring System (CVSS) score version 3, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v4` | The Common Vulnerability Scoring System (CVSS) score version 4, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_version` | The version of the CVSS used in the cvss field. |
+| `epss` | The Exploit Prediction Scoring System (EPSS) score, a probabilistic measure between 0 and 1 (0 and 100%)., predicts the likelihood of a vulnerability being exploited in the wild within the next 30 days. |
+| `kev` | A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts. |
+| `propose_action` | Suggested actions or mitigation strategies to address the vulnerability, aimed at reducing its impact or eliminating the risk to affected systems. |
+| `published_time` | The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone. |
+| `ranking_epss` | This score ranks the vulnerability in terms of its EPSS score relative to all other scored vulnerabilities. |
+| `ransomware_campaign` | Indicates if the vulnerability has been exploited in ransomware campaigns, highlighting its significance and potential impact on security posture. |
+| `references` | A list of references providing further details, technical advisories, and mitigation guidance related to the vulnerability, facilitating deeper understanding and research. |
+| `summary` | A brief overview of the vulnerability, providing essential information on what it entails, the affected systems, and the potential impact in clear, understandable English. |
 
 Operations: Load.
 
@@ -304,21 +304,21 @@ Create an instance: `$cve = $client->Cve();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpes` | `array` |  |
-| `cve_id` | `string` |  |
-| `cvss` | `mixed` |  |
-| `cvss_v2` | `mixed` |  |
-| `cvss_v3` | `mixed` |  |
-| `cvss_v4` | `mixed` |  |
-| `cvss_version` | `mixed` |  |
-| `epss` | `mixed` |  |
-| `kev` | `bool` |  |
-| `propose_action` | `mixed` |  |
-| `published_time` | `string` |  |
-| `ranking_epss` | `mixed` |  |
-| `ransomware_campaign` | `mixed` |  |
-| `references` | `array` |  |
-| `summary` | `mixed` |  |
+| `cpes` | `array` | A list of Common Platform Enumeration (CPE) identifiers that specify the affected product(s) or component(s) by this vulnerability. |
+| `cve_id` | `string` | The unique identifier assigned to a reported vulnerability, adhering to the CVE-YYYY-NNNNN format, which helps in tracking and referencing vulnerabilities systematically. |
+| `cvss` | `mixed` | The Common Vulnerability Scoring System (CVSS) score, newest version, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v2` | `mixed` | The Common Vulnerability Scoring System (CVSS) score version 2, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v3` | `mixed` | The Common Vulnerability Scoring System (CVSS) score version 3, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v4` | `mixed` | The Common Vulnerability Scoring System (CVSS) score version 4, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_version` | `mixed` | The version of the CVSS used in the cvss field. |
+| `epss` | `mixed` | The Exploit Prediction Scoring System (EPSS) score, a probabilistic measure between 0 and 1 (0 and 100%)., predicts the likelihood of a vulnerability being exploited in the wild within the next 30 days. |
+| `kev` | `bool` | A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts. |
+| `propose_action` | `mixed` | Suggested actions or mitigation strategies to address the vulnerability, aimed at reducing its impact or eliminating the risk to affected systems. |
+| `published_time` | `string` | The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone. |
+| `ranking_epss` | `mixed` | This score ranks the vulnerability in terms of its EPSS score relative to all other scored vulnerabilities. |
+| `ransomware_campaign` | `mixed` | Indicates if the vulnerability has been exploited in ransomware campaigns, highlighting its significance and potential impact on security posture. |
+| `references` | `array` | A list of references providing further details, technical advisories, and mitigation guidance related to the vulnerability, facilitating deeper understanding and research. |
+| `summary` | `mixed` | A brief overview of the vulnerability, providing essential information on what it entails, the affected systems, and the potential impact in clear, understandable English. |
 
 #### Example: Load
 

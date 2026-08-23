@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "Cvedb",
+      slug = "cvedb",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -32,74 +35,89 @@ local function make_config()
           {
             ["name"] = "cpes",
             ["req"] = true,
+            ["short"] = "A list of Common Platform Enumeration (CPE) identifiers that specify the affected product(s) or component(s) by this vulnerability.",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "cve_id",
             ["req"] = true,
+            ["short"] = "The unique identifier assigned to a reported vulnerability, adhering to the CVE-YYYY-NNNNN format, which helps in tracking and referencing vulnerabilities systematically.",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "cvss",
             ["req"] = true,
+            ["short"] = "The Common Vulnerability Scoring System (CVSS) score, newest version, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "cvss_v2",
             ["req"] = true,
+            ["short"] = "The Common Vulnerability Scoring System (CVSS) score version 2, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "cvss_v3",
             ["req"] = true,
+            ["short"] = "The Common Vulnerability Scoring System (CVSS) score version 3, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "cvss_v4",
             ["req"] = true,
+            ["short"] = "The Common Vulnerability Scoring System (CVSS) score version 4, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "cvss_version",
             ["req"] = true,
+            ["short"] = "The version of the CVSS used in the cvss field.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "epss",
             ["req"] = true,
+            ["short"] = "The Exploit Prediction Scoring System (EPSS) score, a probabilistic measure between 0 and 1 (0 and 100%)., predicts the likelihood of a vulnerability being exploited in the wild within the next 30 days.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "kev",
             ["req"] = true,
+            ["short"] = "A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts.",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "propose_action",
+            ["short"] = "Suggested actions or mitigation strategies to address the vulnerability, aimed at reducing its impact or eliminating the risk to affected systems.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "published_time",
             ["req"] = true,
+            ["short"] = "The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone.",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "ranking_epss",
             ["req"] = true,
+            ["short"] = "This score ranks the vulnerability in terms of its EPSS score relative to all other scored vulnerabilities.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "ransomware_campaign",
+            ["short"] = "Indicates if the vulnerability has been exploited in ransomware campaigns, highlighting its significance and potential impact on security posture.",
             ["type"] = "`$ANY`",
           },
           {
             ["name"] = "references",
             ["req"] = true,
+            ["short"] = "A list of references providing further details, technical advisories, and mitigation guidance related to the vulnerability, facilitating deeper understanding and research.",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "summary",
             ["req"] = true,
+            ["short"] = "A brief overview of the vulnerability, providing essential information on what it entails, the affected systems, and the potential impact in clear, understandable English.",
             ["type"] = "`$ANY`",
           },
         },

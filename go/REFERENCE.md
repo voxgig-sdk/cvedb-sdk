@@ -106,21 +106,21 @@ fmt.Println(cve.GetName()) // "cve"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `cpes` | `[]any` | Yes |  |
-| `cve_id` | `string` | Yes |  |
-| `cvss` | `any` | Yes |  |
-| `cvss_v2` | `any` | Yes |  |
-| `cvss_v3` | `any` | Yes |  |
-| `cvss_v4` | `any` | Yes |  |
-| `cvss_version` | `any` | Yes |  |
-| `epss` | `any` | Yes |  |
-| `kev` | `bool` | Yes |  |
-| `propose_action` | `any` | No |  |
-| `published_time` | `string` | Yes |  |
-| `ranking_epss` | `any` | Yes |  |
-| `ransomware_campaign` | `any` | No |  |
-| `references` | `[]any` | Yes |  |
-| `summary` | `any` | Yes |  |
+| `cpes` | `[]any` | Yes | A list of Common Platform Enumeration (CPE) identifiers that specify the affected product(s) or component(s) by this vulnerability. |
+| `cve_id` | `string` | Yes | The unique identifier assigned to a reported vulnerability, adhering to the CVE-YYYY-NNNNN format, which helps in tracking and referencing vulnerabilities systematically. |
+| `cvss` | `any` | Yes | The Common Vulnerability Scoring System (CVSS) score, newest version, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v2` | `any` | Yes | The Common Vulnerability Scoring System (CVSS) score version 2, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v3` | `any` | Yes | The Common Vulnerability Scoring System (CVSS) score version 3, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v4` | `any` | Yes | The Common Vulnerability Scoring System (CVSS) score version 4, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_version` | `any` | Yes | The version of the CVSS used in the cvss field. |
+| `epss` | `any` | Yes | The Exploit Prediction Scoring System (EPSS) score, a probabilistic measure between 0 and 1 (0 and 100%)., predicts the likelihood of a vulnerability being exploited in the wild within the next 30 days. |
+| `kev` | `bool` | Yes | A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts. |
+| `propose_action` | `any` | No | Suggested actions or mitigation strategies to address the vulnerability, aimed at reducing its impact or eliminating the risk to affected systems. |
+| `published_time` | `string` | Yes | The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone. |
+| `ranking_epss` | `any` | Yes | This score ranks the vulnerability in terms of its EPSS score relative to all other scored vulnerabilities. |
+| `ransomware_campaign` | `any` | No | Indicates if the vulnerability has been exploited in ransomware campaigns, highlighting its significance and potential impact on security posture. |
+| `references` | `[]any` | Yes | A list of references providing further details, technical advisories, and mitigation guidance related to the vulnerability, facilitating deeper understanding and research. |
+| `summary` | `any` | Yes | A brief overview of the vulnerability, providing essential information on what it entails, the affected systems, and the potential impact in clear, understandable English. |
 
 ### Operations
 

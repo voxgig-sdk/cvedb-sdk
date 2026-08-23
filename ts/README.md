@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -287,21 +287,21 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `cpes` |  |
-| `cve_id` |  |
-| `cvss` |  |
-| `cvss_v2` |  |
-| `cvss_v3` |  |
-| `cvss_v4` |  |
-| `cvss_version` |  |
-| `epss` |  |
-| `kev` |  |
-| `propose_action` |  |
-| `published_time` |  |
-| `ranking_epss` |  |
-| `ransomware_campaign` |  |
-| `references` |  |
-| `summary` |  |
+| `cpes` | A list of Common Platform Enumeration (CPE) identifiers that specify the affected product(s) or component(s) by this vulnerability. |
+| `cve_id` | The unique identifier assigned to a reported vulnerability, adhering to the CVE-YYYY-NNNNN format, which helps in tracking and referencing vulnerabilities systematically. |
+| `cvss` | The Common Vulnerability Scoring System (CVSS) score, newest version, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v2` | The Common Vulnerability Scoring System (CVSS) score version 2, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v3` | The Common Vulnerability Scoring System (CVSS) score version 3, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v4` | The Common Vulnerability Scoring System (CVSS) score version 4, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_version` | The version of the CVSS used in the cvss field. |
+| `epss` | The Exploit Prediction Scoring System (EPSS) score, a probabilistic measure between 0 and 1 (0 and 100%)., predicts the likelihood of a vulnerability being exploited in the wild within the next 30 days. |
+| `kev` | A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts. |
+| `propose_action` | Suggested actions or mitigation strategies to address the vulnerability, aimed at reducing its impact or eliminating the risk to affected systems. |
+| `published_time` | The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone. |
+| `ranking_epss` | This score ranks the vulnerability in terms of its EPSS score relative to all other scored vulnerabilities. |
+| `ransomware_campaign` | Indicates if the vulnerability has been exploited in ransomware campaigns, highlighting its significance and potential impact on security posture. |
+| `references` | A list of references providing further details, technical advisories, and mitigation guidance related to the vulnerability, facilitating deeper understanding and research. |
+| `summary` | A brief overview of the vulnerability, providing essential information on what it entails, the affected systems, and the potential impact in clear, understandable English. |
 
 Operations: load.
 
@@ -344,21 +344,21 @@ Create an instance: `const cve = client.Cve()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `cpes` | `any[]` |  |
-| `cve_id` | `string` |  |
-| `cvss` | `any` |  |
-| `cvss_v2` | `any` |  |
-| `cvss_v3` | `any` |  |
-| `cvss_v4` | `any` |  |
-| `cvss_version` | `any` |  |
-| `epss` | `any` |  |
-| `kev` | `boolean` |  |
-| `propose_action` | `any` |  |
-| `published_time` | `string` |  |
-| `ranking_epss` | `any` |  |
-| `ransomware_campaign` | `any` |  |
-| `references` | `any[]` |  |
-| `summary` | `any` |  |
+| `cpes` | `any[]` | A list of Common Platform Enumeration (CPE) identifiers that specify the affected product(s) or component(s) by this vulnerability. |
+| `cve_id` | `string` | The unique identifier assigned to a reported vulnerability, adhering to the CVE-YYYY-NNNNN format, which helps in tracking and referencing vulnerabilities systematically. |
+| `cvss` | `any` | The Common Vulnerability Scoring System (CVSS) score, newest version, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v2` | `any` | The Common Vulnerability Scoring System (CVSS) score version 2, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v3` | `any` | The Common Vulnerability Scoring System (CVSS) score version 3, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_v4` | `any` | The Common Vulnerability Scoring System (CVSS) score version 4, which ranges from 0 to 10, quantifies the severity of the vulnerability based on various factors such as exploitability, impact, and ease of attack. |
+| `cvss_version` | `any` | The version of the CVSS used in the cvss field. |
+| `epss` | `any` | The Exploit Prediction Scoring System (EPSS) score, a probabilistic measure between 0 and 1 (0 and 100%)., predicts the likelihood of a vulnerability being exploited in the wild within the next 30 days. |
+| `kev` | `boolean` | A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts. |
+| `propose_action` | `any` | Suggested actions or mitigation strategies to address the vulnerability, aimed at reducing its impact or eliminating the risk to affected systems. |
+| `published_time` | `string` | The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone. |
+| `ranking_epss` | `any` | This score ranks the vulnerability in terms of its EPSS score relative to all other scored vulnerabilities. |
+| `ransomware_campaign` | `any` | Indicates if the vulnerability has been exploited in ransomware campaigns, highlighting its significance and potential impact on security posture. |
+| `references` | `any[]` | A list of references providing further details, technical advisories, and mitigation guidance related to the vulnerability, facilitating deeper understanding and research. |
+| `summary` | `any` | A brief overview of the vulnerability, providing essential information on what it entails, the affected systems, and the potential impact in clear, understandable English. |
 
 #### Example: Load
 
