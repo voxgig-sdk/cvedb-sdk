@@ -61,13 +61,19 @@ func TestCveEntity(t *testing.T) {
 
 		// LOAD
 		cveRef01Ent := client.Cve(nil)
-		cveRef01MatchDt0 := map[string]any{}
+		cveRef01MatchDt0 := map[string]any{
+			"id": cveRef01Data["id"],
+		}
 		cveRef01DataDt0Loaded, err := cveRef01Ent.Load(cveRef01MatchDt0, nil)
 		if err != nil {
 			t.Fatalf("load failed: %v", err)
 		}
-		if cveRef01DataDt0Loaded == nil {
-			t.Fatal("expected load result to be non-nil")
+		cveRef01DataDt0LoadResult := core.ToMapAny(entityData(cveRef01DataDt0Loaded))
+		if cveRef01DataDt0LoadResult == nil {
+			t.Fatal("expected load result to be a map")
+		}
+		if cveRef01DataDt0LoadResult["id"] != cveRef01Data["id"] {
+			t.Fatal("expected load result id to match")
 		}
 
 	})

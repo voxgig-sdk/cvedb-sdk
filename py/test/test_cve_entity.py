@@ -48,9 +48,13 @@ class TestCveEntity:
 
         # LOAD
         cve_ref01_ent = client.Cve(None)
-        cve_ref01_match_dt0 = {}
+        cve_ref01_match_dt0 = {
+            "id": cve_ref01_data["id"],
+        }
         cve_ref01_data_dt0_loaded = cve_ref01_ent.load(cve_ref01_match_dt0, None)
-        assert cve_ref01_data_dt0_loaded is not None
+        cve_ref01_data_dt0_load_result = helpers.to_map(runner.entity_data(cve_ref01_data_dt0_loaded))
+        assert cve_ref01_data_dt0_load_result is not None
+        assert cve_ref01_data_dt0_load_result["id"] == cve_ref01_data["id"]
 
 
 

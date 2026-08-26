@@ -33,6 +33,7 @@ class CveRequired(TypedDict):
 
 
 class Cve(CveRequired, total=False):
+    id: str
     propose_action: Any
     ransomware_campaign: Any
 

@@ -22,6 +22,7 @@ type Cve struct {
 	CvssV4 any `json:"cvss_v4"`
 	CvssVersion any `json:"cvss_version"`
 	Epss any `json:"epss"`
+	Id *string `json:"id,omitempty"`
 	Kev bool `json:"kev"`
 	ProposeAction *any `json:"propose_action,omitempty"`
 	PublishedTime string `json:"published_time"`

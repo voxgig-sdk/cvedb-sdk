@@ -48,9 +48,13 @@ class CveEntityTest extends TestCase
 
         // LOAD
         $cve_ref01_ent = $client->Cve(null);
-        $cve_ref01_match_dt0 = [];
+        $cve_ref01_match_dt0 = [
+            "id" => $cve_ref01_data["id"],
+        ];
         $cve_ref01_data_dt0_loaded = $cve_ref01_ent->load($cve_ref01_match_dt0, null);
-        $this->assertNotNull($cve_ref01_data_dt0_loaded);
+        $cve_ref01_data_dt0_load_result = Helpers::to_map(is_object($cve_ref01_data_dt0_loaded) && method_exists($cve_ref01_data_dt0_loaded, 'data_get') ? $cve_ref01_data_dt0_loaded->data_get() : $cve_ref01_data_dt0_loaded);
+        $this->assertNotNull($cve_ref01_data_dt0_load_result);
+        $this->assertEquals($cve_ref01_data_dt0_load_result["id"], $cve_ref01_data["id"]);
 
     }
 }

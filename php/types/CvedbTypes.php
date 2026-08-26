@@ -23,6 +23,7 @@ class Cve
     public mixed $cvss_v4;
     public mixed $cvss_version;
     public mixed $epss;
+    public ?string $id = null;
     public bool $kev;
     public mixed $propose_action = null;
     public string $published_time;

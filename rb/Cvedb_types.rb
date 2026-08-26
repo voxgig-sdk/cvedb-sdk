@@ -34,6 +34,9 @@
 # @!attribute [rw] epss
 #   @return [Object]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] kev
 #   @return [Boolean]
 #
@@ -63,6 +66,7 @@ Cve = Struct.new(
   :cvss_v4,
   :cvss_version,
   :epss,
+  :id,
   :kev,
   :propose_action,
   :published_time,

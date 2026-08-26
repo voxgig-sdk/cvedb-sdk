@@ -15,6 +15,7 @@
 ---@field cvss_v4 any
 ---@field cvss_version any
 ---@field epss any
+---@field id? string
 ---@field kev boolean
 ---@field propose_action? any
 ---@field published_time string

@@ -14,6 +14,7 @@ export interface Cve {
   cvss_v4: any
   cvss_version: any
   epss: any
+  id?: string
   kev: boolean
   propose_action?: any
   published_time: string

@@ -59,9 +59,12 @@ describe('CveEntity', async () => {
 
     let cve_ref01_data = Object.values(setup.data.existing.cve)[0] as any
 
-    // LOAD: skipped — no entity id field and load requires path params.
-    // Entity-var is declared here so later flow steps still compile.
+    // LOAD
     const cve_ref01_ent = client.Cve()
+    const cve_ref01_match_dt0: any = {}
+    cve_ref01_match_dt0.id = cve_ref01_data.id
+    const cve_ref01_data_dt0 = (await cve_ref01_ent.load(cve_ref01_match_dt0)).data()
+    assert(cve_ref01_data_dt0.id === cve_ref01_data.id)
 
 
   })

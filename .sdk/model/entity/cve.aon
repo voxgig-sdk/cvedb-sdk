@@ -54,6 +54,11 @@ main: kit: entity: cve: {
       type: "`$ANY`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "kev"
       req: true
       short: "A boolean value indicating whether the vulnerability is known to be exploited in the wild, which is crucial for prioritizing patching and mitigation efforts."
@@ -96,6 +101,11 @@ main: kit: entity: cve: {
       type: "`$ANY`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "cve"
   op: {
