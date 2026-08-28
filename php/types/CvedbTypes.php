@@ -47,6 +47,10 @@ class IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 /** Request payload for IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo#load. */
 class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch
 {
+    public ?bool $count = null;
+    public ?int $limit = null;
+    public string $product;
+    public ?int $skip = null;
 }
 
 /** ThisEndpointIsTailoredForSearchesBasedOnProductNameOr entity data model. */
@@ -57,5 +61,14 @@ class ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 /** Request payload for ThisEndpointIsTailoredForSearchesBasedOnProductNameOr#load. */
 class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch
 {
+    public ?bool $count = null;
+    public mixed $cpe23 = null;
+    public mixed $end_date = null;
+    public ?bool $is_kev = null;
+    public ?int $limit = null;
+    public mixed $product = null;
+    public ?int $skip = null;
+    public ?bool $sort_by_epss = null;
+    public mixed $start_date = null;
 }
 

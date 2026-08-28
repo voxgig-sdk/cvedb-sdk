@@ -43,6 +43,10 @@ type IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo struct {
 
 // IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch is the typed request payload for IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.LoadTyped.
 type IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch struct {
+	Count *bool `json:"count,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Product string `json:"product"`
+	Skip *int `json:"skip,omitempty"`
 }
 
 // ThisEndpointIsTailoredForSearchesBasedOnProductNameOr is the typed data model for the this_endpoint_is_tailored_for_searches_based_on_product_name_or entity.
@@ -51,6 +55,15 @@ type ThisEndpointIsTailoredForSearchesBasedOnProductNameOr struct {
 
 // ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch is the typed request payload for ThisEndpointIsTailoredForSearchesBasedOnProductNameOr.LoadTyped.
 type ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch struct {
+	Count *bool `json:"count,omitempty"`
+	Cpe23 *any `json:"cpe23,omitempty"`
+	EndDate *any `json:"end_date,omitempty"`
+	IsKev *bool `json:"is_kev,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Product *any `json:"product,omitempty"`
+	Skip *int `json:"skip,omitempty"`
+	SortByEpss *bool `json:"sort_by_epss,omitempty"`
+	StartDate *any `json:"start_date,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

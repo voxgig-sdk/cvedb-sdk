@@ -91,14 +91,68 @@ class IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 end
 
 # Request payload for IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo#load.
-class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch
-end
+#
+# @!attribute [rw] count
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] limit
+#   @return [Integer, nil]
+#
+# @!attribute [rw] product
+#   @return [String]
+#
+# @!attribute [rw] skip
+#   @return [Integer, nil]
+IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch = Struct.new(
+  :count,
+  :limit,
+  :product,
+  :skip,
+  keyword_init: true
+)
 
 # ThisEndpointIsTailoredForSearchesBasedOnProductNameOr entity data model.
 class ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 end
 
 # Request payload for ThisEndpointIsTailoredForSearchesBasedOnProductNameOr#load.
-class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch
-end
+#
+# @!attribute [rw] count
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] cpe23
+#   @return [Object, nil]
+#
+# @!attribute [rw] end_date
+#   @return [Object, nil]
+#
+# @!attribute [rw] is_kev
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] limit
+#   @return [Integer, nil]
+#
+# @!attribute [rw] product
+#   @return [Object, nil]
+#
+# @!attribute [rw] skip
+#   @return [Integer, nil]
+#
+# @!attribute [rw] sort_by_epss
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] start_date
+#   @return [Object, nil]
+ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch = Struct.new(
+  :count,
+  :cpe23,
+  :end_date,
+  :is_kev,
+  :limit,
+  :product,
+  :skip,
+  :sort_by_epss,
+  :start_date,
+  keyword_init: true
+)
 

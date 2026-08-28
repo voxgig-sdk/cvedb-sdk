@@ -46,13 +46,27 @@ class IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo(TypedDict):
     pass
 
 
-class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch(TypedDict):
-    pass
+class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatchRequired(TypedDict):
+    product: str
+
+
+class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch(IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatchRequired, total=False):
+    count: bool
+    limit: int
+    skip: int
 
 
 class ThisEndpointIsTailoredForSearchesBasedOnProductNameOr(TypedDict):
     pass
 
 
-class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch(TypedDict):
-    pass
+class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch(TypedDict, total=False):
+    count: bool
+    cpe23: Any
+    end_date: Any
+    is_kev: bool
+    limit: int
+    product: Any
+    skip: int
+    sort_by_epss: bool
+    start_date: Any

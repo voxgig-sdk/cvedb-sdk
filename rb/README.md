@@ -49,7 +49,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load()
+  ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load({ "product" => "example" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -119,7 +119,7 @@ client = CvedbSDK.test
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load()
+ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load({ "product" => "example" })
 puts ifyouhavethenameofaspecificsoftwareproductandwantto
 ```
 
@@ -334,7 +334,7 @@ Create an instance: `if_you_have_the_name_of_a_specific_software_product_and_wan
 
 ```ruby
 # load returns the ENTITY — call data_get for the IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo record (raises on error).
-if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load()
+if_you_have_the_name_of_a_specific_software_product_and_want_to = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo.load({ "product" => "product" })
 ```
 
 
@@ -354,6 +354,29 @@ Create an instance: `this_endpoint_is_tailored_for_searches_based_on_product_nam
 # load returns the ENTITY — call data_get for the ThisEndpointIsTailoredForSearchesBasedOnProductNameOr record (raises on error).
 this_endpoint_is_tailored_for_searches_based_on_product_name_or = client.ThisEndpointIsTailoredForSearchesBasedOnProductNameOr.load()
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -433,7 +456,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 ifyouhavethenameofaspecificsoftwareproductandwantto = client.IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
-ifyouhavethenameofaspecificsoftwareproductandwantto.load()
+ifyouhavethenameofaspecificsoftwareproductandwantto.load({ "product" => "example" })
 
 # ifyouhavethenameofaspecificsoftwareproductandwantto.data_get now returns the ifyouhavethenameofaspecificsoftwareproductandwantto data from the last load
 # ifyouhavethenameofaspecificsoftwareproductandwantto.match_get returns the last match criteria

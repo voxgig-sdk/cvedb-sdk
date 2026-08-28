@@ -48,7 +48,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local ifyouhavethenameofaspecificsoftwareproductandwantto, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load()
+local ifyouhavethenameofaspecificsoftwareproductandwantto, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load({ product = "example" })
 if err then error(err) end
 ```
 
@@ -106,7 +106,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load()
+local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load({ product = "example" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -322,7 +322,7 @@ Create an instance: `local if_you_have_the_name_of_a_specific_software_product_a
 #### Example: Load
 
 ```lua
-local if_you_have_the_name_of_a_specific_software_product_and_want_to, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load()
+local if_you_have_the_name_of_a_specific_software_product_and_want_to, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo():load({ product = "product" })
 ```
 
 
@@ -341,6 +341,29 @@ Create an instance: `local this_endpoint_is_tailored_for_searches_based_on_produ
 ```lua
 local this_endpoint_is_tailored_for_searches_based_on_product_name_or, err = client:ThisEndpointIsTailoredForSearchesBasedOnProductNameOr():load()
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -420,7 +443,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local ifyouhavethenameofaspecificsoftwareproductandwantto = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
-ifyouhavethenameofaspecificsoftwareproductandwantto:load()
+ifyouhavethenameofaspecificsoftwareproductandwantto:load({ product = "example" })
 
 -- ifyouhavethenameofaspecificsoftwareproductandwantto:data_get() now returns the ifyouhavethenameofaspecificsoftwareproductandwantto data from the last load
 -- ifyouhavethenameofaspecificsoftwareproductandwantto:match_get() returns the last match criteria

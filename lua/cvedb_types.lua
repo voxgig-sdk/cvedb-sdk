@@ -30,10 +30,23 @@
 ---@class IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo
 
 ---@class IfYouHaveTheNameOfASpecificSoftwareProductAndWantToLoadMatch
+---@field count? boolean
+---@field limit? number
+---@field product string
+---@field skip? number
 
 ---@class ThisEndpointIsTailoredForSearchesBasedOnProductNameOr
 
 ---@class ThisEndpointIsTailoredForSearchesBasedOnProductNameOrLoadMatch
+---@field count? boolean
+---@field cpe23? any
+---@field end_date? any
+---@field is_kev? boolean
+---@field limit? number
+---@field product? any
+---@field skip? number
+---@field sort_by_epss? boolean
+---@field start_date? any
 
 local M = {}
 
