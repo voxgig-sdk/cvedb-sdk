@@ -84,8 +84,10 @@ main: kit: entity: this_endpoint_is_tailored_for_searches_based_on_product_name_
           }
           method: "GET"
           orig: "/cves"
-          parts: [
-            "cves"
+          segments: [
+            {
+              lit: "cves"
+            }
           ]
           select: {
             exist: [

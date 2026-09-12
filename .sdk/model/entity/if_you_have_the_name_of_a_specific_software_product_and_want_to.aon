@@ -47,8 +47,10 @@ main: kit: entity: if_you_have_the_name_of_a_specific_software_product_and_want_
           }
           method: "GET"
           orig: "/cpes"
-          parts: [
-            "cpes"
+          segments: [
+            {
+              lit: "cpes"
+            }
           ]
           select: {
             exist: [

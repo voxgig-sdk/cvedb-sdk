@@ -91,6 +91,9 @@ def this_endpoint_is_tailored_for_searches_based_on_product_name_or_basic_setup(
 
   if env["CVEDB_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
       },
       extra || {},

@@ -66,8 +66,10 @@ def if_you_have_the_name_of_a_specific_software_product_and_want_to_direct_setup
   live = env["CVEDB_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
-    }
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
+    })
     client = CvedbSDK.new(merged_opts)
     return {
       client: client,

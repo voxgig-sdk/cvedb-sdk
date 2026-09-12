@@ -1,6 +1,14 @@
 # Cvedb SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -118,6 +126,7 @@ def make_config():
             "type": "`$ANY`",
           },
           {
+            "format": "date-time",
             "name": "published_time",
             "req": True,
             "short": "The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone.",
@@ -147,6 +156,10 @@ def make_config():
             "type": "`$ANY`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "cve",
         "op": {
           "load": {
@@ -168,15 +181,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cve/{cve_id}",
-                "parts": [
-                  "cve",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "cve_id": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "cve",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -186,6 +203,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "cve",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -238,8 +259,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cpes",
-                "parts": [
-                  "cpes",
+                "segments": [
+                  {
+                    "lit": "cpes",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -253,6 +276,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "cpes",
+                ],
               },
             ],
           },
@@ -336,8 +362,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/cves",
-                "parts": [
-                  "cves",
+                "segments": [
+                  {
+                    "lit": "cves",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -356,6 +384,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "cves",
+                ],
               },
             ],
           },

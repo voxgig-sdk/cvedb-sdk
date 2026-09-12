@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -136,6 +147,7 @@ class Config {
           "type": "`$ANY`"
         },
         {
+          "format": "date-time",
           "name": "published_time",
           "req": true,
           "short": "The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone.",
@@ -165,6 +177,10 @@ class Config {
           "type": "`$ANY`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "cve",
       "op": {
         "load": {
@@ -186,15 +202,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cve/{cve_id}",
-              "parts": [
-                "cve",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "cve_id": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "cve"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -203,7 +223,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "cve",
+                "{id}"
+              ]
             }
           ]
         }
@@ -256,8 +280,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cpes",
-              "parts": [
-                "cpes"
+              "segments": [
+                {
+                  "lit": "cpes"
+                }
               ],
               "select": {
                 "exist": [
@@ -270,7 +296,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "cpes"
+              ]
             }
           ]
         }
@@ -354,8 +383,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/cves",
-              "parts": [
-                "cves"
+              "segments": [
+                {
+                  "lit": "cves"
+                }
               ],
               "select": {
                 "exist": [
@@ -373,7 +404,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "cves"
+              ]
             }
           ]
         }
@@ -389,6 +423,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

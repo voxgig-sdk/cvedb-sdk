@@ -50,7 +50,7 @@ func TestIfYouHaveTheNameOfASpecificSoftwareProductAndWantToEntity(t *testing.T)
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		ifYouHaveTheNameOfASpecificSoftwareProductAndWantToRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.if_you_have_the_name_of_a_specific_software_product_and_want_to", setup.data)))
+		ifYouHaveTheNameOfASpecificSoftwareProductAndWantToRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.if_you_have_the_name_of_a_specific_software_product_and_want_to")))
 		var ifYouHaveTheNameOfASpecificSoftwareProductAndWantToRef01Data map[string]any
 		if len(ifYouHaveTheNameOfASpecificSoftwareProductAndWantToRef01DataRaw) > 0 {
 			ifYouHaveTheNameOfASpecificSoftwareProductAndWantToRef01Data = core.ToMapAny(ifYouHaveTheNameOfASpecificSoftwareProductAndWantToRef01DataRaw[0][1])
@@ -97,7 +97,7 @@ func if_you_have_the_name_of_a_specific_software_product_and_want_toBasicSetup(e
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"if_you_have_the_name_of_a_specific_software_product_and_want_to01", "if_you_have_the_name_of_a_specific_software_product_and_want_to02", "if_you_have_the_name_of_a_specific_software_product_and_want_to03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -125,10 +125,22 @@ func if_you_have_the_name_of_a_specific_software_product_and_want_toBasicSetup(e
 	}
 
 	if env["CVEDB_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewCvedbSDK(core.ToMapAny(mergedOpts))
 	}

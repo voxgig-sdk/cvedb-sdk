@@ -1,3 +1,4 @@
 /dist/
 /cvedb-cli
 /go-cli
+.jostraca/

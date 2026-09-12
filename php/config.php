@@ -123,6 +123,7 @@ class CvedbConfig
               'type' => '`$ANY`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'published_time',
               'req' => true,
               'short' => 'The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone.',
@@ -152,6 +153,10 @@ class CvedbConfig
               'type' => '`$ANY`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'cve',
           'op' => [
             'load' => [
@@ -173,13 +178,17 @@ class CvedbConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cve/{cve_id}',
-                  'parts' => [
-                    'cve',
-                    '{id}',
-                  ],
                   'rename' => [
                     'param' => [
                       'cve_id' => 'id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'cve',
+                    ],
+                    [
+                      'var' => 'id',
                     ],
                   ],
                   'select' => [
@@ -190,6 +199,10 @@ class CvedbConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'cve',
+                    '{id}',
                   ],
                 ],
               ],
@@ -243,8 +256,10 @@ class CvedbConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cpes',
-                  'parts' => [
-                    'cpes',
+                  'segments' => [
+                    [
+                      'lit' => 'cpes',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -257,6 +272,9 @@ class CvedbConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'cpes',
                   ],
                 ],
               ],
@@ -341,8 +359,10 @@ class CvedbConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/cves',
-                  'parts' => [
-                    'cves',
+                  'segments' => [
+                    [
+                      'lit' => 'cves',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -360,6 +380,9 @@ class CvedbConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'cves',
                   ],
                 ],
               ],

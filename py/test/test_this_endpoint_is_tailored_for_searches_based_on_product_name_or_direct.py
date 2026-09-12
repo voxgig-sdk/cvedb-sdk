@@ -63,8 +63,11 @@ def _this_endpoint_is_tailored_for_searches_based_on_product_name_or_direct_setu
     live = env.get("CVEDB_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
-        }
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
+        })
         client = CvedbSDK(merged_opts)
         return {
             "client": client,

@@ -101,6 +101,7 @@ func MakeConfig() map[string]any {
 						"type": "`$ANY`",
 					},
 					map[string]any{
+						"format": "date-time",
 						"name": "published_time",
 						"req": true,
 						"short": "The date and time when the vulnerability was published, in the format YYYY-MM-DDTHH:MM:SS, with UTC time zone.",
@@ -130,6 +131,10 @@ func MakeConfig() map[string]any {
 						"type": "`$ANY`",
 					},
 				},
+				"id": map[string]any{
+					"field": "id",
+					"name": "id",
+				},
 				"name": "cve",
 				"op": map[string]any{
 					"load": map[string]any{
@@ -151,13 +156,17 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/cve/{cve_id}",
-								"parts": []any{
-									"cve",
-									"{id}",
-								},
 								"rename": map[string]any{
 									"param": map[string]any{
 										"cve_id": "id",
+									},
+								},
+								"segments": []any{
+									map[string]any{
+										"lit": "cve",
+									},
+									map[string]any{
+										"var": "id",
 									},
 								},
 								"select": map[string]any{
@@ -168,6 +177,10 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"cve",
+									"{id}",
 								},
 							},
 						},
@@ -221,8 +234,10 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/cpes",
-								"parts": []any{
-									"cpes",
+								"segments": []any{
+									map[string]any{
+										"lit": "cpes",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -235,6 +250,9 @@ func MakeConfig() map[string]any {
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
+								},
+								"parts": []any{
+									"cpes",
 								},
 							},
 						},
@@ -319,8 +337,10 @@ func MakeConfig() map[string]any {
 								"kind": "http",
 								"method": "GET",
 								"orig": "/cves",
-								"parts": []any{
-									"cves",
+								"segments": []any{
+									map[string]any{
+										"lit": "cves",
+									},
 								},
 								"select": map[string]any{
 									"exist": []any{
@@ -339,6 +359,9 @@ func MakeConfig() map[string]any {
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
+								"parts": []any{
+									"cves",
+								},
 							},
 						},
 					},
@@ -349,6 +372,17 @@ func MakeConfig() map[string]any {
 			},
 		},
 	}
+}
+
+// The plugin definitions the model selected per feature, as []any so a
+// feature package can consume them without core naming its types. Empty
+// when no active feature declares active plugin groups for this target.
+var featurePlugins = map[string][]any{
+}
+
+// FeaturePlugins is the definitions list for one feature's chain.
+func FeaturePlugins(name string) []any {
+	return featurePlugins[name]
 }
 
 var (
