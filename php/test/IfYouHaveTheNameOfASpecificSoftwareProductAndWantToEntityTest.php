@@ -105,7 +105,15 @@ function if_you_have_the_name_of_a_specific_software_product_and_want_to_basic_s
             // and the apikey/server map above it.
             Vs::ismap($extra) ? $extra : new \stdClass(),
         ]);
-        $client = new CvedbSDK(Helpers::to_map($merged_opts));
+        // "?? []" because merge legitimately answers with a stdClass when every
+        // contributing entry is an EMPTY map - an SDK with no apikey and no
+        // server variables generates an empty middle entry, so that is the
+        // common case, not the edge one. to_map returns null for a non-array by
+        // design, and the constructor takes a non-nullable array, so without the
+        // fallback every such SDK died on "must be of type array, null given"
+        // the moment live mode was switched on. Offline mode never reaches this
+        // branch, which is why the offline suite stayed green.
+        $client = new CvedbSDK(Helpers::to_map($merged_opts) ?? []);
     }
 
     $live = $env["CVEDB_TEST_LIVE"] === "TRUE";
