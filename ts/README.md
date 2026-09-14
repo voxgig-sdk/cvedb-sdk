@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { CvedbSDK } from '@voxgig-sdk/cvedb'
+import { CvedbSDK } from '@voxgig-sdk/cvedb-sdk'
 
 const client = new CvedbSDK()
 ```
@@ -485,7 +485,7 @@ cvedb/
 Import the SDK from the package root:
 
 ```ts
-import { CvedbSDK } from '@voxgig-sdk/cvedb'
+import { CvedbSDK } from '@voxgig-sdk/cvedb-sdk'
 ```
 
 ### Entity state

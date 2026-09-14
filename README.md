@@ -105,7 +105,7 @@ local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
+| TypeScript | `@voxgig-sdk/cvedb-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
 | Python | `voxgig-sdk-cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
 | PHP | `voxgig-sdk/cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/cvedb-sdk/go` | `go get github.com/voxgig-sdk/cvedb-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
 ### TypeScript
 
 ```ts
-import { CvedbSDK } from '@voxgig-sdk/cvedb'
+import { CvedbSDK } from '@voxgig-sdk/cvedb-sdk'
 
 const client = new CvedbSDK()
 
