@@ -45,6 +45,12 @@ main: kit: entity: if_you_have_the_name_of_a_specific_software_product_and_want_
               }
             ]
           }
+          contract: {
+            id: "GET /cpes"
+            json: "{\"operationId\":\"info_cpes_get\",\"parameters\":[{\"in\":\"query\",\"name\":\"product\",\"required\":true,\"schema\":{\"title\":\"Product\",\"type\":\"string\"}},{\"in\":\"query\",\"name\":\"count\",\"required\":false,\"schema\":{\"default\":false,\"title\":\"Count\",\"type\":\"boolean\"}},{\"in\":\"query\",\"name\":\"skip\",\"required\":false,\"schema\":{\"default\":0,\"title\":\"Skip\",\"type\":\"integer\"}},{\"in\":\"query\",\"name\":\"limit\",\"required\":false,\"schema\":{\"default\":1000,\"title\":\"Limit\",\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"anyOf\":[{\"properties\":{\"cpes\":{\"description\":\"A dictionary of specific CPE version 2.3 identifiers. This dictionary serves as a valuable resource for systematically identifying and categorizing potentially affected software and hardware when assessing vulnerabilities.\",\"items\":{\"type\":\"string\"},\"title\":\"Cpes\",\"type\":\"array\"}},\"required\":[\"cpes\"],\"title\":\"CPEs\",\"type\":\"object\"},{\"properties\":{\"total\":{\"anyOf\":[{\"type\":\"integer\"},{\"type\":\"null\"}],\"description\":\"The total count of CPE identifiers that match a given query. This provides a overview of the number of distinct products or components identified as potentially vulnerable, allowing for a broad assessment of exposure risk.\",\"title\":\"Total\"}},\"title\":\"CPEsTotal\",\"type\":\"object\"}],\"title\":\"Response Info Cpes Get\"}}},\"description\":\"Successful Response\"},\"422\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"detail\":{\"items\":{\"properties\":{\"loc\":{\"items\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"integer\"}]},\"title\":\"Location\",\"type\":\"array\"},\"msg\":{\"title\":\"Message\",\"type\":\"string\"},\"type\":{\"title\":\"Error Type\",\"type\":\"string\"}},\"required\":[\"loc\",\"msg\",\"type\"],\"title\":\"ValidationError\",\"type\":\"object\"},\"title\":\"Detail\",\"type\":\"array\"}},\"title\":\"HTTPValidationError\",\"type\":\"object\"}}},\"description\":\"Validation Error\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/cpes"
           segments: [

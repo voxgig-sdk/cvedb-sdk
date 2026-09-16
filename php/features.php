@@ -4,7 +4,10 @@ declare(strict_types=1);
 // Cvedb SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class CvedbFeatures
@@ -14,8 +17,14 @@ class CvedbFeatures
         switch ($name) {
             case "base":
                 return new CvedbBaseFeature();
+            case "ratelimit":
+                return new CvedbRatelimitFeature();
+            case "retry":
+                return new CvedbRetryFeature();
             case "test":
                 return new CvedbTestFeature();
+            case "timeout":
+                return new CvedbTimeoutFeature();
             default:
                 return new CvedbBaseFeature();
         }
@@ -31,7 +40,10 @@ class CvedbFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;
