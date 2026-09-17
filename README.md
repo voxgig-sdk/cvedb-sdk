@@ -105,12 +105,12 @@ local result, err = client:IfYouHaveTheNameOfASpecificSoftwareProductAndWantTo()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/cvedb-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
-| Python | `voxgig-sdk-cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
-| PHP | `voxgig-sdk/cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
+| TypeScript | `@voxgig-sdk/cvedb-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/tags) |
+| Python | `voxgig-sdk-cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/tags) |
+| PHP | `voxgig-sdk/cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/cvedb-sdk/go` | `go get github.com/voxgig-sdk/cvedb-sdk/go@latest` |
-| Ruby | `voxgig-sdk-cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
-| Lua | `voxgig-sdk-cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/releases) |
+| Ruby | `voxgig-sdk-cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/tags) |
+| Lua | `voxgig-sdk-cvedb` | publish pending — [install from git tag](https://github.com/voxgig-sdk/cvedb-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/cvedb-sdk/go-cli` | `go install github.com/voxgig-sdk/cvedb-sdk/go-cli/cmd/cvedb@latest` |
 | Go MCP server | `github.com/voxgig-sdk/cvedb-sdk/go-mcp` | `go get github.com/voxgig-sdk/cvedb-sdk/go-mcp@latest` |
 

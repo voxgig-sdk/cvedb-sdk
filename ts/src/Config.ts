@@ -127,15 +127,15 @@ class Config {
 
     entity: {
       
-      cve: {
-      },
-
-      if_you_have_the_name_of_a_specific_software_product_and_want_to: {
-      },
-
-      this_endpoint_is_tailored_for_searches_based_on_product_name_or: {
-      },
-
+        cve: {
+        },
+  
+        if_you_have_the_name_of_a_specific_software_product_and_want_to: {
+        },
+  
+        this_endpoint_is_tailored_for_searches_based_on_product_name_or: {
+        },
+  
     }
   }
 
